@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">
-  <title>NEXUS MANAGER - Plan Base</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+<title>NEXUS MANAGER - Plan Base</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Reset y estilos base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
@@ -13,6 +14,7 @@
       color: #ddd;
       line-height: 1.6;
     }
+    /* Menú de navegación */
     nav {
       background: #1f1f1f;
       padding: 1rem;
@@ -29,6 +31,7 @@
       color: #ff8800;
       transform: scale(1.1);
     }
+    /* Encabezado para Plan Base */
     header {
       background: #1a1a1a;
       padding: 2rem;
@@ -41,6 +44,7 @@
       color: #ff8800;
       text-shadow: 0 0 8px #ff8800, 0 0 16px #ff8800, 0 0 32px #ff8800;
     }
+    /* Contenedor principal */
     .container {
       max-width: 1000px;
       margin: 2rem auto;
@@ -60,35 +64,13 @@
       margin-bottom: 1rem;
     }
     li { margin-bottom: 0.5rem; }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #ff8800;
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1f1f1f;
       color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background: #cc6f00;
-    }
-    #payment-form {
-      display: none;
-      background: #222;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(255, 136, 0, 0.5);
-      margin-top: 20px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -115,37 +97,24 @@
       <li>Recursos de documentación para configurar tus primeras redes sociales y canales de streaming.</li>
       <li>Consejos básicos de marketing y promoción para empezar a construir tu marca personal u organizacional.</li>
     </ul>
-    <p>¿Listo para comenzar?</p>
-    <button class="btn" onclick="showPaymentForm()">Unirse al Plan</button>
-    
-    <div id="payment-form">
-      <h3>Introduce tus datos de pago</h3>
-      <input type="text" id="email" placeholder="Correo electrónico">
-      <input type="text" id="card" placeholder="Número de tarjeta">
-      <button class="btn" onclick="processPayment()">Pagar</button>
-    </div>
+    <p>
+      Este plan es perfecto si estás explorando tus opciones y quieres una guía general para introducirte al ecosistema competitivo.
+      A medida que crezcas, podrás actualizarte a planes superiores con más beneficios y asesoramiento más profundo.
+    </p>
+    <p>
+  ¿Listo para comenzar? 
+  <strong>
+    <a href="https://discord.gg/S8qmjmQtbX" target="_blank" style="color: #ff8800; text-decoration: none;">
+      ¡Únete al Plan Base de NEXUS MANAGER!
+    </a>
+  </strong>
+</p>
   </div>
 
   <footer>
     <p>NEXUS MANAGER - Todos los derechos reservados &copy; 2025</p>
   </footer>
 
-  <script>
-    function showPaymentForm() {
-      document.getElementById("payment-form").style.display = "block";
-    }
-
-    function processPayment() {
-      let email = document.getElementById("email").value;
-      let card = document.getElementById("card").value;
-      if (email && card) {
-        let code = Math.random().toString(36).substr(2, 8).toUpperCase();
-        alert("Pago exitoso! Tu código exclusivo es: " + code);
-        // Aquí se enviaría el código al correo con un backend real.
-      } else {
-        alert("Por favor, completa todos los campos.");
-      }
-    }
-  </script>
 </body>
 </html>
+
