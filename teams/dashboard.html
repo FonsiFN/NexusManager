@@ -1,1 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus Manager - Dashboard de Clanes</title>
+  <!-- Fuentes y Reset CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================== */
+    /* Reset y estilos base        */
+    /* =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+    }
+    /* =========================== */
+    /* Sidebar                     */
+    /* =========================== */
+    .sidebar {
+      width: 260px;
+      background-color: #1E1E1E;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #333;
+      overflow-y: auto;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .logo {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .sidebar .create-btn {
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 25px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .create-btn:hover {
+      background-color: #e68900;
+    }
+    .sidebar .menu li {
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .sidebar .menu li.active, .sidebar .menu li:hover {
+      background-color: #ff9800;
+      color: #121212;
+    }
+    .sidebar .toggle-container {
+      margin-top: auto;
+      text-align: center;
+      padding: 15px 0;
+    }
+    /* Switch CSS */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 24px;
+    }
+    .switch .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    .switch input:checked + .slider {
+      background-color: #ff9800;
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .sidebar .profile {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .sidebar .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff9800;
+      margin-bottom: 10px;
+    }
+    .sidebar .profile p {
+      font-weight: 500;
+    }
+    .sidebar .profile span {
+      font-size: 12px;
+      color: #aaa;
+    }
+    /* =========================== */
+    /* Content                     */
+    /* =========================== */
+    .content {
+      flex: 1;
+      padding: 20px 30px;
+      overflow-y: auto;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    .tab-nav ul {
+      display: flex;
+      border-bottom: 1px solid #333;
+    }
+    .tab-nav ul li {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+    .tab-nav ul li.active {
+      border-bottom: 3px solid #ff9800;
+      color: #ff9800;
+    }
+    section {
+      margin-top: 20px;
+    }
+    .toolbar {
+      margin-bottom: 15px;
+    }
+    .btn {
+      padding: 10px 15px;
+      background-color: #ff9800;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #e68900;
+    }
+    .list-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .team-item {
+      background-color: #2C2C2C;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .team-item:hover {
+      transform: translateX(5px);
+      background-color: #3a3a3a;
+    }
+    .team-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .team-details strong {
+      font-size: 18px;
+    }
+    .team-details span {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .team-actions button {
+      background: transparent;
+      border: none;
+      color: #ff9800;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .team-actions button:hover {
+      color: #e68900;
+    }
+    /* =========================== */
+    /* Modal Estilos               */
+    /* =========================== */
+    .modal {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background-color: #1E1E1E;
+      padding: 20px 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      animation: slideDown 0.4s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #aaa;
+      transition: color 0.3s ease;
+    }
+    .modal-content .close:hover {
+      color: #fff;
+    }
+    .modal-content h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form-group input[type='text'],
+    .form-group input[type='number'] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e0e0e0;
+      outline: none;
+      transition: background-color 0.3s ease;
+    }
+    .form-group input[type='text']:focus,
+    .form-group input[type='number']:focus {
+      background-color: #444;
+    }
+    .role-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .role-input {
+      flex: 1;
+      min-width: 100px;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e0e0e0;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff9800;
+      border: none;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-submit:hover {
+      background-color: #e68900;
+    }
+    /* =========================== */
+    /* Responsive                  */
+    /* =========================== */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #333;
+      }
+      .content {
+        padding: 15px;
+      }
+      .tab-nav ul {
+        flex-direction: column;
+      }
+      .tab-nav ul li {
+        padding: 8px 15px;
+      }
+    }
+    /* Espaciado extra para fines demostrativos */
+    .spacer { height: 50px; }
+  </style>
+</head>
+<body>
+  <!-- ========== Sidebar ========== -->
+  <div class="sidebar">
+    <div class="logo">Apex</div>
+    <button class="create-btn" id="sidebarCreateBtn">+ Create new</button>
+    <ul class="menu">
+      <li class="active" data-target="dashboard">Dashboard</li>
+      <li data-target="teams">Teams</li>
+      <li data-target="settings">Settings</li>
+      <li data-target="support">Support</li>
+    </ul>
+    <div class="toggle-container">
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="profile">
+      <img src="avatar.png" alt="Avatar">
+      <p>Jhampier</p>
+      <span>jhampier@gmail.com</span>
+    </div>
+  </div>
+  <!-- ========== Content ========== -->
+  <div class="content">
+    <header>
+      <nav class="tab-nav">
+        <ul>
+          <li class="tab active" data-section="teamManager">Gestionar Clanes</li>
+          <li class="tab" data-section="publicTeams">Clanes Públicos</li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Sección para gestionar clanes -->
+    <section id="teamManager">
+      <div class="toolbar">
+        <button class="btn" id="openModalBtn">Crear Nuevo Clan</button>
+      </div>
+      <div id="teamList" class="list-container">
+        <!-- Aquí se listarán los clanes creados -->
+      </div>
+    </section>
+    <!-- Sección para clanes públicos -->
+    <section id="publicTeams" class="hidden">
+      <h2>Clanes Públicos</h2>
+      <div id="publicTeamList" class="list-container">
+        <!-- Aquí se mostrarán los clanes públicos -->
+      </div>
+    </section>
+    <div class="spacer"></div>
+  </div>
+  <!-- ========== Modal para Crear/Editar Clan ========== -->
+  <div id="teamModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="modalClose">&times;</span>
+      <h2 id="modalTitle">Crear Nuevo Clan</h2>
+      <form id="teamForm">
+        <div class="form-group">
+          <label for="teamName">Nombre del Clan:</label>
+          <input type="text" id="teamName" name="teamName" required placeholder="Ingresa el nombre del clan">
+        </div>
+        <div class="form-group">
+          <label for="teamPublic">Hacer público:</label>
+          <input type="checkbox" id="teamPublic" name="teamPublic">
+        </div>
+        <div class="form-group">
+          <label for="maxMembers">Máximo de miembros:</label>
+          <input type="number" id="maxMembers" name="maxMembers" min="1" max="100" value="10" required>
+        </div>
+        <div class="form-group">
+          <label>Roles (separados por coma):</label>
+          <input type="text" id="teamRoles" name="teamRoles" placeholder="Ej: Líder,Sub Líder,Miembro">
+        </div>
+        <button type="submit" class="btn-submit">Guardar Clan</button>
+      </form>
+    </div>
+  </div>
+  <!-- =========================== -->
+  <!-- JavaScript Profesional      -->
+  <!-- =========================== -->
+  <script>
+    // Variables Globales
+    let teams = JSON.parse(localStorage.getItem('teams')) || [];
+    let editingTeamIndex = null; // null = nuevo, número = editar
 
+    // Inicialización de eventos
+    document.addEventListener('DOMContentLoaded', () => {
+      // Botones y elementos
+      const openModalBtn = document.getElementById('openModalBtn');
+      const sidebarCreateBtn = document.getElementById('sidebarCreateBtn');
+      const modal = document.getElementById('teamModal');
+      const modalClose = document.getElementById('modalClose');
+      const teamForm = document.getElementById('teamForm');
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const tabElements = document.querySelectorAll('.tab-nav ul li');
+      
+      // Abre el modal para crear nuevo clan
+      openModalBtn.addEventListener('click', () => openModal());
+      sidebarCreateBtn.addEventListener('click', () => openModal());
+
+      // Cerrar modal
+      modalClose.addEventListener('click', () => closeModal());
+      window.addEventListener('click', (e) => {
+        if(e.target === modal) closeModal();
+      });
+      
+      // Manejo del formulario
+      teamForm.addEventListener('submit', handleFormSubmit);
+      
+      // Pestañas para cambiar de sección
+      tabElements.forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.tab-nav ul li').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          switchSection(tab.getAttribute('data-section'));
+        });
+      });
+      
+      // Toggle de Dark Mode (se puede extender para más cambios de estilo)
+      darkModeToggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+      });
+      
+      renderTeams();
+    });
+
+    // Función para abrir modal (para crear o editar)
+    function openModal(editIndex = null) {
+      editingTeamIndex = editIndex;
+      const modalTitle = document.getElementById('modalTitle');
+      const teamName = document.getElementById('teamName');
+      const teamPublic = document.getElementById('teamPublic');
+      const maxMembers = document.getElementById('maxMembers');
+      const teamRoles = document.getElementById('teamRoles');
+      
+      if(editIndex !== null) {
+        modalTitle.textContent = 'Editar Clan';
+        const team = teams[editIndex];
+        teamName.value = team.name;
+        teamPublic.checked = team.public;
+        maxMembers.value = team.maxMembers;
+        teamRoles.value = team.roles.join(',');
+      } else {
+        modalTitle.textContent = 'Crear Nuevo Clan';
+        teamForm.reset();
+      }
+      document.getElementById('teamModal').classList.add('active');
+    }
+
+    // Función para cerrar modal
+    function closeModal() {
+      document.getElementById('teamModal').classList.remove('active');
+    }
+
+    // Manejo del envío del formulario
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('teamName').value.trim();
+      const isPublic = document.getElementById('teamPublic').checked;
+      const maxMembers = parseInt(document.getElementById('maxMembers').value);
+      const rolesRaw = document.getElementById('teamRoles').value;
+      const roles = rolesRaw ? rolesRaw.split(',').map(r => r.trim()).filter(r => r) : [];
+      
+      if(name === '' || isNaN(maxMembers)) {
+        alert('Por favor, rellena los campos obligatorios.');
+        return;
+      }
+      
+      const teamData = {
+        name,
+        public: isPublic,
+        maxMembers,
+        roles,
+        members: []
+      };
+      
+      if(editingTeamIndex !== null) {
+        teams[editingTeamIndex] = teamData;
+      } else {
+        teams.push(teamData);
+      }
+      localStorage.setItem('teams', JSON.stringify(teams));
+      renderTeams();
+      closeModal();
+    }
+
+    // Renderizar lista de clanes en la sección Gestión y Clanes Públicos
+    function renderTeams() {
+      const teamListEl = document.getElementById('teamList');
+      const publicTeamListEl = document.getElementById('publicTeamList');
+      teamListEl.innerHTML = '';
+      publicTeamListEl.innerHTML = '';
+
+      teams.forEach((team, index) => {
+        // Elemento de la lista para Gestión
+        const teamItem = document.createElement('div');
+        teamItem.classList.add('team-item');
+        
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('team-details');
+        detailsDiv.innerHTML = `<strong>${team.name}</strong>
+                                <span>${team.public ? 'Público' : 'Privado'} - Máx: ${team.maxMembers}</span>
+                                <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>`;
+                                
+        const actionsDiv = document.createElement('div');
+        actionsDiv.classList.add('team-actions');
+        actionsDiv.innerHTML = `<button onclick="editTeam(${index})">Editar</button>
+                                <button onclick="deleteTeam(${index})">Eliminar</button>`;
+        
+        teamItem.appendChild(detailsDiv);
+        teamItem.appendChild(actionsDiv);
+        teamListEl.appendChild(teamItem);
+
+        // Si el equipo es público, se agrega a la lista de clanes públicos
+        if(team.public) {
+          const publicItem = document.createElement('div');
+          publicItem.classList.add('team-item');
+          publicItem.innerHTML = `<div class="team-details">
+                                    <strong>${team.name}</strong>
+                                    <span>Máx: ${team.maxMembers}</span>
+                                    <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
+                                  </div>`;
+          publicTeamListEl.appendChild(publicItem);
+        }
+      });
+    }
+
+    // Función para editar un equipo
+    function editTeam(index) {
+      openModal(index);
+    }
+
+    // Función para eliminar un equipo
+    function deleteTeam(index) {
+      if(confirm('¿Estás seguro de eliminar este clan?')) {
+        teams.splice(index, 1);
+        localStorage.setItem('teams', JSON.stringify(teams));
+        renderTeams();
+      }
+    }
+
+    // Cambiar entre secciones según pestaña seleccionada
+    function switchSection(sectionId) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    // Función para actualizar la visualización de la pestaña en la sidebar
+    const sidebarItems = document.querySelectorAll('.sidebar .menu li');
+    sidebarItems.forEach(item => {
+      item.addEventListener('click', () => {
+        sidebarItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    // Espacio para futuras funciones profesionales
+    // Por ejemplo, se pueden agregar funciones para gestionar miembros, invitar usuarios, o integrar API externas
+    function addMember(teamIndex, memberName, role) {
+      if(teams[teamIndex].members.length < teams[teamIndex].maxMembers) {
+        teams[teamIndex].members.push({ name: memberName, role });
+        localStorage.setItem('teams', JSON.stringify(teams));
+        renderTeams();
+      } else {
+        alert('Se alcanzó el número máximo de miembros.');
+      }
+    }
+
+    // Ejemplo de función de animación adicional
+    function animateElement(element) {
+      element.style.transition = 'transform 0.3s ease';
+      element.style.transform = 'scale(1.02)';
+      setTimeout(() => {
+        element.style.transform = 'scale(1)';
+      }, 300);
+    }
+
+    // Se pueden agregar más funciones y módulos aquí para ampliar la funcionalidad profesional del dashboard
+  </script>
+</body>
+</html>
