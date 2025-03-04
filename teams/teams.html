@@ -10,11 +10,7 @@
     /* =========================== */
     /* Reset y estilos base        */
     /* =========================== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #121212;
@@ -24,13 +20,8 @@
       height: 100vh;
       overflow: hidden;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    ul {
-      list-style: none;
-    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
     /* =========================== */
     /* Sidebar                     */
     /* =========================== */
@@ -70,8 +61,11 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
     }
-    .sidebar .menu li.active, .sidebar .menu li:hover {
+    .sidebar .menu li.active,
+    .sidebar .menu li:hover {
       background-color: #ff9800;
       color: #121212;
     }
@@ -95,10 +89,7 @@
     .switch .slider {
       position: absolute;
       cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-color: #ccc;
       transition: 0.4s;
       border-radius: 24px;
@@ -131,9 +122,7 @@
       border: 2px solid #ff9800;
       margin-bottom: 10px;
     }
-    .sidebar .profile p {
-      font-weight: 500;
-    }
+    .sidebar .profile p { font-weight: 500; }
     .sidebar .profile span {
       font-size: 12px;
       color: #aaa;
@@ -146,9 +135,7 @@
       padding: 20px 30px;
       overflow-y: auto;
     }
-    header {
-      margin-bottom: 20px;
-    }
+    header { margin-bottom: 20px; }
     .tab-nav ul {
       display: flex;
       border-bottom: 1px solid #333;
@@ -163,12 +150,8 @@
       border-bottom: 3px solid #ff9800;
       color: #ff9800;
     }
-    section {
-      margin-top: 20px;
-    }
-    .toolbar {
-      margin-bottom: 15px;
-    }
+    section { margin-top: 20px; }
+    .toolbar { margin-bottom: 15px; }
     .btn {
       padding: 10px 15px;
       background-color: #ff9800;
@@ -179,9 +162,7 @@
       font-weight: 500;
       transition: background 0.3s ease;
     }
-    .btn:hover {
-      background-color: #e68900;
-    }
+    .btn:hover { background-color: #e68900; }
     .list-container {
       display: flex;
       flex-direction: column;
@@ -204,9 +185,7 @@
       display: flex;
       flex-direction: column;
     }
-    .team-details strong {
-      font-size: 18px;
-    }
+    .team-details strong { font-size: 18px; }
     .team-details span {
       font-size: 12px;
       color: #aaa;
@@ -219,9 +198,7 @@
       cursor: pointer;
       transition: color 0.3s ease;
     }
-    .team-actions button:hover {
-      color: #e68900;
-    }
+    .team-actions button:hover { color: #e68900; }
     /* =========================== */
     /* Modal Estilos               */
     /* =========================== */
@@ -267,9 +244,7 @@
       color: #aaa;
       transition: color 0.3s ease;
     }
-    .modal-content .close:hover {
-      color: #fff;
-    }
+    .modal-content .close:hover { color: #fff; }
     .modal-content h2 {
       margin-bottom: 20px;
       text-align: center;
@@ -308,33 +283,20 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .btn-submit:hover {
-      background-color: #e68900;
-    }
+    .btn-submit:hover { background-color: #e68900; }
     /* =========================== */
     /* Responsive                  */
     /* =========================== */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
+      body { flex-direction: column; }
       .sidebar {
         width: 100%;
         height: auto;
         border-right: none;
         border-bottom: 1px solid #333;
       }
-      .content {
-        padding: 15px;
-      }
-      .tab-nav ul {
-        flex-direction: column;
-      }
-      .tab-nav ul li {
-        padding: 8px 15px;
-      }
+      .content { padding: 15px; }
     }
-    /* Espaciado extra para fines demostrativos */
     .spacer { height: 50px; }
   </style>
 </head>
@@ -344,10 +306,10 @@
     <div class="logo">Apex</div>
     <button class="create-btn" id="sidebarCreateBtn">+ Create new</button>
     <ul class="menu">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li class="active"><a href="teams.html">Teams</a></li>
-      <li><a href="settings.html">Settings</a></li>
-      <li><a href="support.html">Support</a></li>
+      <li><a href="dashboard.html"><span>Dashboard</span></a></li>
+      <li class="active"><a href="teams.html"><span>Teams</span></a></li>
+      <li><a href="settings.html"><span>Settings</span></a></li>
+      <li><a href="support.html"><span>Support</span></a></li>
     </ul>
     <div class="toggle-container">
       <label class="switch">
@@ -376,7 +338,6 @@
   </div>
   <!-- =========================== -->
   <!-- JavaScript Profesional      -->
-  <!-- =========================== -->
   <script>
     // Variables Globales
     let teams = JSON.parse(localStorage.getItem('teams')) || [];
@@ -395,11 +356,13 @@
         if (team.public) {
           const publicItem = document.createElement('div');
           publicItem.classList.add('team-item');
-          publicItem.innerHTML = `<div class="team-details">
-                                    <strong>${team.name}</strong>
-                                    <span>Máx: ${team.maxMembers}</span>
-                                    <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
-                                  </div>`;
+          publicItem.innerHTML = `
+            <div class="team-details">
+              <strong>${team.name}</strong>
+              <span>Máx: ${team.maxMembers}</span>
+              <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
+            </div>
+          `;
           publicTeamListEl.appendChild(publicItem);
         }
       });
