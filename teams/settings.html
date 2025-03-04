@@ -70,17 +70,18 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s ease;
-      display: flex;           /* Para alinear imagen y texto en la misma línea */
-      align-items: center;     /* Centrar verticalmente */
-    }
-    .sidebar .menu li img {
-      width: 24px;             /* Ajusta según el tamaño deseado */
-      height: 24px;
-      margin-right: 10px;      /* Espacio entre el icono y el texto */
+      display: flex;
+      align-items: center;
     }
     .sidebar .menu li.active, .sidebar .menu li:hover {
       background-color: #ff9800;
       color: #121212;
+    }
+    /* Ajuste para las imágenes del menú */
+    .sidebar .menu li img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
     }
     .sidebar .toggle-container {
       margin-top: auto;
@@ -304,6 +305,20 @@
     .form-group input[type='number']:focus {
       background-color: #444;
     }
+    .role-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .role-input {
+      flex: 1;
+      min-width: 100px;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e0e0e0;
+    }
     .btn-submit {
       width: 100%;
       padding: 12px;
@@ -341,6 +356,8 @@
         padding: 8px 15px;
       }
     }
+    /* Espaciado extra para fines demostrativos */
+    .hidden { display: none; }
     .spacer { height: 50px; }
   </style>
 </head>
@@ -350,28 +367,23 @@
     <div class="logo">Apex</div>
     <button class="create-btn" id="sidebarCreateBtn">+ Create new</button>
     <ul class="menu">
-      <!-- Agrega tus propias imágenes y rutas según tu proyecto -->
       <li>
         <a href="dashboard.html">
-          <img src="dashboard.png" alt="Dashboard">
           <span>Dashboard</span>
         </a>
       </li>
       <li>
         <a href="teams.html">
-          <img src="teams.png" alt="Teams">
           <span>Teams</span>
         </a>
       </li>
       <li class="active">
         <a href="settings.html">
-          <img src="settings.png" alt="Settings">
           <span>Settings</span>
         </a>
       </li>
       <li>
         <a href="support.html">
-          <img src="support.png" alt="Support">
           <span>Support</span>
         </a>
       </li>
