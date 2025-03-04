@@ -70,10 +70,18 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
     }
     .sidebar .menu li.active, .sidebar .menu li:hover {
       background-color: #ff9800;
       color: #121212;
+    }
+    /* Ajuste para las imágenes del menú */
+    .sidebar .menu li img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
     }
     .sidebar .toggle-container {
       margin-top: auto;
@@ -349,6 +357,7 @@
       }
     }
     /* Espaciado extra para fines demostrativos */
+    .hidden { display: none; }
     .spacer { height: 50px; }
   </style>
 </head>
@@ -358,10 +367,31 @@
     <div class="logo">Apex</div>
     <button class="create-btn" id="sidebarCreateBtn">+ Create new</button>
     <ul class="menu">
-      <li><a href="https://fonsifn.github.io/NexusManager/teams/dashboard">Dashboard</a></li>
-      <li><a href="https://fonsifn.github.io/NexusManager/teams/teams">Teams</a></li>
-      <li><a href="https://fonsifn.github.io/NexusManager/teams/settings">Settings</a></li>
-      <li><a href="https://fonsifn.github.io/NexusManager/teams/support">Support</a></li>
+      <!-- Sustituye estas rutas y nombres de imágenes según tu proyecto -->
+      <li>
+        <a href="https://fonsifn.github.io/NexusManager/teams/dashboard" target="_blank">
+          <img src="dashboard.png" alt="Dashboard"> 
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://fonsifn.github.io/NexusManager/teams/teams" target="_blank">
+          <img src="teams.png" alt="Teams"> 
+          <span>Teams</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://fonsifn.github.io/NexusManager/teams/settings" target="_blank">
+          <img src="settings.png" alt="Settings"> 
+          <span>Settings</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://fonsifn.github.io/NexusManager/teams/support" target="_blank">
+          <img src="support.png" alt="Support"> 
+          <span>Support</span>
+        </a>
+      </li>
     </ul>
     <div class="toggle-container">
       <label class="switch">
@@ -448,7 +478,7 @@
       const darkModeToggle = document.getElementById('darkModeToggle');
       const tabElements = document.querySelectorAll('.tab-nav ul li');
       
-      // Abre el modal para crear nuevo clan
+      // Abre el modal para crear nuevo clan (o editar)
       openModalBtn.addEventListener('click', () => openModal());
       sidebarCreateBtn.addEventListener('click', () => openModal());
 
@@ -470,7 +500,7 @@
         });
       });
       
-      // Toggle de Dark Mode (se puede extender para más cambios de estilo)
+      // Toggle de Dark Mode
       darkModeToggle.addEventListener('change', () => {
         document.body.classList.toggle('dark-mode', darkModeToggle.checked);
       });
@@ -480,6 +510,12 @@
 
     // Función para abrir modal (para crear o editar)
     function openModal(editIndex = null) {
+      // Si se intenta crear un nuevo equipo y ya existe uno, no permitir
+      if(editIndex === null && teams.length >= 1) {
+        alert('Solo se permite crear un equipo. Ya existe uno en tu lista.');
+        return;
+      }
+
       editingTeamIndex = editIndex;
       const modalTitle = document.getElementById('modalTitle');
       const teamName = document.getElementById('teamName');
@@ -488,6 +524,7 @@
       const teamRoles = document.getElementById('teamRoles');
       
       if(editIndex !== null) {
+        // Editar
         modalTitle.textContent = 'Editar Clan';
         const team = teams[editIndex];
         teamName.value = team.name;
@@ -495,6 +532,7 @@
         maxMembers.value = team.maxMembers;
         teamRoles.value = team.roles.join(',');
       } else {
+        // Crear nuevo
         modalTitle.textContent = 'Crear Nuevo Clan';
         teamForm.reset();
       }
@@ -529,8 +567,10 @@
       };
       
       if(editingTeamIndex !== null) {
+        // Editar equipo existente
         teams[editingTeamIndex] = teamData;
       } else {
+        // Crear equipo nuevo
         teams.push(teamData);
       }
       localStorage.setItem('teams', JSON.stringify(teams));
@@ -552,14 +592,18 @@
         
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('team-details');
-        detailsDiv.innerHTML = `<strong>${team.name}</strong>
-                                <span>${team.public ? 'Público' : 'Privado'} - Máx: ${team.maxMembers}</span>
-                                <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>`;
+        detailsDiv.innerHTML = `
+          <strong>${team.name}</strong>
+          <span>${team.public ? 'Público' : 'Privado'} - Máx: ${team.maxMembers}</span>
+          <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
+        `;
                                 
         const actionsDiv = document.createElement('div');
         actionsDiv.classList.add('team-actions');
-        actionsDiv.innerHTML = `<button onclick="editTeam(${index})">Editar</button>
-                                <button onclick="deleteTeam(${index})">Eliminar</button>`;
+        actionsDiv.innerHTML = `
+          <button onclick="editTeam(${index})">Editar</button>
+          <button onclick="deleteTeam(${index})">Eliminar</button>
+        `;
         
         teamItem.appendChild(detailsDiv);
         teamItem.appendChild(actionsDiv);
@@ -569,11 +613,13 @@
         if(team.public) {
           const publicItem = document.createElement('div');
           publicItem.classList.add('team-item');
-          publicItem.innerHTML = `<div class="team-details">
-                                    <strong>${team.name}</strong>
-                                    <span>Máx: ${team.maxMembers}</span>
-                                    <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
-                                  </div>`;
+          publicItem.innerHTML = `
+            <div class="team-details">
+              <strong>${team.name}</strong>
+              <span>Máx: ${team.maxMembers}</span>
+              <span>Roles: ${team.roles.join(', ') || 'Ninguno'}</span>
+            </div>
+          `;
           publicTeamListEl.appendChild(publicItem);
         }
       });
@@ -610,8 +656,7 @@
       });
     });
 
-    // Espacio para futuras funciones profesionales
-    // Por ejemplo, se pueden agregar funciones para gestionar miembros, invitar usuarios, o integrar API externas
+    // Ejemplo de función adicional: agregar miembro (por si lo necesitas)
     function addMember(teamIndex, memberName, role) {
       if(teams[teamIndex].members.length < teams[teamIndex].maxMembers) {
         teams[teamIndex].members.push({ name: memberName, role });
@@ -621,17 +666,6 @@
         alert('Se alcanzó el número máximo de miembros.');
       }
     }
-
-    // Ejemplo de función de animación adicional
-    function animateElement(element) {
-      element.style.transition = 'transform 0.3s ease';
-      element.style.transform = 'scale(1.02)';
-      setTimeout(() => {
-        element.style.transform = 'scale(1)';
-      }, 300);
-    }
-
-    // Se pueden agregar más funciones y módulos aquí para ampliar la funcionalidad profesional del dashboard
   </script>
 </body>
 </html>
