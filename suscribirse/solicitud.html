@@ -56,10 +56,10 @@
   
   <div class="container">
     <h2>Solicitar un Plan</h2>
-    <form id="solicitudForm">
-      <input type="email" id="email" placeholder="Correo Electrónico" required>
-      <input type="text" id="discordID" placeholder="ID de Discord" required>
-      <select id="plan">
+    <form id="solicitudForm" action="https://formspree.io/f/xqapakvd" method="POST">
+      <input type="email" name="Correo Electrónico" placeholder="Correo Electrónico" required>
+      <input type="text" name="ID de Discord" placeholder="ID de Discord" required>
+      <select name="Plan">
         <option value="Base">Plan Base</option>
         <option value="VIP">Plan VIP</option>
         <option value="Partner">Plan Partner</option>
@@ -67,22 +67,24 @@
       <button type="submit">Enviar Solicitud</button>
     </form>
   </div>
-  
+
   <script>
     document.getElementById("solicitudForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const email = document.getElementById("email").value;
-      const discordID = document.getElementById("discordID").value;
-      const plan = document.getElementById("plan").value;
-      
-      fetch("http://127.0.0.1:4040", {
+      event.preventDefault(); // Evita que se recargue la página
+      const form = event.target;
+
+      fetch(form.action, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, discordID, plan })
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
       }).then(response => {
-        if (response.ok) alert("Solicitud enviada correctamente");
-        else alert("Hubo un error, inténtalo de nuevo");
-      });
+        if (response.ok) {
+          alert("Solicitud enviada correctamente");
+          form.reset();
+        } else {
+          alert("Hubo un error, inténtalo de nuevo");
+        }
+      }).catch(() => alert("Hubo un error, inténtalo de nuevo"));
     });
   </script>
 </body>
