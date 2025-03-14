@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad - Nexus Manager</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #121212;
+      color: #ddd;
+      margin: 0;
+      padding: 20px;
+      text-align: justify;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 136, 0, 0.6);
+      animation: slideIn 1s ease-in-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    h1, h2 {
+      color: #ff8800;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Políticas de Nexus Manager</h1>
+    
+    <h2>Política de Representación Profesional</h2>
+    <p><strong>Exclusividad:</strong> Los jugadores y equipos que firmen contratos con Nexus Manager deben comprometerse a no firmar acuerdos de representación o de patrocinio con otras plataformas o agencias sin el consentimiento explícito de Nexus Manager.</p>
+    <p><strong>Confidencialidad:</strong> Toda la información relacionada con contratos, negociaciones, acuerdos de patrocinio, y cualquier documento confidencial debe ser tratada con la máxima discreción.</p>
+    <p><strong>Transparencia:</strong> Los jugadores y equipos deberán proporcionar información clara y precisa sobre su historial, logros y estadísticas.</p>
+    
+    <h2>Política de Contratos</h2>
+    <p><strong>Condiciones Contractuales:</strong> Nexus Manager se asegura de que todos los contratos estén alineados con las leyes y regulaciones aplicables.</p>
+    <p><strong>Duración del Contrato:</strong> Los contratos de representación o gestión de jugadores y equipos tendrán una duración acordada previamente.</p>
+    <p><strong>Revisión de Contratos:</strong> Nexus Manager ofrece asesoría y revisión de contratos antes de su firma.</p>
+    
+    <h2>Política de Comportamiento y Ética Profesional</h2>
+    <p><strong>Comportamiento Profesional:</strong> Los jugadores, equipos y creadores de contenido deben mantener una conducta profesional.</p>
+    <p><strong>Normas de Conducta en Redes Sociales:</strong> Se deberá mantener una actitud respetuosa y profesional en redes.</p>
+    <p><strong>Toxicidad y Violencia:</strong> Se prohíbe cualquier forma de toxicidad, acoso o violencia en línea.</p>
+    
+    <h2>Política de Representación y Patrocinios</h2>
+    <p><strong>Negociación de Patrocinios:</strong> Nexus Manager es el único responsable de la negociación de acuerdos de patrocinio.</p>
+    <p><strong>Gestión de Marca Personal:</strong> Se deben seguir las directrices establecidas por Nexus Manager.</p>
+    <p><strong>Colaboraciones:</strong> Nexus Manager gestionará todas las oportunidades de colaboración.</p>
+    
+    <h2>Política de Scouting y Reclutamiento</h2>
+    <p><strong>Acceso a Talento:</strong> Nexus Manager tendrá acceso exclusivo a la base de datos de jugadores.</p>
+    <p><strong>Representación Exclusiva:</strong> Ningún jugador o equipo podrá ser representado por más de una agencia.</p>
+    <p><strong>Desarrollo de Talento:</strong> Nexus Manager se compromete a desarrollar y promover el talento.</p>
+    
+    <h2>Política de Eventos y Torneos</h2>
+    <p><strong>Participación en Torneos:</strong> Nexus Manager organiza y gestiona la participación en torneos.</p>
+    <p><strong>Organización de Scrims y Competencias:</strong> Nexus Manager coordina entrenamientos competitivos.</p>
+    <p><strong>Exclusividad de Eventos:</strong> En algunos casos, Nexus Manager puede negociar acuerdos exclusivos.</p>
+    
+    <h2>Política de Pagos y Comisiones</h2>
+    <p><strong>Comisiones de Representación:</strong> Nexus Manager cobrará una comisión sobre los ingresos obtenidos.</p>
+    <p><strong>Pagos y Retenciones:</strong> Los pagos serán canalizados a través de Nexus Manager.</p>
+    <p><strong>Transparencia en Pagos:</strong> Nexus Manager proporcionará informes detallados sobre pagos y comisiones.</p>
+    
+    <h2>Política de Resolución de Conflictos</h2>
+    <p><strong>Mediación:</strong> Nexus Manager mediará en disputas entre jugadores y equipos.</p>
+    <p><strong>Término del Contrato:</strong> Nexus Manager se reserva el derecho de terminar contratos en caso de incumplimiento.</p>
+    
+    <h2>Política de Expansión y Crecimiento</h2>
+    <p><strong>Red de Colaboradores:</strong> Nexus Manager trabaja en expandir su red de profesionales del esports.</p>
+    <p><strong>Innovación y Herramientas:</strong> Nexus Manager proporcionará herramientas innovadoras de análisis de rendimiento.</p>
+    
+    <p style="text-align:center;"><strong>Para más información, contáctanos en:</strong> <a href="mailto:nexusmanageroficial@gmail.com" style="color:#ff8800; text-decoration:none;">nexusmanageroficial@gmail.com</a></p>
+  </div>
+</body>
+</html>
