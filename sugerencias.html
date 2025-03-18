@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+  <title>Enviar Sugerencia - NEXUS MANAGER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #121212;
+      color: #ddd;
+      line-height: 1.6;
+      text-align: center;
+    }
+    nav {
+      background: #1f1f1f;
+      padding: 1rem;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      background: #ff8800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e67e22;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
+    <a href="https://fonsifn.github.io/NexusManager/planes">Planes</a>
+    <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
+  </nav>
+  
+  <div class="container">
+    <h2>Enviar una Sugerencia</h2>
+    <form id="sugerenciaForm" action="https://formspree.io/f/xjvndzve" method="POST">
+      <input type="text" name="Nombre" placeholder="Tu nombre o alias" required>
+      <input type="email" name="Correo Electrónico" placeholder="Tu correo electrónico" required>
+      <textarea name="Sugerencia" placeholder="Escribe tu sugerencia aquí..." required></textarea>
+      <button type="submit">Enviar Sugerencia</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("sugerenciaForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      }).then(response => {
+        if (response.ok) {
+          alert("¡Sugerencia enviada correctamente! Gracias por tu aporte.");
+          form.reset();
+        } else {
+          alert("Hubo un error, inténtalo de nuevo");
+        }
+      }).catch(() => alert("Hubo un error, inténtalo de nuevo"));
+    });
+  </script>
+</body>
+</html>
