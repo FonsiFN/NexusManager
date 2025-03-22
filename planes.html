@@ -2,21 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
-<title>NEXUS MANAGER - Planes</title>
+  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+  <title>NEXUS MANAGER - Planes</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Reset y estilos base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #121212;
+      background: #121212; /* Fondo negro */
       color: #ddd;
       line-height: 1.6;
     }
     /* Menú de navegación */
     nav {
-      background: #1f1f1f;
+      background: #000000; /* Fondo de la barra de navegación en negro */
       padding: 1rem;
       text-align: center;
     }
@@ -31,7 +31,7 @@
       color: #ff8800;
       transform: scale(1.1);
     }
-    /* Título del encabezado (igual que en index.html para mantener la coherencia) */
+    /* Título del encabezado */
     .title-container {
       text-align: center;
       padding: 2rem 1rem;
@@ -44,28 +44,20 @@
     .neon-title span {
       display: inline-block;
       padding: 0 15px;
-      border-radius: 5px;
     }
     .nexus {
-      background-color: #000;
       color: #fff;
       text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
       animation: flicker-white 1.5s infinite alternate;
     }
     .manager {
-      background-color: #fff;
-      color: #000;
-      text-shadow: 0 0 8px #000, 0 0 16px #000, 0 0 32px #000;
-      animation: flicker-black 1.5s infinite alternate;
+      color: #fff;
+      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
+      animation: flicker-white 1.5s infinite alternate;
     }
     @keyframes flicker-white {
       0% { opacity: 1; }
       50% { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
-    @keyframes flicker-black {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
       100% { opacity: 1; }
     }
     /* Contenedor principal */
@@ -73,9 +65,8 @@
       max-width: 1200px;
       margin: 2rem auto;
       padding: 2rem;
-      background: #1e1e1e;
+      background: #000000; /* Fondo del contenedor en negro */
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
     h2 {
       color: #ff8800;
@@ -94,7 +85,7 @@
       padding: 1rem;
     }
     .plan-card {
-      background: #2a2a2a;
+      background: #1e1e1e; /* Fondo de las tarjetas en negro */
       border: 1px solid #444;
       border-radius: 8px;
       padding: 1.5rem;
@@ -132,7 +123,7 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background: #1f1f1f;
+      background: #000000; /* Fondo del footer en negro */
       color: #fff;
       margin-top: 2rem;
     }
@@ -153,7 +144,7 @@
   </header>
 
   <div class="container">
-    <h2>Nuestros Planes </h2>
+    <h2>Nuestros Planes</h2>
     <p>
       Descubre la opción que se adapta a tus necesidades y objetivos. Cada plan está diseñado para brindarte
       las herramientas y el apoyo que necesitas para alcanzar el éxito en el mundo de los esports.
