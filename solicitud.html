@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+  <title>Solicitud de Plan - NEXUS MANAGER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #121212;
+      color: #ddd;
+      line-height: 1.6;
+      text-align: center;
+    }
+    nav {
+      background: #1f1f1f;
+      padding: 1rem;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff8800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
+    <a href="https://fonsifn.github.io/NexusManager/planes">Planes</a>
+    <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
+  </nav>
+  
+  <div class="container">
+    <h2>Solicitar un Plan</h2>
+    <form id="solicitudForm" action="https://formspree.io/f/xqapakvd" method="POST">
+      <input type="email" name="Correo Electrónico" placeholder="Correo Electrónico" required>
+      <input type="text" name="ID de Discord" placeholder="ID de Discord" required>
+      <select name="Plan">
+        <option value="Base">Plan Base</option>
+        <option value="VIP">Plan VIP</option>
+        <option value="Partner">Plan Partner</option>
+      </select>
+      <button type="submit">Enviar Solicitud</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("solicitudForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita que se recargue la página
+      const form = event.target;
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      }).then(response => {
+        if (response.ok) {
+          alert("Solicitud enviada correctamente");
+          form.reset();
+        } else {
+          alert("Hubo un error, inténtalo de nuevo");
+        }
+      }).catch(() => alert("Hubo un error, inténtalo de nuevo"));
+    });
+  </script>
+</body>
+</html>

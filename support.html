@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus Manager - Support</title>
+  <!-- Fuentes y Reset CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================== */
+    /* Reset y estilos base        */
+    /* =========================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    /* =========================== */
+    /* Sidebar                     */
+    /* =========================== */
+    .sidebar {
+      width: 260px;
+      background-color: #1E1E1E;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #333;
+      overflow-y: auto;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .logo {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .sidebar .create-btn {
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 25px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .create-btn:hover {
+      background-color: #e68900;
+    }
+    .sidebar .menu li {
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+    .sidebar .menu li.active,
+    .sidebar .menu li:hover {
+      background-color: #ff9800;
+      color: #121212;
+    }
+    .sidebar .toggle-container {
+      margin-top: auto;
+      text-align: center;
+      padding: 15px 0;
+    }
+    /* Switch CSS */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 24px;
+    }
+    .switch .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    .switch input:checked + .slider {
+      background-color: #ff9800;
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .sidebar .profile {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .sidebar .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff9800;
+      margin-bottom: 10px;
+    }
+    .sidebar .profile p { font-weight: 500; }
+    .sidebar .profile span {
+      font-size: 12px;
+      color: #aaa;
+    }
+    /* =========================== */
+    /* Content                     */
+    /* =========================== */
+    .content {
+      flex: 1;
+      padding: 20px 30px;
+      overflow-y: auto;
+    }
+    header { margin-bottom: 20px; }
+    .spacer { height: 50px; }
+    /* =========================== */
+    /* Responsive                  */
+    /* =========================== */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #333;
+      }
+      .content { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== Sidebar ========== -->
+  <div class="sidebar">
+    <div class="logo">Apex</div>
+    <button class="create-btn" id="sidebarCreateBtn">+ Create new</button>
+    <ul class="menu">
+      <li><a href="dashboard.html"><span>Dashboard</span></a></li>
+      <li><a href="teams.html"><span>Teams</span></a></li>
+      <li><a href="settings.html"><span>Settings</span></a></li>
+      <li class="active"><a href="support.html"><span>Support</span></a></li>
+    </ul>
+    <div class="toggle-container">
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="profile">
+      <img src="avatar.png" alt="Avatar">
+      <p>Jhampier</p>
+      <span>jhampier@gmail.com</span>
+    </div>
+  </div>
+  <!-- ========== Content ========== -->
+  <div class="content">
+    <header>
+      <h1>Soporte</h1>
+    </header>
+    <section>
+      <p>¿Necesitas ayuda? Contáctanos en <strong>support@nexusmanager.com</strong>.</p>
+    </section>
+    <div class="spacer"></div>
+  </div>
+</body>
+</html>
