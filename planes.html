@@ -2,23 +2,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
-<title>NEXUS MANAGER - Planes</title>
+  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+  <title>NEXUS MANAGER - Planes</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Reset y estilos base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #121212;
+      background: #000000; /* Fondo negro */
       color: #ddd;
       line-height: 1.6;
     }
+
     /* Menú de navegación */
     nav {
-      background: #1f1f1f;
+      background: #000000; /* Fondo negro */
       padding: 1rem;
       text-align: center;
+      border-bottom: 2px solid #fff; /* Línea blanca debajo del menú */
     }
     nav a {
       color: #fff;
@@ -31,7 +33,8 @@
       color: #ff8800;
       transform: scale(1.1);
     }
-    /* Título del encabezado (igual que en index.html para mantener la coherencia) */
+
+    /* Título del encabezado */
     .title-container {
       text-align: center;
       padding: 2rem 1rem;
@@ -68,24 +71,28 @@
       50% { opacity: 0.6; }
       100% { opacity: 1; }
     }
+
     /* Contenedor principal */
     .container {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 2rem;
-      background: #1e1e1e;
+      background: #1e1e1e; /* Fondo gris oscuro */
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
+
     h2 {
       color: #ff8800;
       margin-bottom: 1rem;
       text-align: center;
     }
+
     p {
       text-align: center;
       margin-bottom: 2rem;
     }
+
     /* Grid de Planes */
     .plans {
       display: grid;
@@ -93,6 +100,7 @@
       gap: 2rem;
       padding: 1rem;
     }
+
     .plan-card {
       background: #2a2a2a;
       border: 1px solid #444;
@@ -101,18 +109,22 @@
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .plan-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
+
     .plan-card h3 {
       color: #ff8800;
       margin-bottom: 0.5rem;
       font-size: 1.8rem;
     }
+
     .plan-card p {
       margin: 0.5rem 0;
     }
+
     .btn-info {
       display: inline-block;
       margin-top: 1rem;
@@ -124,18 +136,21 @@
       font-weight: bold;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
     .btn-info:hover {
       background-color: #e67e22;
       transform: scale(1.05);
     }
+
     /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
-      background: #1f1f1f;
+      background: #000000; /* Fondo negro */
       color: #fff;
       margin-top: 2rem;
     }
+
   </style>
 </head>
 <body>
