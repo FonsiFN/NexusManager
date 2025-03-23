@@ -2,23 +2,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
-    <title>NEXUS MANAGER</title>
+  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">
+  <title>NEXUS MANAGER</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-<style>
+  <style>
     /* Reset y estilos base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #121212;
+      background: #000000;
       color: #ddd;
       line-height: 1.6;
     }
+
     /* Menú de navegación */
     nav {
-      background: #1f1f1f;
+      background: #000000; /* Fondo negro */
       padding: 1rem;
       text-align: center;
+      border-bottom: 2px solid #fff; /* Línea blanca debajo del menú */
     }
     nav a {
       color: #fff;
@@ -31,43 +33,41 @@
       color: #ff8800;
       transform: scale(1.1);
     }
+
     /* Título en el centro */
     .title-container {
       text-align: center;
       padding: 2rem 1rem;
       margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
     }
+
     .neon-title {
       font-size: 4rem;
       display: inline-block;
     }
-    .neon-title span {
-      display: inline-block;
-      padding: 0 15px;
-      border-radius: 5px;
-    }
+
     .nexus {
-      background-color: #000;
       color: #fff;
       text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
       animation: flicker-white 1.5s infinite alternate;
     }
+
     .manager {
-      background-color: #fff;
-      color: #000;
-      text-shadow: 0 0 8px #000, 0 0 16px #000, 0 0 32px #000;
-      animation: flicker-black 1.5s infinite alternate;
+      color: #fff;
+      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
+      animation: flicker-white 1.5s infinite alternate;
     }
+
     @keyframes flicker-white {
       0%   { opacity: 1; }
       50%  { opacity: 0.8; }
       100% { opacity: 1; }
     }
-    @keyframes flicker-black {
-      0%   { opacity: 1; }
-      50%  { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
+
     /* Contenedor principal de contenido */
     .container {
       max-width: 1000px;
@@ -82,13 +82,20 @@
       margin-bottom: 1rem;
     }
     p { margin-bottom: 1rem; }
+
     /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
-      background: #1f1f1f;
+      background: #000000; /* Fondo negro */
       color: #fff;
       margin-top: 2rem;
+    }
+
+    /* Logo estilo */
+    .logo {
+      width: 100px; /* Ajusta el tamaño aquí */
+      height: auto;
     }
   </style>
 </head>
@@ -101,8 +108,9 @@
     <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
   </nav>
 
-  <!-- Título central con efecto neón -->
+  <!-- Título central con logo y efecto neón -->
   <header class="title-container">
+    <img src="https://imgur.com/wVTfGfZ.png" alt="Logo de Nexus Manager" class="logo">
     <h1 class="neon-title">
       <span class="nexus">NEXUS</span>
       <span class="manager">MANAGER</span>
