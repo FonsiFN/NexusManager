@@ -38,16 +38,23 @@
       text-align: center;
       padding: 2rem 1rem;
       margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
     }
+
     .neon-title {
       font-size: 4rem;
       display: inline-block;
     }
+
     .nexus {
       color: #fff;
       text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
       animation: flicker-white 1.5s infinite alternate;
     }
+
     .manager {
       color: #fff;
       text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
@@ -83,6 +90,12 @@
       color: #fff;
       margin-top: 2rem;
     }
+
+    /* Logo estilo */
+    .logo {
+      width: 50px;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -94,8 +107,9 @@
     <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
   </nav>
 
-  <!-- Título central con efecto neón -->
+  <!-- Título central con logo y efecto neón -->
   <header class="title-container">
+    <img src="https://imgur.com/wVTfGfZ.png" alt="Logo de Nexus Manager" class="logo">
     <h1 class="neon-title">
       <span class="nexus">NEXUS</span>
       <span class="manager">MANAGER</span>
