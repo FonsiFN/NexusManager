@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS MANAGER - Contacto</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero --- */
+        .contact-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.15), transparent 70%),
+                url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(13,13,13,0.95) 30%, transparent 100%);
+        }
+        .contact-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--gray), transparent);
+            z-index: 1;
+        }
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .contact-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .contact-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .contact-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .contact-section:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .contact-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .contact-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+        .contact-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        .contact-method a {
+            color: var(--white);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .contact-method a:hover {
+            color: var(--neon-blue);
+        }
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-right: 20px;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 40px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .contact-form:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 5px;
+            color: var(--white);
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            background: var(--neon-blue);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 100px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+            .contact-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            .nav-links a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+            .contact-card h3 {
+                font-size: 1.5rem;
+            }
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="planes.html">Planes</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1>Contacto</h1>
+            <p>Estamos aquí para ayudarte en tu camino al éxito en los esports</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:contacto@nexusmanager.com">contacto@nexusmanager.com</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34987654321">+34 987 654 321</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calle Gaming 123, Madrid, España</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Horario de Atención</h3>
+                    <div class="contact-method">
+                        <i class="fas fa-clock"></i>
+                        <span>Lunes a Viernes: 10:00 - 20:00</span>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-clock"></i>
+                        <span>Sábados: 12:00 - 18:00</span>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-clock"></i>
+                        <span>Domingos: Cerrado</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Envíanos un Mensaje</h3>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Selecciona un asunto</option>
+                            <option value="general">Consulta General</option>
+                            <option value="support">Soporte Técnico</option>
+                            <option value="partnership">Colaboraciones</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="terminos-y-servicios.html">Términos y Servicios</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
