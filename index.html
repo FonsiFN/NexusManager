@@ -1,153 +1,209 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">
-  <title>NEXUS MANAGER</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Nexus Manager - Inicio</title>
+  <!-- Estilos embebidos -->
   <style>
-    /* Reset y estilos base */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #000000;
-      color: #ddd;
-      line-height: 1.6;
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Menú de navegación */
-    nav {
-      background: #000000; /* Fondo negro */
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 2px solid #fff; /* Línea blanca debajo del menú */
+    body {
+      background-color: #000; /* Fondo negro */
+      color: #fff;            /* Texto blanco */
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;     /* Evita scroll horizontal */
     }
+
+    header {
+      width: 100%;
+      padding: 1rem;
+      background-color: #111; 
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      color: #f00; /* Rojo */
+      font-size: 1.5rem;
+    }
+
     nav a {
       color: #fff;
       margin: 0 1rem;
       text-decoration: none;
-      font-weight: 700;
-      transition: color 0.3s ease, transform 0.3s ease;
+      transition: color 0.3s;
     }
+
     nav a:hover {
-      color: #ff8800;
-      transform: scale(1.1);
+      color: #f00; /* Efecto hover en rojo */
     }
 
-    /* Título en el centro */
-    .title-container {
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
+    /* Sección hero */
+    .hero {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1rem;
+      background: url('https://via.placeholder.com/1200x600/000000/FFFFFF?text=Banner+Nexus+Manager') center/cover no-repeat;
+      position: relative;
     }
 
-    .neon-title {
-      font-size: 4rem;
-      display: inline-block;
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: slide-down 1s ease forwards;
     }
 
-    .nexus {
-      color: #fff;
-      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
-      animation: flicker-white 1.5s infinite alternate;
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+      animation: fade-in 2s ease forwards;
+      opacity: 0;
     }
 
-    .manager {
-      color: #fff;
-      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
-      animation: flicker-white 1.5s infinite alternate;
+    @keyframes slide-down {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
 
-    @keyframes flicker-white {
-      0%   { opacity: 1; }
-      50%  { opacity: 0.8; }
+    @keyframes fade-in {
+      0% { opacity: 0; }
       100% { opacity: 1; }
     }
 
-    /* Contenedor principal de contenido */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    /* Sección principal de información */
+    .info-section {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    h2 {
-      color: #ff8800;
+
+    .info-section h3 {
+      color: #f00;
       margin-bottom: 1rem;
+      font-size: 2rem;
+      text-transform: uppercase;
     }
-    p { margin-bottom: 1rem; }
+
+    .info-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
 
     /* Footer */
     footer {
+      background-color: #111;
       text-align: center;
       padding: 1rem;
-      background: #000000; /* Fondo negro */
-      color: #fff;
       margin-top: 2rem;
     }
 
-    /* Logo estilo */
-    .logo {
-      width: 100px; /* Ajusta el tamaño aquí */
-      height: auto;
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Pequeña animación al hacer scroll (opcional) */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
+
+  <!-- Script embebido -->
+  <script>
+    // Ejemplo de animación en scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollElements = document.querySelectorAll('.animate-on-scroll');
+
+      const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+          elementTop <= 
+          (window.innerHeight || document.documentElement.clientHeight) / dividend
+        );
+      };
+
+      const displayScrollElement = (element) => {
+        element.classList.add('visible');
+      };
+
+      const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+          if (elementInView(el, 1.25)) {
+            displayScrollElement(el);
+          }
+        })
+      }
+
+      window.addEventListener('scroll', () => {
+        handleScrollAnimation();
+      });
+    });
+  </script>
 </head>
 <body>
-
-  <!-- Menú de navegación -->
-  <nav>
-    <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
-    <a href="https://fonsifn.github.io/NexusManager/planes">Planes</a>
-    <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
-  </nav>
-
-  <!-- Título central con logo y efecto neón -->
-  <header class="title-container">
-    <img src="https://imgur.com/wVTfGfZ.png" alt="Logo de Nexus Manager" class="logo">
-    <h1 class="neon-title">
-      <span class="nexus">NEXUS</span>
-      <span class="manager">MANAGER</span>
-    </h1>
+  <!-- Header / Menú -->
+  <header>
+    <h1>Nexus Manager</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="planes.html">Planes</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
   </header>
 
-  <!-- Contenido principal -->
-  <div class="container">
-    <h2>Bienvenido a NEXUS MANAGER</h2>
+  <!-- Sección Hero -->
+  <section class="hero">
+    <h2>La mejor gestión de talentos y representación</h2>
     <p>
-      En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia.
-      Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones
-      hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.
+      Bienvenido a Nexus Manager, tu plataforma líder en scouting, representación, gestión de redes y mucho más.
     </p>
-    <p>
-      Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo
-      multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca
-      personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.
+  </section>
+
+  <!-- Sección de Información Principal -->
+  <section class="info-section">
+    <h3>¿Qué es Nexus Manager?</h3>
+    <p class="animate-on-scroll">
+      Nexus Manager es una empresa dedicada a la gestión 360º de creadores de contenido, atletas y talentos en general.
+      Ofrecemos servicios de representación, negociación de contratos, asesoramiento en redes sociales, branding y mucho más.
     </p>
-    <p>
-      ¿Qué nos hace únicos? La combinación de experiencia, innovación y una red de contactos que abren puertas en
-      torneos nacionales e internacionales, garantizando que cada paso hacia el éxito esté respaldado por estrategias
-      comprobadas y un enfoque personalizado.
+    <p class="animate-on-scroll">
+      Nuestro objetivo es que cada uno de nuestros clientes obtenga la máxima exposición y los mejores beneficios, 
+      respaldados por un equipo profesional con amplia experiencia en el sector.
     </p>
-    <p>
-      Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas
-      para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!
+    <p class="animate-on-scroll">
+      Desde la búsqueda y scouting de nuevos talentos hasta la gestión diaria de contenido, en Nexus Manager 
+      nos encargamos de todo para que tú solo te preocupes por brillar.
     </p>
-    <p>
-      <strong>¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</strong>
-    </p>
-  </div>
+
+    <!-- Puedes añadir más secciones con info tomada de:
+         https://fonsifn.github.io/NexusManager/inicio
+         https://fonsifn.github.io/NexusManager/plataformas/scouting
+         https://fonsifn.github.io/NexusManager/politicas/usuarios
+         etc.
+    -->
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>NEXUS MANAGER - Todos los derechos reservados &copy; 2025</p>
+    <p>© 2023 Nexus Manager. Todos los derechos reservados.</p>
+    <!-- Si deseas enlazar a políticas: -->
+    <!-- <p><a href="politicas-usuarios.html">Políticas de Usuarios</a> | <a href="politicas-staff.html">Políticas de Staff</a></p> -->
   </footer>
-
 </body>
 </html>
