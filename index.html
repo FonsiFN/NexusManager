@@ -6,6 +6,7 @@
     <title>NexusManager | Revolución en Esports</title>
     <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">  
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --black: #0D0D0D;
@@ -29,9 +30,6 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         /* --- Navbar --- */
@@ -43,6 +41,11 @@
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .logo img {
             height: 50px;
@@ -138,36 +141,46 @@
             box-shadow: 0 0 20px var(--neon-blue);
         }
 
-        /* --- Nueva clase para el texto de la introducción --- */
-        .intro-text {
-            padding: 60px 0;
+        /* --- Sección Información --- */
+        .info-section {
+            padding: 80px 0;
             background-color: var(--gray);
+            text-align: center;
         }
-        .intro-text p {
+        .info-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+        .info-content {
+            max-width: 900px;
+            margin: 0 auto;
             font-size: 1.1rem;
             line-height: 1.8;
             opacity: 0.85;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         /* --- Features --- */
         .features {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: var(--gray);
+            text-align: center;
         }
         .features h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
             color: var(--neon-blue);
+            text-transform: uppercase;
         }
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .feature-card {
             background: rgba(30, 30, 30, 0.7);
@@ -222,6 +235,10 @@
         .footer-social a:hover {
             color: var(--neon-blue);
         }
+        .footer-copyright {
+            margin-top: 30px;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -252,16 +269,16 @@
         </div>
     </section>
 
-    <!-- Nueva sección para el texto introductorio -->
-    <section class="intro-text">
+    <!-- Sección Información -->
+    <section class="info-section">
         <div class="container">
-            <p>En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.
-
-Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.
-
-Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!
-
-¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</p>
+            <h2>INFORMACIÓN</h2>
+            <div class="info-content">
+                <p>En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.</p>
+                <p>Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.</p>
+                <p>Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!</p>
+                <p>¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</p>
+            </div>
         </div>
     </section>
 
@@ -306,7 +323,7 @@ Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER pue
                 <a href="#"><i class="fab fa-discord"></i></a>
                 <a href="#"><i class="fab fa-twitch"></i></a>
             </div>
-            <p style="margin-top: 30px; opacity: 0.7;">© 2025 NexusManager. Todos los derechos reservados.</p>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
         </div>
     </footer>
 </body>
