@@ -1,153 +1,330 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">
-  <title>NEXUS MANAGER</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset y estilos base */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #000000;
-      color: #ddd;
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Revolución en Esports</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    /* Menú de navegación */
-    nav {
-      background: #000000; /* Fondo negro */
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 2px solid #fff; /* Línea blanca debajo del menú */
-    }
-    nav a {
-      color: #fff;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 700;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-    nav a:hover {
-      color: #ff8800;
-      transform: scale(1.1);
-    }
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
 
-    /* Título en el centro */
-    .title-container {
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1), transparent 70%),
+                url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(13,13,13,0.9) 30%, transparent 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .btn-hero {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-hero:hover {
+            background: var(--neon-blue);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
 
-    .neon-title {
-      font-size: 4rem;
-      display: inline-block;
-    }
+        /* --- Sección Información --- */
+        .info-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            text-align: center;
+        }
+        .info-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+        .info-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.85;
+        }
 
-    .nexus {
-      color: #fff;
-      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
-      animation: flicker-white 1.5s infinite alternate;
-    }
+        /* --- Features --- */
+        .features {
+            padding: 80px 0;
+            background-color: var(--gray);
+            text-align: center;
+        }
+        .features h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 40px 30px;
+            transition: all 0.5s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+        }
+        .feature-card p {
+            opacity: 0.8;
+        }
 
-    .manager {
-      color: #fff;
-      text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff;
-      animation: flicker-white 1.5s infinite alternate;
-    }
-
-    @keyframes flicker-white {
-      0%   { opacity: 1; }
-      50%  { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
-
-    /* Contenedor principal de contenido */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    h2 {
-      color: #ff8800;
-      margin-bottom: 1rem;
-    }
-    p { margin-bottom: 1rem; }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #000000; /* Fondo negro */
-      color: #fff;
-      margin-top: 2rem;
-    }
-
-    /* Logo estilo */
-    .logo {
-      width: 100px; /* Ajusta el tamaño aquí */
-      height: auto;
-    }
-  </style>
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+        }
+        .footer-logo img {
+            height: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-copyright {
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="planes.html">Planes</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Menú de navegación -->
-  <nav>
-    <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
-    <a href="https://fonsifn.github.io/NexusManager/planes">Planes</a>
-    <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
-  </nav>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>BIENVENIDO A NEXUS MANAGER</h1>
+                <p>Fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito.</p>
+                <a href="planes.html" class="btn-hero">VER PLANES</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Título central con logo y efecto neón -->
-  <header class="title-container">
-    <img src="https://imgur.com/wVTfGfZ.png" alt="Logo de Nexus Manager" class="logo">
-    <h1 class="neon-title">
-      <span class="nexus">NEXUS</span>
-      <span class="manager">MANAGER</span>
-    </h1>
-  </header>
+    <!-- Sección Información -->
+    <section class="info-section">
+        <div class="container">
+            <h2>INFORMACIÓN</h2>
+            <div class="info-content">
+                <p>En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.</p>
+                <p>Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.</p>
+                <p>Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!</p>
+                <p>¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contenido principal -->
-  <div class="container">
-    <h2>Bienvenido a NEXUS MANAGER</h2>
-    <p>
-      En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia.
-      Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones
-      hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.
-    </p>
-    <p>
-      Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo
-      multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca
-      personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.
-    </p>
-    <p>
-      ¿Qué nos hace únicos? La combinación de experiencia, innovación y una red de contactos que abren puertas en
-      torneos nacionales e internacionales, garantizando que cada paso hacia el éxito esté respaldado por estrategias
-      comprobadas y un enfoque personalizado.
-    </p>
-    <p>
-      Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas
-      para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!
-    </p>
-    <p>
-      <strong>¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</strong>
-    </p>
-  </div>
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2>¿QUÉ NOS HACE ÚNICOS?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>RED GLOBAL</h3>
+                    <p>Conexiones exclusivas en torneos nacionales e internacionales.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>ENFOQUE PERSONALIZADO</h3>
+                    <p>Estrategias adaptadas a cada talento y organización, con seguimiento constante.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>TECNOLOGÍA AVANZADA</h3>
+                    <p>Herramientas de análisis, scouting y proyección de rendimiento de última generación.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>REPRESENTACIÓN PROFESIONAL</h3>
+                    <p>Gestión integral de marca y contratos, con asesoría legal y fiscal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>NEXUS MANAGER - Todos los derechos reservados &copy; 2025</p>
-  </footer>
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
