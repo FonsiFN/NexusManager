@@ -1,209 +1,278 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Nexus Manager - Inicio</title>
-  <!-- Estilos embebidos -->
-  <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Revolución en Esports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    body {
-      background-color: #000; /* Fondo negro */
-      color: #fff;            /* Texto blanco */
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;     /* Evita scroll horizontal */
-    }
+        /* --- Navbar Gaming --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
 
-    header {
-      width: 100%;
-      padding: 1rem;
-      background-color: #111; 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+        /* --- Hero Section (Estilo Gaming) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1), transparent 70%),
+                url('https://i.imgur.com/gaming-bg.jpg') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(13,13,13,0.9) 30%, transparent 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .btn-hero {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-hero:hover {
+            background: var(--neon-blue);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
 
-    header h1 {
-      color: #f00; /* Rojo */
-      font-size: 1.5rem;
-    }
+        /* --- Sección "Qué nos hace únicos" --- */
+        .features {
+            padding: 100px 0;
+            background-color: var(--gray);
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 40px 30px;
+            transition: all 0.5s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+        }
+        .feature-card p {
+            opacity: 0.8;
+        }
 
-    nav a {
-      color: #fff;
-      margin: 0 1rem;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f00; /* Efecto hover en rojo */
-    }
-
-    /* Sección hero */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5rem 1rem;
-      background: url('https://via.placeholder.com/1200x600/000000/FFFFFF?text=Banner+Nexus+Manager') center/cover no-repeat;
-      position: relative;
-    }
-
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      animation: slide-down 1s ease forwards;
-    }
-
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.5;
-      animation: fade-in 2s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes slide-down {
-      0% { transform: translateY(-50px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fade-in {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Sección principal de información */
-    .info-section {
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .info-section h3 {
-      color: #f00;
-      margin-bottom: 1rem;
-      font-size: 2rem;
-      text-transform: uppercase;
-    }
-
-    .info-section p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #111;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-
-    footer p {
-      font-size: 0.9rem;
-    }
-
-    /* Pequeña animación al hacer scroll (opcional) */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease;
-    }
-
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-
-  <!-- Script embebido -->
-  <script>
-    // Ejemplo de animación en scroll
-    document.addEventListener('DOMContentLoaded', function() {
-      const scrollElements = document.querySelectorAll('.animate-on-scroll');
-
-      const elementInView = (el, dividend = 1) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return (
-          elementTop <= 
-          (window.innerHeight || document.documentElement.clientHeight) / dividend
-        );
-      };
-
-      const displayScrollElement = (element) => {
-        element.classList.add('visible');
-      };
-
-      const handleScrollAnimation = () => {
-        scrollElements.forEach((el) => {
-          if (elementInView(el, 1.25)) {
-            displayScrollElement(el);
-          }
-        })
-      }
-
-      window.addEventListener('scroll', () => {
-        handleScrollAnimation();
-      });
-    });
-  </script>
+        /* --- Footer Gaming --- */
+        .footer {
+            background-color: var(--black);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+        }
+        .footer-logo img {
+            height: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+        }
+    </style>
 </head>
 <body>
-  <!-- Header / Menú -->
-  <header>
-    <h1>Nexus Manager</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="planes.html">Planes</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-  </header>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://i.imgur.com/IY6Cl7E.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="planes.html">Planes</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Sección Hero -->
-  <section class="hero">
-    <h2>La mejor gestión de talentos y representación</h2>
-    <p>
-      Bienvenido a Nexus Manager, tu plataforma líder en scouting, representación, gestión de redes y mucho más.
-    </p>
-  </section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>BIENVENIDO A NEXUS MANAGER</h1>
+                <p>Fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito.</p>
+                <a href="planes.html" class="btn-hero">VER PLANES</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Sección de Información Principal -->
-  <section class="info-section">
-    <h3>¿Qué es Nexus Manager?</h3>
-    <p class="animate-on-scroll">
-      Nexus Manager es una empresa dedicada a la gestión 360º de creadores de contenido, atletas y talentos en general.
-      Ofrecemos servicios de representación, negociación de contratos, asesoramiento en redes sociales, branding y mucho más.
-    </p>
-    <p class="animate-on-scroll">
-      Nuestro objetivo es que cada uno de nuestros clientes obtenga la máxima exposición y los mejores beneficios, 
-      respaldados por un equipo profesional con amplia experiencia en el sector.
-    </p>
-    <p class="animate-on-scroll">
-      Desde la búsqueda y scouting de nuevos talentos hasta la gestión diaria de contenido, en Nexus Manager 
-      nos encargamos de todo para que tú solo te preocupes por brillar.
-    </p>
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2>¿QUÉ NOS HACE ÚNICOS?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>RED GLOBAL</h3>
+                    <p>Conexiones exclusivas en torneos nacionales e internacionales.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>ENFOQUE PERSONALIZADO</h3>
+                    <p>Estrategias adaptadas a cada talento y organización.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>TECNOLOGÍA AVANZADA</h3>
+                    <p>Herramientas de análisis y scouting de última generación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Puedes añadir más secciones con info tomada de:
-         https://fonsifn.github.io/NexusManager/inicio
-         https://fonsifn.github.io/NexusManager/plataformas/scouting
-         https://fonsifn.github.io/NexusManager/politicas/usuarios
-         etc.
-    -->
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2023 Nexus Manager. Todos los derechos reservados.</p>
-    <!-- Si deseas enlazar a políticas: -->
-    <!-- <p><a href="politicas-usuarios.html">Políticas de Usuarios</a> | <a href="politicas-staff.html">Políticas de Staff</a></p> -->
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://i.imgur.com/IY6Cl7E.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.7;">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
