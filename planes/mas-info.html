@@ -1,130 +1,471 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">
-  <title>NEXUS MANAGER - Más Información</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #121212;
-      color: #ddd;
-      line-height: 1.6;
-    }
-    nav {
-      background: #1f1f1f;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 700;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-    nav a:hover {
-      color: #ff8800;
-      transform: scale(1.1);
-    }
-    header {
-      background: #1a1a1a;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 1rem;
-      border-bottom: 2px solid #ff8800;
-    }
-    header h1 {
-      font-size: 3.5rem;
-      color: #ff8800;
-      text-shadow: 0 0 8px #ff8800, 0 0 16px #ff8800, 0 0 32px #ff8800;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    h2 { color: #ff8800; margin-bottom: 1rem; text-align: center; }
-    p { margin-bottom: 1rem; }
-    ul { margin-left: 2rem; margin-bottom: 1rem; }
-    li { margin-bottom: 0.5rem; }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1f1f1f;
-      color: #fff;
-      margin-top: 2rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS MANAGER - Más Información</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/IY6Cl7E.png">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero --- */
+        .info-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.15), transparent 70%),
+                url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(13,13,13,0.95) 30%, transparent 100%);
+        }
+        .info-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--gray), transparent);
+            z-index: 1;
+        }
+        .info-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .info-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .info-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- Info Section --- */
+        .info-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .info-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .info-section:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .info-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .plan-details {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 40px;
+            margin-bottom: 50px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .plan-details:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+        .plan-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .plan-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-right: 20px;
+        }
+        .plan-price {
+            background: var(--neon-blue);
+            color: var(--black);
+            padding: 5px 15px;
+            font-weight: 900;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(0, 240, 255, 0.3);
+        }
+        .plan-description {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        .features-list {
+            margin-bottom: 30px;
+        }
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.05rem;
+        }
+        .features-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+        .ideal-for {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .ideal-for p {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+        }
+        .ideal-for-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .ideal-for-list li:before {
+            content: '•';
+            position: absolute;
+            left: 10px;
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 100px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .info-hero h1 {
+                font-size: 3rem;
+            }
+            .plan-header h2 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            .info-hero {
+                height: 35vh;
+                min-height: 250px;
+            }
+            .info-hero h1 {
+                font-size: 2.2rem;
+            }
+            .plan-details {
+                padding: 30px 20px;
+            }
+            .plan-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .plan-price {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+            .nav-links a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
-    <a href="https://fonsifn.github.io/NexusManager/planes">Planes</a>
-    <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a>
-  </nav>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="https://fonsifn.github.io/NexusManager/inicio" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Planes</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Política</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <header>
-    <h1>Más Información</h1>
-  </header>
+    <!-- Hero -->
+    <section class="info-hero">
+        <div class="info-hero-content">
+            <h1>Más Información</h1>
+            <p>Descubre todos los detalles de nuestros planes</p>
+        </div>
+    </section>
 
-  <div class="container">
-    <h2>Plan Base (5€ / mes)</h2>
-    <p>El Plan Base está diseñado para quienes están comenzando en el mundo de los esports o desean mejorar su rendimiento de manera autodidacta con una guía básica. Es ideal para jugadores individuales o pequeños equipos que buscan dar sus primeros pasos.</p>
-    <ul>
-      <li>Acceso a una base de conocimientos: Documentación sobre estrategias de juego, rutinas de entrenamiento, consejos de comunicación en equipo y más.</li>
-      <li>Soporte básico por correo electrónico: Respuestas a dudas esenciales sobre estrategia, gestión de redes y configuración básica de streams.</li>
-      <li>Recursos para redes sociales: Plantillas para banners, logos y una guía rápida de cómo presentarse profesionalmente en plataformas como Twitch, YouTube y Twitter.</li>
-      <li>Consejos de marketing: Introducción a cómo promocionarse y empezar a captar una audiencia pequeña pero fiel.</li>
-    </ul>
-    <p>🎯 <strong>¿Para quién es ideal?</strong></p>
-    <ul>
-      <li>🎮 Jugadores casuales que quieren empezar a competir.</li>
-      <li>🏆 Equipos recién formados que necesitan una dirección inicial.</li>
-      <li>📢 Streamers pequeños que buscan dar una imagen más profesional.</li>
-    </ul>
-    
-    <h2>Plan VIP (10€ / mes)</h2>
-    <p>El Plan VIP está pensado para jugadores, streamers o equipos que ya tienen experiencia y buscan llevar su rendimiento y presencia al siguiente nivel. Combina asesoría personalizada con herramientas avanzadas.</p>
-    <ul>
-      <li>Consultorías personalizadas: Análisis de fortalezas y debilidades, con planes de mejora adaptados a cada jugador o equipo.</li>
-      <li>Asesoría en marketing digital: Estrategias para hacer crecer la marca personal, aumentar seguidores y optimizar el contenido.</li>
-      <li>Acceso a herramientas de análisis: Software para revisar estadísticas de rendimiento, analizar jugadas y optimizar estrategias.</li>
-      <li>Sesiones de retroalimentación periódicas: Revisión mensual de avances y ajustes en las tácticas.</li>
-      <li>Soporte prioritario: Respuesta rápida a dudas y consultas, especialmente en temas de optimización y networking.</li>
-    </ul>
-    <p>🎯 <strong>¿Para quién es ideal?</strong></p>
-    <ul>
-      <li>🔥 Equipos semi-profesionales que buscan mejorar su sinergia y rendimiento.</li>
-      <li>📈 Streamers en crecimiento que desean profesionalizar su contenido.</li>
-      <li>🎯 Jugadores individuales que apuntan a unirse a equipos reconocidos.</li>
-    </ul>
-    
-    <h2>Plan Partner (20€ / mes)</h2>
-    <p>El Plan Partner es la opción más completa y exclusiva, enfocada en jugadores, equipos o creadores de contenido que quieren destacar a nivel competitivo y comercial. Ofrece asesoramiento integral y representación para aprovechar al máximo las oportunidades del mercado.</p>
-    <ul>
-      <li>Representación en negociaciones: Gestión de contratos y acuerdos con marcas y equipos.</li>
-      <li>Acceso prioritario a eventos: Invitaciones especiales a torneos, encuentros con patrocinadores y eventos exclusivos.</li>
-      <li>Asesoría avanzada en marketing: Planificación de estrategias de marca, colaboración con otros creadores y optimización de la imagen personal.</li>
-      <li>Análisis detallado de rendimiento: Reportes exhaustivos con planes de mejora continua basados en datos de rendimiento.</li>
-      <li>Planificación estratégica de carrera: Diseño de una hoja de ruta para maximizar la carrera, incluyendo ingresos, visibilidad y crecimiento personal.</li>
-      <li>Acceso directo a todas nuestras plataformas: Conexión sin restricciones a todas las herramientas, servicios y recursos exclusivos de Nexus Manager.</li>
-    </ul>
-<p>🎯 <strong>¿Para quién es ideal?</strong></p>
-    <ul>
-      <li>🎮 Jugadores élite que aspiran a formar parte de organizaciones top.</li>
-      <li>💰 Equipos competitivos que buscan patrocinadores y reconocimiento.</li>
-      <li>🌟 Streamers e influencers que desean construir una marca poderosa y sostenible.</li>
-    </ul>
-  </div>
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-container">
+            <!-- Plan Base -->
+            <div class="plan-details">
+                <div class="plan-header">
+                    <h2>Plan Base</h2>
+                    <div class="plan-price">5€ / mes</div>
+                </div>
+                <p class="plan-description">El Plan Base está diseñado para quienes están comenzando en el mundo de los esports o desean mejorar su rendimiento de manera autodidacta con una guía básica. Es ideal para jugadores individuales o pequeños equipos que buscan dar sus primeros pasos.</p>
+                
+                <ul class="features-list">
+                    <li>Acceso a una base de conocimientos: Documentación sobre estrategias de juego, rutinas de entrenamiento, consejos de comunicación en equipo y más.</li>
+                    <li>Soporte básico por correo electrónico: Respuestas a dudas esenciales sobre estrategia, gestión de redes y configuración básica de streams.</li>
+                    <li>Recursos para redes sociales: Plantillas para banners, logos y una guía rápida de cómo presentarse profesionalmente en plataformas como Twitch, YouTube y Twitter.</li>
+                    <li>Consejos de marketing: Introducción a cómo promocionarse y empezar a captar una audiencia pequeña pero fiel.</li>
+                </ul>
+                
+                <div class="ideal-for">
+                    <p>🎯 <strong>¿Para quién es ideal?</strong></p>
+                    <ul class="ideal-for-list">
+                        <li>🎮 Jugadores casuales que quieren empezar a competir.</li>
+                        <li>🏆 Equipos recién formados que necesitan una dirección inicial.</li>
+                        <li>📢 Streamers pequeños que buscan dar una imagen más profesional.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Plan VIP -->
+            <div class="plan-details">
+                <div class="plan-header">
+                    <h2>Plan VIP</h2>
+                    <div class="plan-price">10€ / mes</div>
+                </div>
+                <p class="plan-description">El Plan VIP está pensado para jugadores, streamers o equipos que ya tienen experiencia y buscan llevar su rendimiento y presencia al siguiente nivel. Combina asesoría personalizada con herramientas avanzadas.</p>
+                
+                <ul class="features-list">
+                    <li>Consultorías personalizadas: Análisis de fortalezas y debilidades, con planes de mejora adaptados a cada jugador o equipo.</li>
+                    <li>Asesoría en marketing digital: Estrategias para hacer crecer la marca personal, aumentar seguidores y optimizar el contenido.</li>
+                    <li>Acceso a herramientas de análisis: Software para revisar estadísticas de rendimiento, analizar jugadas y optimizar estrategias.</li>
+                    <li>Sesiones de retroalimentación periódicas: Revisión mensual de avances y ajustes en las tácticas.</li>
+                    <li>Soporte prioritario: Respuesta rápida a dudas y consultas, especialmente en temas de optimización y networking.</li>
+                </ul>
+                
+                <div class="ideal-for">
+                    <p>🎯 <strong>¿Para quién es ideal?</strong></p>
+                    <ul class="ideal-for-list">
+                        <li>🔥 Equipos semi-profesionales que buscan mejorar su sinergia y rendimiento.</li>
+                        <li>📈 Streamers en crecimiento que desean profesionalizar su contenido.</li>
+                        <li>🎯 Jugadores individuales que apuntan a unirse a equipos reconocidos.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Plan Partner -->
+            <div class="plan-details">
+                <div class="plan-header">
+                    <h2>Plan Partner</h2>
+                    <div class="plan-price">20€ / mes</div>
+                </div>
+                <p class="plan-description">El Plan Partner es la opción más completa y exclusiva, enfocada en jugadores, equipos o creadores de contenido que quieren destacar a nivel competitivo y comercial. Ofrece asesoramiento integral y representación para aprovechar al máximo las oportunidades del mercado.</p>
+                
+                <ul class="features-list">
+                    <li>Representación en negociaciones: Gestión de contratos y acuerdos con marcas y equipos.</li>
+                    <li>Acceso prioritario a eventos: Invitaciones especiales a torneos, encuentros con patrocinadores y eventos exclusivos.</li>
+                    <li>Asesoría avanzada en marketing: Planificación de estrategias de marca, colaboración con otros creadores y optimización de la imagen personal.</li>
+                    <li>Análisis detallado de rendimiento: Reportes exhaustivos con planes de mejora continua basados en datos de rendimiento.</li>
+                    <li>Planificación estratégica de carrera: Diseño de una hoja de ruta para maximizar la carrera, incluyendo ingresos, visibilidad y crecimiento personal.</li>
+                    <li>Acceso directo a todas nuestras plataformas: Conexión sin restricciones a todas las herramientas, servicios y recursos exclusivos de Nexus Manager.</li>
+                </ul>
+                
+                <div class="ideal-for">
+                    <p>🎯 <strong>¿Para quién es ideal?</strong></p>
+                    <ul class="ideal-for-list">
+                        <li>🎮 Jugadores élite que aspiran a formar parte de organizaciones top.</li>
+                        <li>💰 Equipos competitivos que buscan patrocinadores y reconocimiento.</li>
+                        <li>🌟 Streamers e influencers que desean construir una marca poderosa y sostenible.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>NEXUS MANAGER - Todos los derechos reservados &copy; 2025</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="https://fonsifn.github.io/NexusManager/politicas/usuarios">Políticas</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">NEXUS MANAGER - Todos los derechos reservados &copy; 2025</p>
+        </div>
+    </footer>
 </body>
 </html>
