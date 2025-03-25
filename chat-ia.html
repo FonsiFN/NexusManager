@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Asistente IA</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .chat-container {
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: var(--gray);
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: rgba(0, 240, 255, 0.2);
+            margin-left: auto;
+            border: 1px solid var(--neon-blue);
+        }
+        .bot-message {
+            background-color: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--neon-blue);
+            background-color: var(--gray);
+            color: var(--white);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: var(--neon-blue);
+            color: var(--black);
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .typing {
+            display: inline-block;
+        }
+        .typing span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            margin-right: 3px;
+            opacity: 0.4;
+        }
+        .typing span:nth-child(1) {
+            animation: typing 1s infinite;
+        }
+        .typing span:nth-child(2) {
+            animation: typing 1s infinite 0.2s;
+        }
+        .typing span:nth-child(3) {
+            animation: typing 1s infinite 0.4s;
+        }
+        @keyframes typing {
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-3px); }
+        }
+    </style>
+</head>
+<body>
+    <h2 style="color: var(--neon-blue);">Asistente IA NexusManager</h2>
+    <div class="chat-container" id="chat">
+        <div class="message bot-message">
+            ¡Hola! Soy tu asistente de NexusManager. Puedo responderte cualquier duda sobre nuestros planes:<br><br>
+            🔵 <strong>Plan Base</strong> (7,99€/mes)<br>
+            🟢 <strong>Plan VIP</strong> (14.99€/mes)<br>
+            🟣 <strong>Plan Partner</strong> (29,99€/mes)<br><br>
+            ¿En qué puedo ayudarte hoy?
+        </div>
+    </div>
+    
+    <div class="input-container">
+        <input type="text" id="user-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+
+    <script>
+        const API_KEY = "AIzaSyBpO3A17R6M5q22fp1NCF8wEXebZVv75Zk";
+        const chatElement = document.getElementById("chat");
+        const userInput = document.getElementById("user-input");
+        
+        // Contexto inicial para el modelo
+        const context = `
+        Eres NexusBot, el asistente virtual oficial de NexusManager. 
+        NexusManager ofrece servicios para jugadores y creadores de esports con 3 planes:
+
+        🔵 PLAN BASE (7,99€/mes):
+        - Asesoría general sobre crecimiento en redes
+        - Consejos básicos de branding
+        - Recursos y plantillas prediseñadas
+        - Recomendaciones para engagement
+        - Soporte básico por email
+
+        🟢 PLAN VIP (14.99€/mes):
+        - Todo lo del Plan Base +
+        - Análisis detallado de contenido
+        - Contacto directo con asesores
+        - Acceso anticipado a herramientas
+        - Networking con creadores
+        - Soporte prioritario 24/7
+
+        🟣 PLAN PARTNER (29,99€/mes):
+        - Todo lo del Plan VIP +
+        - Gestión avanzada de redes
+        - Colaboraciones con marcas
+        - Eventos y torneos privados
+        - Herramientas de monetización
+        - Bot NexusManager exclusivo
+        - Asesoría legal incluida
+
+        Responde de forma concisa y profesional, enfocándote en los detalles de los planes.
+        Si preguntan sobre algo no relacionado, indica cortésmente que solo puedes hablar de NexusManager.
+        `;
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.innerHTML = text;
+            chatElement.appendChild(messageDiv);
+            chatElement.scrollTop = chatElement.scrollHeight;
+        }
+
+        function showTyping() {
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "message bot-message";
+            typingDiv.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+            chatElement.appendChild(typingDiv);
+            chatElement.scrollTop = chatElement.scrollHeight;
+            return typingDiv;
+        }
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            userInput.value = "";
+            addMessage(message, true);
+            
+            const typingElement = showTyping();
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `${context}\n\nUsuario: ${message}\nNexusBot:`
+                            }]
+                        }]
+                    })
+                });
+                
+                const data = await response.json();
+                chatElement.removeChild(typingElement);
+                
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    addMessage(data.candidates[0].content.parts[0].text);
+                } else {
+                    addMessage("Lo siento, no pude procesar tu pregunta. ¿Podrías reformularla?");
+                }
+            } catch (error) {
+                chatElement.removeChild(typingElement);
+                addMessage("Error de conexión. Por favor intenta nuevamente.");
+                console.error("Error:", error);
+            }
+        }
+        
+        userInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
