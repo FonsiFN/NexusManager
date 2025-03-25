@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS MANAGER - Términos y Servicios</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+            line-height: 1.7;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero --- */
+        .terms-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.15), transparent 70%),
+                url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        .terms-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(13,13,13,0.95) 30%, transparent 100%);
+        }
+        .terms-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--gray), transparent);
+            z-index: 1;
+        }
+        .terms-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .terms-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .terms-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- Terms Section --- */
+        .terms-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .terms-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .terms-section:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .terms-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .terms-content {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 50px;
+            border-radius: 5px;
+        }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            color: var(--neon-blue);
+            margin: 40px 0 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--neon-blue);
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin: 30px 0 15px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        strong {
+            color: var(--neon-blue);
+        }
+        .highlight-box {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 3px solid var(--neon-blue);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .back-to-top {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .back-to-top:hover {
+            text-decoration: underline;
+        }
+        .back-to-top i {
+            margin-right: 5px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 100px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .terms-hero h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            .terms-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            .terms-hero h1 {
+                font-size: 2.2rem;
+            }
+            .terms-content {
+                padding: 30px 20px;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            .nav-links a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="planes.html">Planes</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="terms-hero">
+        <div class="terms-hero-content">
+            <h1>Términos y Servicios</h1>
+            <p>Conoce nuestras condiciones de uso y políticas de servicio</p>
+        </div>
+    </section>
+
+    <!-- Terms Section -->
+    <section class="terms-section">
+        <div class="terms-container">
+            <div class="terms-content">
+                <h2>1. Términos Generales</h2>
+                <p>Al acceder y utilizar los servicios de Nexus Manager ("nosotros", "nuestro", "la Plataforma"), usted ("Usuario", "usted") acepta estar legalmente obligado por estos Términos y Condiciones de Servicio ("Términos"). Si no está de acuerdo con estos Términos, no debe utilizar nuestros servicios.</p>
+                
+                <h3>1.1 Definiciones</h3>
+                <p>Para los propósitos de estos Términos:</p>
+                <ul>
+                    <li><strong>Servicios</strong> se refiere a todas las funciones, características, contenido y aplicaciones proporcionadas por Nexus Manager.</li>
+                    <li><strong>Contenido</strong> incluye todo el texto, gráficos, imágenes, música, software, audio, video, información u otro material disponible en la Plataforma.</li>
+                    <li><strong>Cuenta</strong> significa la cuenta personal creada por el Usuario para acceder a ciertas funciones de los Servicios.</li>
+                </ul>
+
+                <h3>1.2 Modificaciones</h3>
+                <p>Nos reservamos el derecho de modificar estos Términos en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación en la Plataforma. Su uso continuado de los Servicios constituirá su aceptación de dichas modificaciones.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Nota importante:</strong> Es su responsabilidad revisar periódicamente estos Términos para estar al tanto de cualquier cambio. Si continúa utilizando los Servicios después de que los cambios entren en vigor, significará que acepta los nuevos Términos.</p>
+                </div>
+
+                <h2>2. Uso de los Servicios</h2>
+                <h3>2.1 Elegibilidad</h3>
+                <p>Para utilizar nuestros Servicios, debe:</p>
+                <ol>
+                    <li>Tener al menos 16 años de edad (o la mayoría de edad legal en su jurisdicción si es mayor).</li>
+                    <li>No estar prohibido de recibir nuestros Servicios bajo las leyes de su jurisdicción.</li>
+                    <li>Proporcionar información precisa y completa al crear una Cuenta.</li>
+                </ol>
+
+                <h3>2.2 Cuentas de Usuario</h3>
+                <p>Al crear una Cuenta, acepta:</p>
+                <ul>
+                    <li>Mantener la confidencialidad de su contraseña y ser responsable de toda actividad que ocurra bajo su Cuenta.</li>
+                    <li>Notificarnos inmediatamente de cualquier uso no autorizado de su Cuenta o cualquier otra violación de seguridad.</li>
+                    <li>No transferir su Cuenta a ninguna otra persona sin nuestro consentimiento previo por escrito.</li>
+                </ul>
+
+                <h3>2.3 Conducta Prohibida</h3>
+                <p>Usted acepta no:</p>
+                <ul>
+                    <li>Utilizar los Servicios para cualquier propósito ilegal o no autorizado.</li>
+                    <li>Alterar, adaptar, piratear o modificar de otro modo la Plataforma.</li>
+                    <li>Utilizar cualquier sistema automatizado, incluyendo "robots", "spiders", etc., para acceder a los Servicios.</li>
+                    <li>Interferir con o interrumpir la integridá o el rendimiento de los Servicios.</li>
+                    <li>Intentar obtener acceso no autorizado a los Servicios o sus sistemas relacionados.</li>
+                </ul>
+
+                <h2>3. Contenido</h2>
+                <h3>3.1 Derechos de Propiedad</h3>
+                <p>Todos los derechos de propiedad intelectual sobre los Servicios y su Contenido son y permanecerán propiedad exclusiva de Nexus Manager y sus licenciantes. Los Servicios están protegidos por leyes de derechos de autor, marcas registradas y otras leyes tanto de España como de otros países.</p>
+
+                <h3>3.2 Licencia Limitada</h3>
+                <p>Sujeto a su cumplimiento de estos Términos, le concedemos una licencia limitada, no exclusiva, intransferible y revocable para acceder y utilizar los Servicios únicamente para su uso personal y no comercial.</p>
+
+                <h3>3.3 Contenido del Usuario</h3>
+                <p>Usted conserva todos los derechos de propiedad intelectual sobre cualquier Contenido que envíe, publique o muestre en o a través de los Servicios ("Contenido del Usuario"). Al proporcionar Contenido del Usuario, usted nos concede una licencia mundial, no exclusiva, transferible, sublicenciable, libre de regalías para usar, copiar, modificar, crear obras derivadas, distribuir, mostrar y ejecutar dicho Contenido en relación con la operación y promoción de los Servicios.</p>
+
+                <h2>4. Pagos y Facturación</h2>
+                <h3>4.1 Tarifas</h3>
+                <p>El acceso a ciertas funciones de los Servicios puede requerir el pago de tarifas. Todas las tarifas se indicarán en euros y se cobrarán en el momento de la compra. Nos reservamos el derecho de cambiar nuestras tarifas en cualquier momento.</p>
+
+                <h3>4.2 Facturación Recurrente</h3>
+                <p>Para suscripciones recurrentes:</p>
+                <ul>
+                    <li>Usted autoriza a Nexus Manager a cobrar automáticamente la tarifa de renovación y los impuestos aplicables utilizando el método de pago que nos haya proporcionado.</li>
+                    <li>Las suscripciones se renovarán automáticamente al final de cada período de facturación a menos que cancele su suscripción antes de la fecha de renovación.</li>
+                    <li>Los pagos no son reembolsables, excepto según lo requiera la ley aplicable.</li>
+                </ul>
+
+                <h3>4.3 Cancelación</h3>
+                <p>Puede cancelar su suscripción en cualquier momento, pero no recibirá un reembolso por cualquier porción no utilizada del período de suscripción ya pagado.</p>
+
+                <h2>5. Privacidad</h2>
+                <p>Su privacidad es importante para nosotros. Nuestra Política de Privacidad explica cómo recopilamos, usamos y protegemos su información personal. Al utilizar los Servicios, usted acepta nuestras prácticas de privacidad.</p>
+
+                <h2>6. Limitación de Responsabilidad</h2>
+                <p>En la máxima medida permitida por la ley aplicable, Nexus Manager no será responsable por:</p>
+                <ol>
+                    <li>Cualquier daño indirecto, incidental, especial, consecuente o punitivo.</li>
+                    <li>Pérdida de beneficios, datos, uso, fondo de comercio u otras pérdidas intangibles.</li>
+                    <li>Cualquier daño o mal funcionamiento resultante de:</li>
+                    <ul>
+                        <li>Su incapacidad para utilizar los Servicios</li>
+                        <li>Acceso no autorizado o alteración de sus transmisiones o datos</li>
+                        <li>Cualquier declaración o conducta de cualquier tercero en los Servicios</li>
+                    </ul>
+                </ol>
+
+                <h2>7. Ley Aplicable</h2>
+                <p>Estos Términos se regirán e interpretarán de acuerdo con las leyes de España, sin tener en cuenta sus disposiciones sobre conflictos de leyes.</p>
+
+                <h2>8. Contacto</h2>
+                <p>Para cualquier pregunta sobre estos Términos, por favor contáctenos a través de nuestro formulario de contacto o en la dirección de correo electrónico: legal@nexusmanager.com</p>
+
+                <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Volver arriba</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="terminos-y-servicios.html">Términos y Servicios</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Botón "Volver arriba"
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'inline-block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
