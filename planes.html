@@ -167,7 +167,7 @@
         .plan-card {
             background: rgba(30, 30, 30, 0.8);
             border: 1px solid var(--neon-blue);
-            padding: 50px 35px;
+            padding: 40px 30px;
             position: relative;
             transition: all 0.5s;
             width: 360px;
@@ -208,61 +208,52 @@
             box-shadow: 0 3px 10px rgba(255, 61, 61, 0.3);
         }
         .plan-card h3 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 15px;
             color: var(--neon-blue);
             text-align: center;
         }
         .plan-price {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 900;
-            margin: 25px 0;
+            margin: 20px 0;
             color: var(--white);
             text-align: center;
-            position: relative;
-        }
-        .discount-percent {
-            font-size: 1.2rem;
-            color: var(--discount-red);
-            font-weight: bold;
-            margin-left: 5px;
         }
         .plan-price span {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.8;
         }
         .plan-features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-align: left;
-            min-height: 280px;
         }
         .plan-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 8px 0;
+            font-size: 0.95rem;
             position: relative;
-            padding-left: 30px;
-            font-size: 1.05rem;
+            padding-left: 28px;
+            line-height: 1.4;
         }
         .plan-features li:before {
             content: '✓';
             position: absolute;
-            left: 0;
+            left: 5px;
             color: var(--neon-blue);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .btn-plan {
             background: transparent;
             color: var(--neon-blue);
             border: 2px solid var(--neon-blue);
-            padding: 15px 30px;
+            padding: 12px 25px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
             width: 100%;
             border-radius: 5px;
         }
@@ -333,7 +324,7 @@
             }
             .plan-card {
                 width: 320px;
-                padding: 40px 30px;
+                padding: 35px 25px;
             }
         }
         @media (max-width: 1000px) {
@@ -364,11 +355,15 @@
             .plan-card {
                 width: 90%;
                 min-width: auto;
-                padding: 35px 25px;
+                padding: 30px 20px;
             }
             .nav-links a {
                 margin-left: 20px;
                 font-size: 0.85rem;
+            }
+            .plan-features li {
+                font-size: 0.9rem;
+                padding-left: 25px;
             }
         }
     </style>
@@ -405,16 +400,16 @@
             <div class="plans-container">
                 <!-- Plan Base -->
                 <div class="plan-card">
-                    <h3>Plan Base</h3>
                     <div class="plan-badge">BÁSICO</div>
+                    <h3>Plan Base</h3>
                     <div class="plan-price">7,99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para quienes comienzan en el mundo de los esports</p>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 15px;">Para principiantes en esports</p>
                     <ul class="plan-features">
-                        <li>Acceso a base de conocimientos</li>
+                        <li>Asesoría general sobre crecimiento en redes</li>
+                        <li>Consejos básicos sobre branding y optimización de contenido</li>
+                        <li>Acceso a recursos y plantillas prediseñadas</li>
+                        <li>Recomendaciones para mejorar el engagement</li>
                         <li>Soporte básico por email</li>
-                        <li>Recursos para redes sociales</li>
-                        <li>Consejos de marketing inicial</li>
-                        <li>Acceso a webinars mensuales</li>
                     </ul>
                     <button class="btn-plan">CONTRATAR</button>
                 </div>
@@ -425,14 +420,14 @@
                     <div class="discount-badge">🔥 33% OFF</div>
                     <h3>Plan VIP</h3>
                     <div class="plan-price">14.99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para jugadores y streamers en crecimiento</p>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 15px;">Para streamers en crecimiento</p>
                     <ul class="plan-features">
-                        <li>Consultorías personalizadas</li>
-                        <li>Asesoría en marketing digital</li>
-                        <li>Herramientas de análisis avanzado</li>
-                        <li>Sesiones de retroalimentación</li>
+                        <li>Todos los beneficios del Plan Base</li>
+                        <li>Análisis detallado de contenido y estrategias</li>
+                        <li>Contacto directo con asesores especializados</li>
+                        <li>Acceso anticipado a herramientas y novedades</li>
+                        <li>Oportunidades de networking con creadores</li>
                         <li>Soporte prioritario 24/7</li>
-                        <li>Descuentos en eventos</li>
                     </ul>
                     <button class="btn-plan">CONTRATAR</button>
                 </div>
@@ -443,14 +438,14 @@
                     <div class="discount-badge">🔥 25% OFF</div>
                     <h3>Plan Partner</h3>
                     <div class="plan-price">29,99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para profesionales que buscan dominar</p>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 15px;">Para profesionales</p>
                     <ul class="plan-features">
-                        <li>Representación en negociaciones</li>
-                        <li>Acceso VIP a eventos exclusivos</li>
-                        <li>Asesoría avanzada en marketing</li>
-                        <li>Análisis detallado de rendimiento</li>
-                        <li>Planificación estratégica de carrera</li>
-                        <li>Conexiones con patrocinadores</li>
+                        <li>Todos los beneficios del Plan VIP</li>
+                        <li>Gestión avanzada de redes sociales</li>
+                        <li>Oportunidades de colaboraciones con marcas</li>
+                        <li>Acceso a eventos y torneos privados</li>
+                        <li>Soporte premium y herramientas de monetización</li>
+                        <li>Bot NexusManager para gestionar comunidades</li>
                         <li>Asesoría legal incluida</li>
                     </ul>
                     <button class="btn-plan">CONTRATAR</button>
