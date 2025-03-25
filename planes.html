@@ -206,9 +206,6 @@
             font-size: 0.9rem;
             border-radius: 20px;
             box-shadow: 0 3px 10px rgba(255, 61, 61, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
         .plan-card h3 {
             font-size: 2.2rem;
@@ -216,29 +213,19 @@
             color: var(--neon-blue);
             text-align: center;
         }
-        .plan-price-container {
-            margin: 25px 0;
-            text-align: center;
-        }
-        .original-price {
-            font-size: 1.8rem;
-            color: var(--discount-red);
-            text-decoration: line-through;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .current-price {
+        .plan-price {
             font-size: 3.5rem;
             font-weight: 900;
+            margin: 25px 0;
             color: var(--white);
-            display: block;
+            text-align: center;
+            position: relative;
         }
         .discount-percent {
             font-size: 1.2rem;
             color: var(--discount-red);
             font-weight: bold;
             margin-left: 5px;
-            vertical-align: super;
         }
         .plan-price span {
             font-size: 1.2rem;
@@ -383,12 +370,6 @@
                 margin-left: 20px;
                 font-size: 0.85rem;
             }
-            .original-price {
-                font-size: 1.5rem;
-            }
-            .current-price {
-                font-size: 2.8rem;
-            }
         }
     </style>
 </head>
@@ -425,13 +406,9 @@
                 <!-- Plan Base -->
                 <div class="plan-card">
                     <div class="plan-badge">BÁSICO</div>
-                    <div class="discount-badge">🔥 30% OFF</div>
+                    <div class="discount-badge">-30%</div>
                     <h3>Plan Base</h3>
-                    <div class="plan-price-container">
-                        <span class="original-price">~~7.14€~~</span>
-                        <span class="current-price">5€ <span class="discount-percent">-30%</span></span>
-                        <span style="opacity: 0.8; font-size: 1.2rem;">/mes</span>
-                    </div>
+                    <div class="plan-price">5€ <span>/mes</span></div>
                     <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para quienes comienzan en el mundo de los esports</p>
                     <ul class="plan-features">
                         <li>Acceso a base de conocimientos</li>
@@ -446,13 +423,9 @@
                 <!-- Plan VIP -->
                 <div class="plan-card">
                     <div class="plan-badge">POPULAR</div>
-                    <div class="discount-badge">🔥 30% OFF</div>
+                    <div class="discount-badge">-30%</div>
                     <h3>Plan VIP</h3>
-                    <div class="plan-price-container">
-                        <span class="original-price">~~14.28€~~</span>
-                        <span class="current-price">10€ <span class="discount-percent">-30%</span></span>
-                        <span style="opacity: 0.8; font-size: 1.2rem;">/mes</span>
-                    </div>
+                    <div class="plan-price">10€ <span>/mes</span></div>
                     <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para jugadores y streamers en crecimiento</p>
                     <ul class="plan-features">
                         <li>Consultorías personalizadas</li>
@@ -468,13 +441,9 @@
                 <!-- Plan Partner -->
                 <div class="plan-card">
                     <div class="plan-badge">ÉLITE</div>
-                    <div class="discount-badge">🔥 30% OFF</div>
+                    <div class="discount-badge">-30%</div>
                     <h3>Plan Partner</h3>
-                    <div class="plan-price-container">
-                        <span class="original-price">~~28.57€~~</span>
-                        <span class="current-price">20€ <span class="discount-percent">-30%</span></span>
-                        <span style="opacity: 0.8; font-size: 1.2rem;">/mes</span>
-                    </div>
+                    <div class="plan-price">20€ <span>/mes</span></div>
                     <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para profesionales que buscan dominar</p>
                     <ul class="plan-features">
                         <li>Representación en negociaciones</li>
