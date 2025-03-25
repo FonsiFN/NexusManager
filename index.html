@@ -14,6 +14,9 @@
             --white: #F2F2F2;
             --gray: #1E1E1E;
             --accent: #FF2A6D;
+            --green-tick: #00FF9D;
+            --blue-tick: #00F0FF;
+            --purple-tick: #BD00FF;
         }
         * {
             margin: 0;
@@ -25,7 +28,7 @@
             background-color: var(--black);
             color: var(--white);
             overflow-x: hidden;
-            padding-top: 80px; /* Añadido para compensar la navbar fixed */
+            padding-top: 80px;
         }
         .container {
             width: 90%;
@@ -35,25 +38,24 @@
 
         /* --- Navbar --- */
         .navbar {
-    background-color: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px 0; /* Mismo que planes.html */
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    border-bottom: 1px solid var(--neon-blue);
-    /* Eliminar cualquier height definido */
-}
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
         .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .logo img {
-    height: 50px; /* Mismo tamaño que planes.html */
-    filter: drop-shadow(0 0 10px var(--neon-blue));
-}
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
         .nav-links {
             display: flex;
             list-style: none;
@@ -92,8 +94,6 @@
                 url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
             position: relative;
             overflow: hidden;
-            /* Eliminado: margin-top: -80px; */
-            padding-top: 0; /* Ajustado a 0 (el padding lo maneja el body) */
         }
         .hero:before {
             content: '';
@@ -193,24 +193,52 @@
             margin: 0 auto;
             font-size: 1.1rem;
             line-height: 1.8;
+            text-align: left;
         }
-        .info-content p {
-            text-align: justify;
-            margin-bottom: 1.5em;
+        .info-content h3 {
+            color: var(--neon-blue);
+            margin: 40px 0 20px;
+            font-size: 1.8rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .plan-card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .plan-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+        .plan-card h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .plan-features {
+            list-style: none;
+        }
+        .plan-features li {
+            margin-bottom: 12px;
+            padding-left: 30px;
             position: relative;
-            padding-bottom: 1em;
+            line-height: 1.6;
         }
-        .info-content p:after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 1px;
-            background: rgba(0, 240, 255, 0.1);
-            margin: 1em auto 0;
+        .plan-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
         }
-        .info-content p:last-child:after {
-            display: none;
-        }
+        .plan-base li:before { color: var(--green-tick); }
+        .plan-vip li:before { color: var(--blue-tick); }
+        .plan-partner li:before { color: var(--purple-tick); }
 
         /* --- Features --- */
         .features {
@@ -341,6 +369,12 @@
                 margin-left: 15px;
                 font-size: 0.85rem;
             }
+            .info-content {
+                padding: 0 15px;
+            }
+            .plan-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -377,10 +411,49 @@
         <div class="container">
             <h2>INFORMACIÓN</h2>
             <div class="info-content">
-                <p>En NEXUS MANAGER fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito, combinando consultoría, scouting y representación profesional en un solo lugar.</p>
-                <p>Nuestra misión es transformar el potencial de cada talento en resultados palpables. Con un equipo multidisciplinario y herramientas avanzadas, te ayudamos a optimizar tu rendimiento, gestionar tu marca personal y conectar con las oportunidades que marcarán la diferencia en el competitivo mundo del gaming.</p>
-                <p>Explora nuestro sitio, conoce nuestros planes y descubre cómo NEXUS MANAGER puede ser el impulso que necesitas para llevar tu carrera al siguiente nivel. ¡Tu futuro en los esports comienza aquí!</p>
-                <p>¡Únete a la revolución de los esports con NEXUS MANAGER y da el salto a un nuevo nivel de éxito!</p>
+                <h3>¿Qué es Nexus Manager?</h3>
+                <p>Nexus Manager es una agencia de gestión y asesoría diseñada específicamente para streamers, proplayers e influencers. Su propósito es ayudar a los creadores de contenido y jugadores profesionales a crecer, optimizar su marca personal y maximizar sus oportunidades dentro de la industria del gaming y el entretenimiento digital.</p>
+                
+                <h3>¿Qué ofrece Nexus Manager?</h3>
+                <p>Nexus Manager proporciona asesoramiento personalizado, herramientas exclusivas y soporte estratégico para que sus miembros puedan mejorar su presencia en redes, obtener colaboraciones y acceder a beneficios únicos. Su equipo está compuesto por expertos en gestión de comunidades, marketing digital y optimización de contenido.</p>
+                
+                <h3>Planes de Nexus Manager</h3>
+                
+                <div class="plan-card">
+                    <h4>Plan Base</h4>
+                    <ul class="plan-features plan-base">
+                        <li>Acceso a asesoría general sobre crecimiento en redes</li>
+                        <li>Consejos básicos sobre branding y optimización de contenido</li>
+                        <li>Acceso a recursos y plantillas prediseñadas</li>
+                        <li>Recomendaciones para mejorar el engagement con la audiencia</li>
+                    </ul>
+                </div>
+                
+                <div class="plan-card">
+                    <h4>Plan VIP</h4>
+                    <ul class="plan-features plan-vip">
+                        <li>Todos los beneficios del Plan Base</li>
+                        <li>Análisis detallado de contenido y estrategias de mejora</li>
+                        <li>Contacto directo con asesores especializados</li>
+                        <li>Acceso anticipado a herramientas y novedades</li>
+                        <li>Oportunidades de networking con otros creadores y jugadores</li>
+                    </ul>
+                </div>
+                
+                <div class="plan-card">
+                    <h4>Plan Partner (Exclusivo)</h4>
+                    <ul class="plan-features plan-partner">
+                        <li>Todos los beneficios del Plan VIP</li>
+                        <li>Gestión avanzada de redes sociales y estrategias de crecimiento</li>
+                        <li>Oportunidades de colaboraciones con marcas y patrocinadores</li>
+                        <li>Acceso a eventos y torneos privados</li>
+                        <li>Soporte premium y herramientas de monetización</li>
+                        <li>Acceso exclusivo al bot NexusManager para gestionar comunidades</li>
+                    </ul>
+                </div>
+                
+                <h3>¿Por qué elegir Nexus Manager?</h3>
+                <p>Nexus Manager no es solo una agencia de asesoría; es una comunidad diseñada para potenciar a los creadores y jugadores. Con acceso a herramientas especializadas, asesoramiento profesional y oportunidades exclusivas, los miembros pueden llevar su carrera al siguiente nivel en la industria del gaming y los esports.</p>
             </div>
         </div>
     </section>
