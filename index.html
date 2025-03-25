@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">  
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
             --black: #0D0D0D;
@@ -17,6 +18,7 @@
             --green-tick: #00FF9D;
             --blue-tick: #00F0FF;
             --purple-tick: #BD00FF;
+            --glow-intensity: 0.5;
         }
         * {
             margin: 0;
@@ -36,6 +38,48 @@
             margin: 0 auto;
         }
 
+        /* --- Animaciones personalizadas --- */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px var(--neon-blue); }
+            50% { text-shadow: 0 0 20px var(--neon-blue); }
+            100% { text-shadow: 0 0 10px var(--neon-blue); }
+        }
+        @keyframes border-glow {
+            0% { box-shadow: 0 0 5px var(--neon-blue); }
+            50% { box-shadow: 0 0 20px var(--neon-blue); }
+            100% { box-shadow: 0 0 5px var(--neon-blue); }
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        @keyframes particle-float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
         /* --- Navbar --- */
         .navbar {
             background-color: rgba(13, 13, 13, 0.95);
@@ -46,6 +90,7 @@
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid var(--neon-blue);
+            animation: fadeInDown 0.8s ease-out;
         }
         .navbar .container {
             display: flex;
@@ -55,6 +100,12 @@
         .logo img {
             height: 50px;
             filter: drop-shadow(0 0 10px var(--neon-blue));
+            animation: pulse 3s infinite ease-in-out;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .logo:hover img {
+            transform: rotate(10deg) scale(1.1);
+            filter: drop-shadow(0 0 15px var(--neon-blue));
         }
         .nav-links {
             display: flex;
@@ -69,6 +120,7 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .nav-links a:after {
             content: '';
@@ -78,10 +130,15 @@
             background: var(--neon-blue);
             bottom: -5px;
             left: 0;
-            transition: width 0.3s;
+            transition: width 0.3s, box-shadow 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
         }
         .nav-links a:hover:after {
             width: 100%;
+            box-shadow: 0 0 10px var(--neon-blue);
         }
 
         /* --- Hero Section --- */
@@ -94,6 +151,7 @@
                 url('https://i.imgur.com/gaming-bg.jpg') center/cover no-repeat;
             position: relative;
             overflow: hidden;
+            animation: gradient-shift 15s infinite alternate;
         }
         .hero:before {
             content: '';
@@ -118,6 +176,7 @@
             position: relative;
             z-index: 2;
             max-width: 600px;
+            animation: fadeInUp 1s ease-out;
         }
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
@@ -130,12 +189,14 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            animation: glow 3s infinite ease-in-out;
         }
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
             line-height: 1.6;
+            animation: fadeIn 1.5s ease-out;
         }
         .btn-hero {
             background: transparent;
@@ -146,14 +207,34 @@
             font-weight: 700;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
         }
         .btn-hero:hover {
             background: var(--neon-blue);
             color: var(--black);
             box-shadow: 0 0 20px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        .btn-hero:active {
+            transform: translateY(1px);
+        }
+        .btn-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-hero:hover:before {
+            left: 100%;
         }
 
         /* --- Sección Información --- */
@@ -179,14 +260,20 @@
             color: var(--neon-blue);
             text-transform: uppercase;
             position: relative;
+            animation: fadeInDown 1s ease-out;
         }
         .info-section h2:after {
             content: '';
             display: block;
-            width: 100px;
+            width: 0;
             height: 3px;
             background: var(--neon-blue);
             margin: 20px auto 0;
+            animation: lineExpand 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes lineExpand {
+            to { width: 100px; }
         }
         .info-content {
             max-width: 900px;
@@ -200,6 +287,10 @@
             margin: 40px 0 20px;
             font-size: 1.8rem;
             font-family: 'Montserrat', sans-serif;
+            animation: fadeInLeft 1s ease-out;
+        }
+        .info-content p {
+            animation: fadeInRight 1s ease-out;
         }
         .plan-card {
             background: rgba(30, 30, 30, 0.7);
@@ -207,11 +298,28 @@
             padding: 30px;
             margin: 30px 0;
             border-radius: 8px;
-            transition: all 0.3s;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
         }
         .plan-card:hover {
             border-color: var(--neon-blue);
             box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .plan-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: all 0.6s ease;
+        }
+        .plan-card:hover:before {
+            left: 100%;
         }
         .plan-card h4 {
             color: var(--white);
@@ -229,16 +337,33 @@
             padding-left: 30px;
             position: relative;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .plan-features li:hover {
+            transform: translateX(10px);
         }
         .plan-features li:before {
             content: '✓';
             position: absolute;
             left: 0;
             font-weight: bold;
+            transition: all 0.3s ease;
         }
-        .plan-base li:before { color: var(--green-tick); }
-        .plan-vip li:before { color: var(--blue-tick); }
-        .plan-partner li:before { color: var(--purple-tick); }
+        .plan-features li:hover:before {
+            transform: scale(1.5);
+        }
+        .plan-base li:before { 
+            color: var(--green-tick);
+            text-shadow: 0 0 5px var(--green-tick);
+        }
+        .plan-vip li:before { 
+            color: var(--blue-tick);
+            text-shadow: 0 0 5px var(--blue-tick);
+        }
+        .plan-partner li:before { 
+            color: var(--purple-tick);
+            text-shadow: 0 0 5px var(--purple-tick);
+        }
 
         /* --- Features --- */
         .features {
@@ -263,14 +388,17 @@
             color: var(--neon-blue);
             text-transform: uppercase;
             position: relative;
+            animation: fadeInDown 1s ease-out;
         }
         .features h2:after {
             content: '';
             display: block;
-            width: 100px;
+            width: 0;
             height: 3px;
             background: var(--neon-blue);
             margin: 20px auto 0;
+            animation: lineExpand 1.5s ease-out forwards;
+            animation-delay: 0.5s;
         }
         .features-grid {
             display: grid;
@@ -283,21 +411,49 @@
             background: rgba(30, 30, 30, 0.7);
             border: 1px solid rgba(0, 240, 255, 0.3);
             padding: 40px 30px;
-            transition: all 0.5s;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
         }
+        .feature-card:nth-child(1) { animation-delay: 0.2s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
+        .feature-card:nth-child(4) { animation-delay: 0.8s; }
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.03);
             border-color: var(--neon-blue);
             box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: all 0.6s ease;
+        }
+        .feature-card:hover:before {
+            left: 100%;
         }
         .feature-card h3 {
             font-size: 1.8rem;
             margin-bottom: 20px;
             color: var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover h3 {
+            text-shadow: 0 0 10px var(--neon-blue);
         }
         .feature-card p {
             opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover p {
+            opacity: 1;
         }
 
         /* --- Footer --- */
@@ -320,6 +476,7 @@
             height: 60px;
             margin-bottom: 25px;
             filter: drop-shadow(0 0 15px var(--neon-blue));
+            animation: pulse 3s infinite ease-in-out;
         }
         .footer-links {
             margin-bottom: 30px;
@@ -328,11 +485,25 @@
             color: var(--white);
             margin: 0 20px;
             text-decoration: none;
-            transition: 0.3s;
-            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .footer-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s, box-shadow 0.3s;
         }
         .footer-links a:hover {
             color: var(--neon-blue);
+        }
+        .footer-links a:hover:after {
+            width: 100%;
+            box-shadow: 0 0 10px var(--neon-blue);
         }
         .footer-social {
             margin-bottom: 30px;
@@ -341,16 +512,58 @@
             color: var(--white);
             font-size: 1.8rem;
             margin: 0 15px;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
         }
         .footer-social a:hover {
             color: var(--neon-blue);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.2);
+            text-shadow: 0 0 10px var(--neon-blue);
         }
         .footer-copyright {
             margin-top: 40px;
             opacity: 0.7;
             font-size: 0.9rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* --- Efectos especiales --- */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: particle-float linear infinite;
+            opacity: 0;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            background: rgba(30, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-left: 4px solid var(--neon-blue);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast.show {
+            right: 20px;
         }
 
         /* Responsive */
@@ -375,10 +588,16 @@
             .plan-card {
                 padding: 20px;
             }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles-js"></div>
+
     <!-- Navbar -->
     <header class="navbar">
         <div class="container">
@@ -391,7 +610,6 @@
                     <li><a href="https://fonsifn.github.io/NexusManager/planes">Planes</a></li>
                     <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
                     <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
-
                 </ul>
             </nav>
         </div>
@@ -401,9 +619,9 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>BIENVENIDO A NEXUS MANAGER</h1>
-                <p>Fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito.</p>
-                <a href="planes.html" class="btn-hero">VER PLANES</a>
+                <h1 class="animate__animated animate__fadeInDown">BIENVENIDO A NEXUS MANAGER</h1>
+                <p class="animate__animated animate__fadeIn animate__delay-1s">Fusionamos la pasión por los esports con estrategias de vanguardia. Nuestra plataforma está diseñada para impulsar a proplayers, streamers y organizaciones hacia el éxito.</p>
+                <a href="planes.html" class="btn-hero animate__animated animate__fadeInUp animate__delay-1s">VER PLANES</a>
             </div>
         </div>
     </section>
@@ -504,5 +722,125 @@
             <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Mensaje de notificación</div>
+
+    <script>
+        // Crear partículas flotantes
+        function createParticles() {
+            const container = document.getElementById('particles-js');
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Color aleatorio
+                const colors = ['var(--neon-blue)', 'var(--green-tick)', 'var(--purple-tick)', 'var(--accent)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Duración y delay de animación
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Efecto de escritura para el hero
+        function typeWriterEffect() {
+            const h1 = document.querySelector('.hero h1');
+            const originalText = h1.textContent;
+            h1.textContent = '';
+            
+            let i = 0;
+            const speed = 100;
+            
+            function type() {
+                if (i < originalText.length) {
+                    h1.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            setTimeout(type, 1000);
+        }
+
+        // Mostrar toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Efecto de scroll
+        function setupScrollAnimations() {
+            const animateOnScroll = (elements, animation) => {
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.classList.add(animation);
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', () => {
+                const cards = document.querySelectorAll('.plan-card, .feature-card');
+                animateOnScroll(cards, 'animate__animated animate__pulse');
+            });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            typeWriterEffect();
+            setupScrollAnimations();
+            
+            // Mostrar toast de bienvenida
+            setTimeout(() => {
+                showToast('¡Bienvenido a Nexus Manager!');
+            }, 2000);
+            
+            // Efecto hover para botones
+            const buttons = document.querySelectorAll('.btn-hero, .footer-links a');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'scale(1.05)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = '';
+                });
+            });
+            
+            // Efecto de carga para imágenes
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.transition = 'all 0.5s ease';
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                    img.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
