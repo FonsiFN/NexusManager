@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUÍA DE OPTIMIZACIÓN - Herramientas para PC Gaming</title>
+    <style>
+        :root {
+            /* Sistema de colores RGB avanzado */
+            --rgb-primary: 0, 255, 255;   /* Cian */
+            --rgb-secondary: 255, 0, 255; /* Magenta */
+            --rgb-accent: 255, 255, 0;    /* Amarillo */
+            --rgb-extra1: 0, 255, 0;      /* Verde */
+            --rgb-extra2: 255, 0, 0;      /* Rojo */
+            --rgb-extra3: 0, 0, 255;      /* Azul */
+            --rgb-extra4: 255, 165, 0;    /* Naranja */
+            
+            /* Colores base */
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --darkest-bg: #020203;
+            --panel-bg: rgba(30, 30, 40, 0.85);
+            --panel-border: #1e1e2e;
+            
+            /* Textos */
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-highlight: #00ffff;
+            --text-warning: #ff5555;
+            
+            /* Efectos especiales */
+            --glow-intensity: 0.8;
+            --glow-spread: 15px;
+            --animation-speed: 8s;
+            
+            /* Sombras RGB dinámicas */
+            --shadow-primary: 0 0 10px rgba(var(--rgb-primary), var(--glow-intensity));
+            --shadow-secondary: 0 0 10px rgba(var(--rgb-secondary), var(--glow-intensity));
+            --shadow-accent: 0 0 10px rgba(var(--rgb-accent), var(--glow-intensity));
+            
+            /* Gradientes */
+            --gradient-primary: linear-gradient(
+                135deg,
+                rgba(var(--rgb-primary), 0.7),
+                rgba(var(--rgb-secondary), 0.7)
+            );
+            --gradient-diagonal: linear-gradient(
+                to bottom right,
+                rgba(var(--rgb-primary), 0.5),
+                rgba(var(--rgb-secondary), 0.5),
+                rgba(var(--rgb-accent), 0.5)
+            );
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(var(--rgb-primary), 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(var(--rgb-secondary), 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 50% 20%, rgba(var(--rgb-accent), 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 30% 80%, rgba(var(--rgb-extra1), 0.1) 0%, transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Efectos RGB globales */
+        .rgb-global-effect {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.15;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(var(--rgb-primary), 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(var(--rgb-secondary), 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 50% 20%, rgba(var(--rgb-accent), 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 30% 80%, rgba(var(--rgb-extra1), 0.2) 0%, transparent 30%);
+            animation: rgb-move 25s infinite alternate;
+        }
+
+        @keyframes rgb-move {
+            0% { 
+                transform: translate(0, 0);
+                background-size: 150% 150%;
+            }
+            25% { 
+                transform: translate(-5%, 5%) rotate(2deg);
+                background-size: 160% 160%;
+            }
+            50% { 
+                transform: translate(5%, -5%) rotate(-2deg);
+                background-size: 155% 155%;
+            }
+            75% { 
+                transform: translate(-3%, -3%) rotate(1deg);
+                background-size: 165% 165%;
+            }
+            100% { 
+                transform: translate(5%, 5%) rotate(-1deg);
+                background-size: 150% 150%;
+            }
+        }
+
+        /* Efecto de partículas RGB */
+        .rgb-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(20px); }
+        }
+
+        /* Estructura principal estilo PC */
+        .pc-case {
+            max-width: 1200px;
+            margin: 40px auto;
+            border: 3px solid var(--panel-border);
+            border-radius: 15px;
+            background: linear-gradient(to bottom, var(--darker-bg) 0%, var(--darkest-bg) 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 25px rgba(var(--rgb-primary), 0.3),
+                0 0 45px rgba(var(--rgb-secondary), 0.2),
+                0 0 65px rgba(var(--rgb-accent), 0.1);
+            animation: rgb-case-glow var(--animation-speed) infinite alternate;
+        }
+
+        @keyframes rgb-case-glow {
+            0% { 
+                box-shadow: 
+                    0 0 25px rgba(var(--rgb-primary), 0.4),
+                    0 0 45px rgba(var(--rgb-secondary), 0.2),
+                    0 0 65px rgba(var(--rgb-accent), 0.1);
+                border-color: rgba(var(--rgb-primary), 0.5);
+            }
+            33% { 
+                box-shadow: 
+                    0 0 25px rgba(var(--rgb-secondary), 0.4),
+                    0 0 45px rgba(var(--rgb-accent), 0.2),
+                    0 0 65px rgba(var(--rgb-primary), 0.1);
+                border-color: rgba(var(--rgb-secondary), 0.5);
+            }
+            66% { 
+                box-shadow: 
+                    0 0 25px rgba(var(--rgb-accent), 0.4),
+                    0 0 45px rgba(var(--rgb-primary), 0.2),
+                    0 0 65px rgba(var(--rgb-secondary), 0.1);
+                border-color: rgba(var(--rgb-accent), 0.5);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 25px rgba(var(--rgb-primary), 0.4),
+                    0 0 45px rgba(var(--rgb-secondary), 0.2),
+                    0 0 65px rgba(var(--rgb-accent), 0.1);
+                border-color: rgba(var(--rgb-primary), 0.5);
+            }
+        }
+
+        .pc-case::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                rgba(var(--rgb-primary), 0.8), 
+                rgba(var(--rgb-secondary), 0.8),
+                rgba(var(--rgb-accent), 0.8));
+            animation: rgb-header-glow var(--animation-speed) infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes rgb-header-glow {
+            0% { background: linear-gradient(90deg, rgba(var(--rgb-primary), 0.8), rgba(var(--rgb-secondary), 0.8)); }
+            50% { background: linear-gradient(90deg, rgba(var(--rgb-secondary), 0.8), rgba(var(--rgb-accent), 0.8)); }
+            100% { background: linear-gradient(90deg, rgba(var(--rgb-accent), 0.8), rgba(var(--rgb-primary), 0.8)); }
+        }
+
+        /* Cabecera */
+        .pc-header {
+            background: linear-gradient(to right, var(--darker-bg), var(--darkest-bg));
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(var(--rgb-primary), 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pc-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(var(--rgb-primary), 0.7),
+                rgba(var(--rgb-secondary), 0.7),
+                transparent);
+            animation: rgb-light var(--animation-speed) infinite alternate;
+        }
+
+        .pc-header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(
+                90deg, 
+                rgba(var(--rgb-primary), 1), 
+                rgba(var(--rgb-secondary), 1),
+                rgba(var(--rgb-accent), 1));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 10px rgba(var(--rgb-primary), 0.3),
+                0 0 20px rgba(var(--rgb-secondary), 0.2);
+            margin-bottom: 10px;
+            animation: rgb-text-glow var(--animation-speed) infinite alternate;
+        }
+
+        @keyframes rgb-text-glow {
+            0% { text-shadow: 0 0 10px rgba(var(--rgb-primary), 0.4), 0 0 20px rgba(var(--rgb-secondary), 0.2); }
+            50% { text-shadow: 0 0 10px rgba(var(--rgb-secondary), 0.4), 0 0 20px rgba(var(--rgb-accent), 0.2); }
+            100% { text-shadow: 0 0 10px rgba(var(--rgb-accent), 0.4), 0 0 20px rgba(var(--rgb-primary), 0.2); }
+        }
+
+        .pc-header p {
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(var(--rgb-primary), 0.2);
+        }
+
+        /* Barra RGB */
+        .rgb-strip {
+            height: 6px;
+            width: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(var(--rgb-primary), 0.8), 
+                rgba(var(--rgb-secondary), 0.8),
+                rgba(var(--rgb-accent), 0.8),
+                rgba(var(--rgb-extra1), 0.8),
+                rgba(var(--rgb-extra2), 0.8));
+            background-size: 400% 100%;
+            animation: rgb-strip-scroll 8s linear infinite;
+        }
+
+        @keyframes rgb-strip-scroll {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        /* Contenido principal */
+        .pc-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 30px;
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Sección de categorías */
+        .tool-category {
+            background-color: rgba(40, 40, 60, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(var(--rgb-primary), 0.2);
+            box-shadow: 
+                0 5px 20px rgba(0, 0, 0, 0.4),
+                var(--shadow-primary);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(var(--rgb-primary), 0.03),
+                rgba(var(--rgb-secondary), 0.03),
+                rgba(var(--rgb-accent), 0.03));
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+
+        .tool-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(var(--rgb-primary), 0.4),
+                0 0 30px rgba(var(--rgb-secondary), 0.2);
+            border-color: rgba(var(--rgb-primary), 0.5);
+        }
+
+        /* Encabezado de categoría */
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(var(--rgb-primary), 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-header h2 {
+            color: var(--text-highlight);
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 10px rgba(var(--rgb-primary), 0.3);
+        }
+
+        .category-header h2 i {
+            margin-right: 12px;
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        .rating {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1px solid var(--text-highlight);
+            box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.3);
+            color: var(--text-highlight);
+        }
+
+        /* Lista de herramientas */
+        .tool-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tarjetas de herramientas */
+        .tool-card {
+            background: linear-gradient(
+                to bottom right, 
+                rgba(50, 50, 70, 0.7), 
+                rgba(40, 40, 60, 0.9));
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--text-highlight);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(var(--rgb-primary), 0.08), 
+                rgba(var(--rgb-secondary), 0.08),
+                rgba(var(--rgb-accent), 0.08));
+            z-index: 0;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(var(--rgb-primary), 0.3);
+            border-left-color: rgba(var(--rgb-accent), 1);
+        }
+
+        .tool-card h3 {
+            color: var(--text-highlight);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            position: relative;
+            text-shadow: 0 0 8px rgba(var(--rgb-primary), 0.2);
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            background: linear-gradient(
+                to right, 
+                rgba(var(--rgb-primary), 0.3), 
+                rgba(var(--rgb-secondary), 0.3));
+            color: var(--text-highlight);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(var(--rgb-primary), 0.5);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .tool-link i {
+            margin-right: 8px;
+        }
+
+        .tool-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: all 0.6s;
+        }
+
+        .tool-link:hover {
+            background: linear-gradient(
+                to right, 
+                rgba(var(--rgb-primary), 0.5), 
+                rgba(var(--rgb-secondary), 0.5));
+            box-shadow: 
+                0 0 15px rgba(var(--rgb-primary), 0.4),
+                0 0 25px rgba(var(--rgb-secondary), 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tool-link:hover::before {
+            left: 100%;
+        }
+
+        /* Ventiladores RGB Ultra Realistas */
+        .pc-fans {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 20px;
+            background: linear-gradient(
+                to bottom, 
+                rgba(20, 20, 30, 0.7), 
+                rgba(10, 10, 20, 0.9));
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(var(--rgb-primary), 0.1);
+        }
+
+        .fan-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            filter: drop-shadow(0 0 10px rgba(var(--rgb-primary), 0.4));
+            animation: fan-float 6s infinite ease-in-out alternate;
+        }
+
+        @keyframes fan-float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .fan-outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 12px solid #222;
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 15px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 0, 0, 0.6);
+            background: radial-gradient(
+                circle at center,
+                #333 0%,
+                #222 50%,
+                #111 100%);
+            z-index: 2;
+        }
+
+        .fan-inner-ring {
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            border: 5px solid #444;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                #555 0%,
+                #333 100%);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.8),
+                0 0 10px rgba(0, 0, 0, 0.6);
+            z-index: 4;
+        }
+
+        .fan-blades {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            z-index: 1;
+            animation: fan-spin 2s linear infinite;
+        }
+
+        @keyframes fan-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fan-blade {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 40%;
+            height: 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(
+                to bottom, 
+                transparent, 
+                rgba(var(--rgb-primary), 0.7));
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            filter: drop-shadow(0 0 5px rgba(var(--rgb-primary), 0.8));
+        }
+
+        .fan-rgb-light {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(var(--rgb-primary), 0.2) 0%,
+                transparent 70%);
+            animation: fan-rgb-pulse 4s infinite alternate;
+            z-index: 3;
+        }
+
+        @keyframes fan-rgb-pulse {
+            0% { 
+                opacity: 0.3;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(var(--rgb-primary), 0.3) 0%,
+                    transparent 70%);
+            }
+            50% { 
+                opacity: 0.5;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(var(--rgb-secondary), 0.4) 0%,
+                    transparent 70%);
+            }
+            100% { 
+                opacity: 0.3;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(var(--rgb-accent), 0.3) 0%,
+                    transparent 70%);
+            }
+        }
+
+        .fan-screw {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #555;
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 5px rgba(0, 0, 0, 0.8),
+                0 0 5px rgba(0, 0, 0, 0.6);
+            z-index: 5;
+        }
+
+        /* Efecto de luz ambiental para ventiladores */
+        .fan-light-effect {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                rgba(var(--rgb-primary), 0.05) 0%,
+                transparent 50%);
+            animation: fan-light-move 8s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes fan-light-move {
+            0% { transform: translate(-25%, -25%); }
+            100% { transform: translate(25%, 25%); }
+        }
+
+        /* Pie de página */
+        .pc-footer {
+            background: linear-gradient(
+                to right, 
+                var(--darker-bg), 
+                var(--darkest-bg));
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(var(--rgb-primary), 0.2);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .pc-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(var(--rgb-primary), 0.5),
+                rgba(var(--rgb-secondary), 0.5),
+                transparent);
+        }
+
+        .pc-footer p {
+            text-shadow: 0 0 5px rgba(var(--rgb-primary), 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tool-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .pc-header h1 {
+                font-size: 2rem;
+            }
+            
+            .fan-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="rgb-global-effect"></div>
+    <div class="rgb-particles" id="rgbParticles"></div>
+    
+    <div class="pc-case">
+        <div class="pc-header">
+            <h1>GUÍA DE OPTIMIZACIÓN</h1>
+            <p>Las mejores herramientas web para llevar tu PC al máximo rendimiento</p>
+        </div>
+        
+        <div class="rgb-strip"></div>
+        
+        <div class="pc-content">
+            <!-- Categoría 1 -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-broom"></i> Limpieza del Sistema</h2>
+                    <span class="rating">⭐ 4.8/5</span>
+                </div>
+                <div class="tool-list">
+                    <div class="tool-card">
+                        <h3>CCleaner Web</h3>
+                        <p>Limpieza avanzada de archivos temporales, registro y navegadores con versión online.</p>
+                        <a href="https://www.ccleaner.com/online" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>BleachBit Online</h3>
+                        <p>Herramienta open-source para limpieza de espacio en disco y privacidad.</p>
+                        <a href="https://www.bleachbit.org/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Disk Cleaner Pro</h3>
+                        <p>Identifica y elimina archivos innecesarios con interfaz web intuitiva.</p>
+                        <a href="https://www.wisecleaner.com/wise-disk-cleaner.html" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Categoría 2 -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Optimización de Rendimiento</h2>
+                    <span class="rating">⭐ 4.6/5</span>
+                </div>
+                <div class="tool-list">
+                    <div class="tool-card">
+                        <h3>CPUID HWMonitor</h3>
+                        <p>Monitoriza en tiempo real voltajes, temperaturas y velocidades de ventiladores.</p>
+                        <a href="https://www.cpuid.com/softwares/hwmonitor.html" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>MSI Afterburner</h3>
+                        <p>Overclocking de GPU y monitorización avanzada para gaming.</p>
+                        <a href="https://www.msi.com/Landing/afterburner" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Process Lasso</h3>
+                        <p>Optimización automática de CPU y priorización de procesos.</p>
+                        <a href="https://bitsum.com/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Categoría 3 -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</h2>
+                    <span class="rating">⭐ 4.9/5</span>
+                </div>
+                <div class="tool-list">
+                    <div class="tool-card">
+                        <h3>Malwarebytes Web</h3>
+                        <p>Protección contra malware, ransomware y exploits con versión online.</p>
+                        <a href="https://www.malwarebytes.com/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>VirusTotal</h3>
+                        <p>Analiza archivos y URLs con múltiples motores antivirus simultáneamente.</p>
+                        <a href="https://www.virustotal.com/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>O&O ShutUp10</h3>
+                        <p>Desactiva funciones de telemetría y mejora la privacidad en Windows 10/11.</p>
+                        <a href="https://www.oo-software.com/en/shutup10" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Categoría 4 -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-download"></i> Gestión de Drivers</h2>
+                    <span class="rating">⭐ 4.5/5</span>
+                </div>
+                <div class="tool-list">
+                    <div class="tool-card">
+                        <h3>Driver Booster Online</h3>
+                        <p>Detecta y actualiza drivers obsoletos con solo conexión a internet.</p>
+                        <a href="https://www.iobit.com/en/driver-booster.php" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Snappy Driver Installer</h3>
+                        <p>Base de datos masiva de drivers que funciona sin instalación.</p>
+                        <a href="https://sdi-tool.org/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                    <div class="tool-card">
+                        <h3>NVCleanstall</h3>
+                        <p>Instalador personalizado de drivers NVIDIA sin componentes innecesarios.</p>
+                        <a href="https://www.techpowerup.com/download/techpowerup-nvcleanstall/" class="tool-link" target="_blank"><i class="fas fa-external-link-alt"></i> Visitar Web</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ventiladores RGB Ultra Realistas -->
+        <div class="pc-fans">
+            <div class="fan-light-effect"></div>
+            
+            <div class="fan-container">
+                <div class="fan-blades">
+                    <div class="fan-blade" style="transform: rotate(0deg);"></div>
+                    <div class="fan-blade" style="transform: rotate(90deg);"></div>
+                    <div class="fan-blade" style="transform: rotate(180deg);"></div>
+                    <div class="fan-blade" style="transform: rotate(270deg);"></div>
+                </div>
+                <div class="fan-outer-ring"></div>
+                <div class="fan-rgb-light"></div>
+                <div class="fan-inner-ring"></div>
+                <div class="fan-screw" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+            
+            <div class="fan-container" style="animation-delay: 0.5s;">
+                <div class="fan-blades" style="animation-direction: reverse;">
+                    <div class="fan-blade" style="transform: rotate(0deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-secondary), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(90deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-secondary), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(180deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-secondary), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(270deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-secondary), 0.7));"></div>
+                </div>
+                <div class="fan-outer-ring"></div>
+                <div class="fan-rgb-light" style="animation-delay: 2s;"></div>
+                <div class="fan-inner-ring"></div>
+                <div class="fan-screw" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+            
+            <div class="fan-container" style="animation-delay: 1s;">
+                <div class="fan-blades" style="animation-duration: 1.5s;">
+                    <div class="fan-blade" style="transform: rotate(0deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-accent), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(90deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-accent), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(180deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-accent), 0.7));"></div>
+                    <div class="fan-blade" style="transform: rotate(270deg); background: linear-gradient(to bottom, transparent, rgba(var(--rgb-accent), 0.7));"></div>
+                </div>
+                <div class="fan-outer-ring"></div>
+                <div class="fan-rgb-light" style="animation-delay: 1s;"></div>
+                <div class="fan-inner-ring"></div>
+                <div class="fan-screw" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+        </div>
+        
+        <div class="pc-footer">
+            <p>© 2023 GUÍA DE OPTIMIZACIÓN | Todos los derechos reservados | Diseñado para gamers y entusiastas del PC</p>
+        </div>
+    </div>
+
+    <script>
+        // Efecto RGB dinámico avanzado
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            
+            // Sistema de colores RGB dinámico
+            function updateRGBColors() {
+                const now = new Date();
+                const seconds = now.getSeconds();
+                const minutes = now.getMinutes();
+                
+                // Variación basada en el tiempo
+                const hue1 = (seconds * 6 + minutes * 0.1) % 360;
+                const hue2 = (hue1 + 120) % 360;
+                const hue3 = (hue2 + 120) % 360;
+                
+                // Convertir HSL a RGB
+                const rgb1 = hslToRgb(hue1 / 360, 1, 0.5);
+                const rgb2 = hslToRgb(hue2 / 360, 1, 0.5);
+                const rgb3 = hslToRgb(hue3 / 360, 1, 0.5);
+                
+                // Actualizar variables CSS
+                root.style.setProperty('--rgb-primary', `${rgb1.r}, ${rgb1.g}, ${rgb1.b}`);
+                root.style.setProperty('--rgb-secondary', `${rgb2.r}, ${rgb2.g}, ${rgb2.b}`);
+                root.style.setProperty('--rgb-accent', `${rgb3.r}, ${rgb3.g}, ${rgb3.b}`);
+                
+                requestAnimationFrame(updateRGBColors);
+            }
+            
+            // Función HSL a RGB
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                
+                if (s === 0) {
+                    r = g = b = l;
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1/6) return p + (q - p) * 6 * t;
+                        if (t < 1/2) return q;
+                        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                        return p;
+                    };
+                    
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    
+                    r = hue2rgb(p, q, h + 1/3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1/3);
+                }
+                
+                return {
+                    r: Math.round(r * 255),
+                    g: Math.round(g * 255),
+                    b: Math.round(b * 255)
+                };
+            }
+            
+            // Crear partículas RGB
+            function createParticles() {
+                const container = document.getElementById('rgbParticles');
+                const particleCount = 30;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Posición aleatoria
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    
+                    // Tamaño aleatorio
+                    const size = Math.random() * 5 + 2;
+                    
+                    // Color RGB aleatorio
+                    const rgbChoice = Math.floor(Math.random() * 3);
+                    let rgbColor;
+                    
+                    switch(rgbChoice) {
+                        case 0: rgbColor = `rgba(var(--rgb-primary), ${Math.random() * 0.3})`; break;
+                        case 1: rgbColor = `rgba(var(--rgb-secondary), ${Math.random() * 0.3})`; break;
+                        case 2: rgbColor = `rgba(var(--rgb-accent), ${Math.random() * 0.3})`; break;
+                    }
+                    
+                    // Configurar partícula
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.top = `${posY}%`;
+                    particle.style.background = rgbColor;
+                    particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    container.appendChild(particle);
+                }
+            }
+            
+            // Efecto hover en tarjetas (cambio de color RGB)
+            const toolCards = document.querySelectorAll('.tool-card');
+            toolCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const randomHue = Math.floor(Math.random() * 360);
+                    const rgb = hslToRgb(randomHue / 360, 1, 0.5);
+                    card.style.setProperty('--text-highlight', `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`);
+                    card.style.borderLeftColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                });
+            });
+            
+            // Iniciar efectos
+            updateRGBColors();
+            createParticles();
+            
+            // Actualizar valoraciones dinámicamente
+            setTimeout(() => {
+                const ratings = document.querySelectorAll('.rating');
+                ratings.forEach(rating => {
+                    const baseRating = parseFloat(rating.textContent.split(' ')[1]);
+                    const variance = (Math.random() * 0.2) - 0.1; // ±0.1
+                    const finalRating = Math.min(5, Math.max(4.3, baseRating + variance)).toFixed(1);
+                    rating.textContent = `⭐ ${finalRating}/5 (${Math.floor(Math.random() * 500 + 800)}+ reviews)`;
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
