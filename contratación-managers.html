@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Únete a Nuestro Equipo | NexusManager</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+       :root {
+    --black: #0D0D0D;
+    --neon-blue: #00F0FF;
+    --white: #F2F2F2;
+    --gray: #1E1E1E;
+    --accent: #FF2A6D;
+    --green-tick: #00FF9D;
+    --blue-tick: #00F0FF;
+    --purple-tick: #BD00FF;
+    --glow-intensity: 0.5;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Animaciones personalizadas --- */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 10px var(--neon-blue); }
+    50% { text-shadow: 0 0 20px var(--neon-blue); }
+    100% { text-shadow: 0 0 10px var(--neon-blue); }
+}
+@keyframes border-glow {
+    0% { box-shadow: 0 0 5px var(--neon-blue); }
+    50% { box-shadow: 0 0 20px var(--neon-blue); }
+    100% { box-shadow: 0 0 5px var(--neon-blue); }
+}
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+@keyframes particle-float {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+}
+
+/* --- Navbar --- */
+.navbar {
+    background-color: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--neon-blue);
+    animation: fadeInDown 0.8s ease-out;
+}
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo img {
+    height: 50px;
+    filter: drop-shadow(0 0 10px var(--neon-blue));
+    animation: pulse 3s infinite ease-in-out;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.logo:hover img {
+    transform: rotate(10deg) scale(1.1);
+    filter: drop-shadow(0 0 15px var(--neon-blue));
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 700;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--neon-blue);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s, box-shadow 0.3s;
+}
+.nav-links a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+.nav-links a:hover:after {
+    width: 100%;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* --- Hero Section --- */
+.hero-careers {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.15), transparent 70%),
+        linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+.hero-careers-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hero-careers h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--white), var(--neon-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    animation: glow 3s infinite ease-in-out;
+}
+.hero-careers p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Formulario de Contratación */
+.application-section {
+    padding: 80px 0;
+    background-color: var(--gray);
+}
+.application-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.application-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    transition: all 0.6s ease;
+}
+.application-container:hover:before {
+    left: 100%;
+}
+.application-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--neon-blue);
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+}
+.application-title:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--neon-blue);
+    margin: 15px auto 0;
+}
+.application-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group.full-width {
+    grid-column: span 2;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--neon-blue);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(13, 13, 13, 0.8);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s ease;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.submit-btn {
+    grid-column: span 2;
+    background: transparent;
+    color: var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.submit-btn:hover {
+    background: var(--neon-blue);
+    color: var(--black);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* Beneficios */
+.benefits-section {
+    padding: 80px 0;
+    background-color: var(--black);
+    text-align: center;
+}
+.benefits-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    position: relative;
+}
+.benefits-title:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--neon-blue);
+    margin: 20px auto 0;
+}
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.benefit-card {
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    padding: 40px 30px;
+    border-radius: 5px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+.benefit-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    transition: all 0.6s ease;
+}
+.benefit-card:hover:before {
+    left: 100%;
+}
+.benefit-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+}
+.benefit-icon {
+    font-size: 3rem;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+}
+.benefit-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+}
+.benefit-card p {
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--black);
+    padding: 100px 0 50px;
+    text-align: center;
+    position: relative;
+}
+.footer:before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--black), transparent);
+}
+.footer-logo img {
+    height: 60px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 15px var(--neon-blue));
+    animation: pulse 3s infinite ease-in-out;
+}
+.footer-links {
+    margin-bottom: 30px;
+}
+.footer-links a {
+    color: var(--white);
+    margin: 0 20px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+.footer-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--neon-blue);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s, box-shadow 0.3s;
+}
+.footer-links a:hover {
+    color: var(--neon-blue);
+}
+.footer-links a:hover:after {
+    width: 100%;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+.footer-social {
+    margin-bottom: 30px;
+}
+.footer-social a {
+    color: var(--white);
+    font-size: 1.8rem;
+    margin: 0 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+}
+.footer-social a:hover {
+    color: var(--neon-blue);
+    transform: translateY(-5px) scale(1.2);
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+.footer-copyright {
+    margin-top: 40px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-careers h1 {
+        font-size: 2.5rem;
+    }
+    .hero-careers p {
+        font-size: 1rem;
+    }
+    .application-form {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+    .benefits-title {
+        font-size: 2rem;
+    }
+    .nav-links a {
+        margin-left: 15px;
+        font-size: 0.85rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles-js"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Planes</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-careers">
+        <div class="container">
+            <div class="hero-careers-content">
+                <h1 class="animate__animated animate__fadeInDown">ÚNETE A NUESTRO EQUIPO</h1>
+                <p class="animate__animated animate__fadeIn animate__delay-1s">Buscamos managers apasionados por los esports que quieran formar parte de la revolución en la gestión de talentos gaming.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contratación -->
+    <section class="application-section">
+        <div class="container">
+            <div class="application-container">
+                <h2 class="application-title">SOLICITUD DE CONTRATACIÓN</h2>
+                <form id="manager-form" action="https://formspree.io/f/mvgkbdog" method="POST">
+                    <div class="application-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pais">País de Residencia</label>
+                            <input type="text" id="pais" name="pais" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="experiencia">Años de Experiencia</label>
+                            <select id="experiencia" name="experiencia" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="0-1">0-1 años</option>
+                                <option value="1-3">1-3 años</option>
+                                <option value="3-5">3-5 años</option>
+                                <option value="5+">Más de 5 años</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="especialidad">Especialidad</label>
+                            <select id="especialidad" name="especialidad" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="proplayers">Gestión de Pro Players</option>
+                                <option value="streamers">Gestión de Streamers</option>
+                                <option value="equipos">Gestión de Equipos</option>
+                                <option value="eventos">Organización de Eventos</option>
+                                <option value="marketing">Marketing Esports</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="experiencia-desc">Describe tu experiencia en gestión de talentos</label>
+                            <textarea id="experiencia-desc" name="experiencia-desc" required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="motivacion">¿Por qué quieres unirte a NexusManager?</label>
+                            <textarea id="motivacion" name="motivacion" required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="linkedin">Perfil de LinkedIn (opcional)</label>
+                            <input type="url" id="linkedin" name="linkedin">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="portfolio">Portfolio o ejemplos de trabajo (URL)</label>
+                            <input type="url" id="portfolio" name="portfolio">
+                        </div>
+                        <button type="submit" class="submit-btn">ENVIAR SOLICITUD</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios de Trabajar con Nosotros -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="benefits-title">BENEFICIOS DE SER MANAGER EN NEXUS</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Crecimiento Profesional</h3>
+                    <p>Acceso a programas de formación exclusivos y oportunidades de desarrollo en la industria de los esports.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Red de Contactos</h3>
+                    <p>Conexión con los principales actores de la industria: jugadores, equipos, marcas y organizadores.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Remuneración Competitiva</h3>
+                    <p>Estructura de comisiones atractivas y bonos por desempeño basados en tus resultados.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Herramientas Premium</h3>
+                    <p>Acceso a nuestra plataforma de gestión con analíticas avanzadas y herramientas exclusivas.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Alcance Global</h3>
+                    <p>Trabaja con talentos de todo el mundo y expande tu cartera internacionalmente.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Reconocimiento</h3>
+                    <p>Posicionamiento como manager certificado por NexusManager, una marca líder en el sector.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/fg3jk3Heq6"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Crear partículas flotantes
+        function createParticles() {
+            const container = document.getElementById('particles-js');
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Color aleatorio
+                const colors = ['var(--neon-blue)', 'var(--green-tick)', 'var(--purple-tick)', 'var(--accent)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Duración y delay de animación
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Mostrar mensaje de confirmación al enviar el formulario
+        document.getElementById('manager-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('¡Tu solicitud ha sido enviada con éxito! Nos pondremos en contacto contigo pronto.');
+                    form.reset();
+                } else {
+                    throw new Error('Error en el envío del formulario');
+                }
+            })
+            .catch(error => {
+                alert('Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.');
+                console.error(error);
+            });
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
