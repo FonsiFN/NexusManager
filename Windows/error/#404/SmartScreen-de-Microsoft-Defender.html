@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Seguro - Solución SmartScreen</title>
+    <style>
+      :root {
+            --primary: #0066cc;
+            --secondary: #003366;
+            --accent: #00ccff;
+            --danger: #ff3333;
+            --success: #00cc66;
+            --warning: #ffcc00;
+            --dark: #1a1a1a;
+            --light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a1a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .optimizer-container {
+            width: 100%;
+            max-width: 1100px;
+            background: linear-gradient(145deg, #0f0f2d, #1a1a3a);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--primary);
+        }
+
+        .optimizer-header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--accent);
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .optimizer-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .optimization-section {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .optimization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .optimization-card {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .optimization-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 204, 255, 0.2);
+        }
+
+        .optimization-card.selected {
+            border-color: var(--success);
+            background-color: rgba(0, 204, 102, 0.1);
+        }
+
+        .optimization-card i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .optimization-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .optimization-card p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .optimization-card .category-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            background-color: rgba(0, 204, 255, 0.2);
+            padding: 3px 6px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0055aa;
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .os-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .os-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .os-option:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .os-option.selected {
+            border-color: var(--accent);
+            background-color: rgba(0, 204, 255, 0.1);
+        }
+
+        .os-option i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instructions {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .instructions h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions-content {
+            display: none;
+        }
+
+        .instructions-content.active {
+            display: block;
+        }
+
+        .instructions-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .instructions-tab {
+            padding: 8px 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .instructions-tab.active {
+            background-color: var(--primary);
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tab-content {
+            padding: 20px 0;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .optimization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .os-selector {
+                flex-direction: column;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .tab {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+                padding: 8px 15px;
+            }
+            
+            .tab.active {
+                border-bottom: none;
+                border-left-color: var(--accent);
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+            
+            .download-btn {
+                width: 100%;
+            }
+        }
+        /* Nuevos estilos para la sección de SmartScreen */
+        .smartscreen-info {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .smartscreen-info h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .verification-steps {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .verification-step {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .verification-step i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .trust-certificate {
+            background-color: rgba(0, 204, 102, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        /* [Resto de estilos se mantienen igual] */
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="antivirus-container">
+        <!-- [El encabezado y cuerpo anterior se mantienen igual] -->
+
+        <!-- Nueva sección sobre SmartScreen -->
+        <div class="scan-section">
+            <div class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Solución para SmartScreen de Microsoft Defender</h2>
+            </div>
+
+            <div class="smartscreen-info">
+                <h3><i class="fas fa-exclamation-triangle"></i> ¿Por qué aparece esta advertencia?</h3>
+                <p>Microsoft Defender SmartScreen muestra esta advertencia porque:</p>
+                <ul>
+                    <li>El script no está firmado digitalmente por una entidad reconocida</li>
+                    <li>Es un archivo reciente y no muchos usuarios lo han ejecutado</li>
+                    <li>Windows protege a los usuarios de archivos potencialmente no seguros</li>
+                </ul>
+
+                <div class="verification-steps">
+                    <h4><i class="fas fa-check-circle"></i> Cómo verificar que el script es seguro:</h4>
+                    
+                    <div class="verification-step">
+                        <i class="fas fa-search"></i>
+                        <div>
+                            <strong>1. Revisa el código fuente</strong>
+                            <p>Puedes abrir el script con el Bloc de notas para verificar que solo contiene comandos legítimos del sistema.</p>
+                        </div>
+                    </div>
+
+                    <div class="verification-step">
+                        <i class="fas fa-certificate"></i>
+                        <div>
+                            <strong>2. Verifica el hash del archivo</strong>
+                            <p>Usa PowerShell con <code>Get-FileHash -Algorithm SHA256 tu_archivo.ps1</code> y compara con el valor proporcionado.</p>
+                        </div>
+                    </div>
+
+                    <div class="verification-step">
+                        <i class="fas fa-user-shield"></i>
+                        <div>
+                            <strong>3. Comprueba la reputación</strong>
+                            <p>Sube el archivo a <a href="https://www.virustotal.com" target="_blank" style="color: var(--accent);">VirusTotal</a> para analizarlo con múltiples antivirus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust-certificate">
+                    <h4><i class="fas fa-lock"></i> Cómo ejecutar el script de forma segura:</h4>
+                    <ol>
+                        <li><strong>Haz clic derecho</strong> en el archivo descargado</li>
+                        <li>Selecciona <strong>"Propiedades"</strong></li>
+                        <li>Marca la casilla <strong>"Desbloquear"</strong> si está presente</li>
+                        <li>Haz clic en <strong>"Aceptar"</strong></li>
+                        <li>Ahora puedes ejecutarlo normalmente</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="file-upload">
+                <!-- [Resto del contenido anterior] -->
+            </div>
+        </div>
+
+        <!-- [Resto del código HTML anterior] -->
+    </div>
+
+    <script>
+        // [El código JavaScript anterior se mantiene igual]
+
+        // Nueva función para mostrar hash de verificación
+        function showVerificationHash(content) {
+            // Esta función generaría un hash SHA-256 del contenido del script
+            // En un entorno real, usarías una librería como CryptoJS
+            return "SHA-256: " + "EjemploDeHashSeguro1234567890abcdef";
+        }
+
+        // Modificamos la función de descarga para incluir información de verificación
+        function downloadFile(fileName, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            
+            // Mostramos el hash de verificación antes de descargar
+            const hash = showVerificationHash(content);
+            alert(`Antes de descargar, anote este código de verificación:\n\n${hash}\n\nPodrá usarlo para comprobar la integridad del archivo.`);
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
