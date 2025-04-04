@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Premium</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #003366;
+            --accent: #00ccff;
+            --danger: #ff3333;
+            --success: #00cc66;
+            --warning: #ffcc00;
+            --dark: #1a1a1a;
+            --light: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a1a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .optimizer-container {
+            width: 100%;
+            max-width: 1100px;
+            background: linear-gradient(145deg, #0f0f2d, #1a1a3a);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--primary);
+        }
+
+        .optimizer-header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--accent);
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .optimizer-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .optimization-section {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .optimization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .optimization-card {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .optimization-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 204, 255, 0.2);
+        }
+
+        .optimization-card.selected {
+            border-color: var(--success);
+            background-color: rgba(0, 204, 102, 0.1);
+        }
+
+        .optimization-card i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .optimization-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .optimization-card p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .optimization-card .category-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            background-color: rgba(0, 204, 255, 0.2);
+            padding: 3px 6px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0055aa;
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .os-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .os-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .os-option:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .os-option.selected {
+            border-color: var(--accent);
+            background-color: rgba(0, 204, 255, 0.1);
+        }
+
+        .os-option i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instructions {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .instructions h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions-content {
+            display: none;
+        }
+
+        .instructions-content.active {
+            display: block;
+        }
+
+        .instructions-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .instructions-tab {
+            padding: 8px 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .instructions-tab.active {
+            background-color: var(--primary);
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tab-content {
+            padding: 20px 0;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .optimization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .os-selector {
+                flex-direction: column;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .tab {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+                padding: 8px 15px;
+            }
+            
+            .tab.active {
+                border-bottom: none;
+                border-left-color: var(--accent);
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+            
+            .download-btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="optimizer-container">
+        <div class="optimizer-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Optimizador Premium</h1>
+                    <p>Scripts específicos para cada necesidad</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="optimizer-body">
+            <div class="optimization-section">
+                <div class="section-title">
+                    <i class="fas fa-laptop"></i>
+                    <h2>Selecciona tu sistema operativo</h2>
+                </div>
+                
+                <div class="os-selector">
+                    <div class="os-option selected" data-os="windows">
+                        <i class="fab fa-windows"></i>
+                        <h3>Windows</h3>
+                    </div>
+                    <div class="os-option" data-os="linux">
+                        <i class="fab fa-linux"></i>
+                        <h3>Linux</h3>
+                    </div>
+                    <div class="os-option" data-os="macos">
+                        <i class="fab fa-apple"></i>
+                        <h3>macOS</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="optimization-section">
+                <div class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    <h2>Selecciona las optimizaciones que necesitas</h2>
+                </div>
+                
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" data-tab="performance">Rendimiento</div>
+                        <div class="tab" data-tab="cleaning">Limpieza</div>
+                        <div class="tab" data-tab="security">Seguridad</div>
+                        <div class="tab" data-tab="network">Red</div>
+                        <div class="tab" data-tab="privacy">Privacidad</div>
+                    </div>
+                    
+                    <!-- Pestaña Rendimiento -->
+                    <div class="tab-content active" id="performance-tab">
+                        <div class="optimization-grid">
+                            <div class="optimization-card" data-opt="defrag" data-category="performance">
+                                <i class="fas fa-hdd"></i>
+                                <h3>Desfragmentar disco</h3>
+                                <p>Optimiza la distribución de datos en discos HDD para mejorar velocidad</p>
+                                <span class="category-badge">Rendimiento</span>
+                            </div>
+                            <div class="optimization-card" data-opt="trim" data-category="performance">
+                                <i class="fas fa-memory"></i>
+                                <h3>Optimizar SSD</h3>
+                                <p>Ejecuta comando TRIM para mantener el máximo rendimiento en SSD</p>
+                                <span class="category-badge">Rendimiento</span>
+                            </div>
+                            <div class="optimization-card" data-opt="services" data-category="performance">
+                                <i class="fas fa-cogs"></i>
+                                <h3>Servicios no esenciales</h3>
+                                <p>Desactiva servicios que consumen recursos innecesariamente</p>
+                                <span class="category-badge">Rendimiento</span>
+                            </div>
+                            <div class="optimization-card" data-opt="startup" data-category="performance">
+                                <i class="fas fa-power-off"></i>
+                                <h3>Programas de inicio</h3>
+                                <p>Deshabilita aplicaciones que ralentizan el arranque del sistema</p>
+                                <span class="category-badge">Rendimiento</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pestaña Limpieza -->
+                    <div class="tab-content" id="cleaning-tab">
+                        <div class="optimization-grid">
+                            <div class="optimization-card" data-opt="tempfiles" data-category="cleaning">
+                                <i class="fas fa-trash-alt"></i>
+                                <h3>Archivos temporales</h3>
+                                <p>Elimina archivos temporales del sistema y aplicaciones</p>
+                                <span class="category-badge">Limpieza</span>
+                            </div>
+                            <div class="optimization-card" data-opt="recyclebin" data-category="cleaning">
+                                <i class="fas fa-trash-restore"></i>
+                                <h3>Papelera de reciclaje</h3>
+                                <p>Vacía completamente la papelera de reciclaje</p>
+                                <span class="category-badge">Limpieza</span>
+                            </div>
+                            <div class="optimization-card" data-opt="logs" data-category="cleaning">
+                                <i class="fas fa-clipboard-list"></i>
+                                <h3>Logs del sistema</h3>
+                                <p>Elimina registros antiguos que ocupan espacio innecesario</p>
+                                <span class="category-badge">Limpieza</span>
+                            </div>
+                            <div class="optimization-card" data-opt="browsercache" data-category="cleaning">
+                                <i class="fas fa-globe"></i>
+                                <h3>Caché de navegadores</h3>
+                                <p>Limpia caché, cookies y datos de navegación</p>
+                                <span class="category-badge">Limpieza</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pestaña Seguridad -->
+                    <div class="tab-content" id="security-tab">
+                        <div class="optimization-grid">
+                            <div class="optimization-card" data-opt="antivirus" data-category="security">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Escaneo antivirus</h3>
+                                <p>Ejecuta un escaneo rápido con el antivirus del sistema</p>
+                                <span class="category-badge">Seguridad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="firewall" data-category="security">
+                                <i class="fas fa-fire"></i>
+                                <h3>Configurar firewall</h3>
+                                <p>Revisa y optimiza las reglas del firewall</p>
+                                <span class="category-badge">Seguridad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="updates" data-category="security">
+                                <i class="fas fa-cloud-download-alt"></i>
+                                <h3>Actualizaciones de seguridad</h3>
+                                <p>Instala las últimas actualizaciones críticas del sistema</p>
+                                <span class="category-badge">Seguridad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="processes" data-category="security">
+                                <i class="fas fa-tasks"></i>
+                                <h3>Procesos sospechosos</h3>
+                                <p>Busca y analiza procesos potencialmente maliciosos</p>
+                                <span class="category-badge">Seguridad</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pestaña Red -->
+                    <div class="tab-content" id="network-tab">
+                        <div class="optimization-grid">
+                            <div class="optimization-card" data-opt="dns" data-category="network">
+                                <i class="fas fa-server"></i>
+                                <h3>Optimizar DNS</h3>
+                                <p>Configura servidores DNS rápidos y seguros</p>
+                                <span class="category-badge">Red</span>
+                            </div>
+                            <div class="optimization-card" data-opt="tcpip" data-category="network">
+                                <i class="fas fa-network-wired"></i>
+                                <h3>Resetear TCP/IP</h3>
+                                <p>Reinicia la configuración de red para resolver problemas</p>
+                                <span class="category-badge">Red</span>
+                            </div>
+                            <div class="optimization-card" data-opt="winsock" data-category="network">
+                                <i class="fas fa-plug"></i>
+                                <h3>Resetear Winsock</h3>
+                                <p>Repara problemas de conexión y sockets de red</p>
+                                <span class="category-badge">Red</span>
+                            </div>
+                            <div class="optimization-card" data-opt="networkreset" data-category="network">
+                                <i class="fas fa-sync-alt"></i>
+                                <h3>Resetear red</h3>
+                                <p>Restablece completamente la configuración de red</p>
+                                <span class="category-badge">Red</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pestaña Privacidad -->
+                    <div class="tab-content" id="privacy-tab">
+                        <div class="optimization-grid">
+                            <div class="optimization-card" data-opt="tracking" data-category="privacy">
+                                <i class="fas fa-user-secret"></i>
+                                <h3>Deshabilitar tracking</h3>
+                                <p>Desactiva servicios de rastreo y telemetría</p>
+                                <span class="category-badge">Privacidad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="passwords" data-category="privacy">
+                                <i class="fas fa-key"></i>
+                                <h3>Contraseñas guardadas</h3>
+                                <p>Revisa y limpia credenciales almacenadas</p>
+                                <span class="category-badge">Privacidad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="history" data-category="privacy">
+                                <i class="fas fa-history"></i>
+                                <h3>Historial de actividad</h3>
+                                <p>Elimina el historial de actividad y diagnósticos</p>
+                                <span class="category-badge">Privacidad</span>
+                            </div>
+                            <div class="optimization-card" data-opt="advertising" data-category="privacy">
+                                <i class="fas fa-ad"></i>
+                                <h3>Publicidad personalizada</h3>
+                                <p>Desactiva la publicidad basada en intereses</p>
+                                <span class="category-badge">Privacidad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="download-options hidden" id="downloadOptions">
+                    <button class="btn btn-primary download-btn" data-download="individual">
+                        <i class="fas fa-file-download"></i> Descargar scripts por categoría
+                    </button>
+                    <button class="btn btn-primary download-btn" data-download="combined">
+                        <i class="fas fa-file-archive"></i> Descargar script combinado
+                    </button>
+                </div>
+                
+                <div id="instructions" class="instructions hidden">
+                    <h3><i class="fas fa-info-circle"></i> Instrucciones detalladas</h3>
+                    
+                    <div class="instructions-tabs">
+                        <div class="instructions-tab active" data-instructions="windows">Windows</div>
+                        <div class="instructions-tab" data-instructions="linux">Linux</div>
+                        <div class="instructions-tab" data-instructions="macos">macOS</div>
+                    </div>
+                    
+                    <div class="instructions-content active" id="windows-instructions">
+                        <h4><i class="fas fa-shield-alt"></i> Requisitos previos:</h4>
+                        <ol>
+                            <li>Asegúrate de tener permisos de administrador</li>
+                            <li>Haz una copia de seguridad de tus datos importantes</li>
+                            <li>Cierra todas las aplicaciones antes de ejecutar los scripts</li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-terminal"></i> Pasos para ejecutar:</h4>
+                        <ol>
+                            <li><strong>Para scripts .bat:</strong>
+                                <ul>
+                                    <li>Haz clic derecho sobre el archivo</li>
+                                    <li>Selecciona "Ejecutar como administrador"</li>
+                                    <li>Confirma el aviso de control de cuentas de usuario (UAC)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Para scripts .ps1 (PowerShell):</strong>
+                                <ul>
+                                    <li>Haz clic derecho sobre el archivo</li>
+                                    <li>Selecciona "Ejecutar con PowerShell"</li>
+                                    <li>Si aparece un mensaje de seguridad, escribe <code>Set-ExecutionPolicy RemoteSigned -Scope Process</code> y luego ejecuta el script</li>
+                                </ul>
+                            </li>
+                            <li>Sigue las instrucciones que aparecen en pantalla</li>
+                            <li>Es posible que necesites reiniciar el equipo para que algunos cambios surtan efecto</li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-exclamation-triangle"></i> Notas importantes:</h4>
+                        <ul>
+                            <li>Algunas optimizaciones pueden desactivar características que usas regularmente</li>
+                            <li>La primera ejecución puede tardar varios minutos</li>
+                            <li>Para revertir cambios, ejecuta el script nuevamente (algunos incluyen opción de revertir)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="instructions-content" id="linux-instructions">
+                        <h4><i class="fas fa-shield-alt"></i> Requisitos previos:</h4>
+                        <ol>
+                            <li>Necesitas permisos de root (sudo)</li>
+                            <li>Recomendado hacer backup de configuraciones importantes</li>
+                            <li>Ejecuta desde una terminal con permisos elevados</li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-terminal"></i> Pasos para ejecutar:</h4>
+                        <ol>
+                            <li>Abre una terminal (Ctrl+Alt+T)</li>
+                            <li>Navega hasta la ubicación del script: <code>cd /ruta/al/script</code></li>
+                            <li>Da permisos de ejecución: <code>chmod +x nombre_script.sh</code></li>
+                            <li>Ejecuta con sudo: <code>sudo ./nombre_script.sh</code></li>
+                            <li>Introduce tu contraseña cuando se solicite</li>
+                            <li>Sigue las instrucciones en pantalla</li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-exclamation-triangle"></i> Notas importantes:</h4>
+                        <ul>
+                            <li>Algunos comandos pueden variar según tu distribución</li>
+                            <li>Revisa el código si no confías en el origen del script</li>
+                            <li>Para deshacer cambios, revisa el historial de comandos ejecutados</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="instructions-content" id="macos-instructions">
+                        <h4><i class="fas fa-shield-alt"></i> Requisitos previos:</h4>
+                        <ol>
+                            <li>Necesitas permisos de administrador</li>
+                            <li>Cierra aplicaciones importantes antes de ejecutar</li>
+                            <li>Conecta el Mac a corriente eléctrica para optimizaciones largas</li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-terminal"></i> Pasos para ejecutar:</h4>
+                        <ol>
+                            <li>Abre Terminal (desde Aplicaciones > Utilidades)</li>
+                            <li>Navega hasta la ubicación del script: <code>cd /ruta/al/script</code></li>
+                            <li>Da permisos de ejecución: <code>chmod +x nombre_script.command</code></li>
+                            <li>Ejecuta: <code>./nombre_script.command</code></li>
+                            <li>Introduce tu contraseña cuando se solicite</li>
+                            <li>Para scripts que requieren más privilegios, usa <code>sudo ./nombre_script.command</code></li>
+                        </ol>
+                        
+                        <h4><i class="fas fa-exclamation-triangle"></i> Notas importantes:</h4>
+                        <ul>
+                            <li>Algunas optimizaciones pueden afectar el rendimiento de ciertas apps</li>
+                            <li>La primera ejecución puede tardar varios minutos</li>
+                            <li>Revisa cuidadosamente los cambios que realizará el script</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let selectedOS = 'windows';
+        let selectedOptimizations = [];
+        let optimizationsByCategory = {
+            performance: [],
+            cleaning: [],
+            security: [],
+            network: [],
+            privacy: []
+        };
+        
+        // Elementos del DOM
+        const osOptions = document.querySelectorAll('.os-option');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const optimizationCards = document.querySelectorAll('.optimization-card');
+        const downloadOptions = document.getElementById('downloadOptions');
+        const instructions = document.getElementById('instructions');
+        const instructionTabs = document.querySelectorAll('.instructions-tab');
+        const instructionContents = document.querySelectorAll('.instructions-content');
+        
+        // Event listeners
+        osOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                osOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedOS = option.dataset.os;
+                updateDownloadOptions();
+            });
+        });
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+        
+        optimizationCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('selected');
+                const optId = card.dataset.opt;
+                const category = card.dataset.category;
+                
+                if (card.classList.contains('selected')) {
+                    if (!selectedOptimizations.includes(optId)) {
+                        selectedOptimizations.push(optId);
+                        optimizationsByCategory[category].push(optId);
+                    }
+                } else {
+                    selectedOptimizations = selectedOptimizations.filter(id => id !== optId);
+                    optimizationsByCategory[category] = optimizationsByCategory[category].filter(id => id !== optId);
+                }
+                
+                updateDownloadOptions();
+            });
+        });
+        
+        instructionTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                instructionTabs.forEach(t => t.classList.remove('active'));
+                instructionContents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.instructions}-instructions`).classList.add('active');
+            });
+        });
+        
+        document.querySelector('[data-download="individual"]').addEventListener('click', () => {
+            downloadScriptsByCategory();
+        });
+        
+        document.querySelector('[data-download="combined"]').addEventListener('click', () => {
+            downloadCombinedScript();
+        });
+        
+        // Función para actualizar las opciones de descarga
+        function updateDownloadOptions() {
+            if (selectedOptimizations.length > 0) {
+                downloadOptions.classList.remove('hidden');
+                instructions.classList.remove('hidden');
+            } else {
+                downloadOptions.classList.add('hidden');
+                instructions.classList.add('hidden');
+            }
+        }
+        
+        // Función para descargar scripts por categoría
+        function downloadScriptsByCategory() {
+            for (const [category, optimizations] of Object.entries(optimizationsByCategory)) {
+                if (optimizations.length > 0) {
+                    const scriptContent = generateScriptForCategory(category, optimizations);
+                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                    let fileName = `${category}_optimization_${timestamp}`;
+                    
+                    if (selectedOS === 'windows') fileName += '.bat';
+                    else if (selectedOS === 'linux') fileName += '.sh';
+                    else if (selectedOS === 'macos') fileName += '.command';
+                    
+                    downloadFile(fileName, scriptContent);
+                }
+            }
+            
+            alert('¡Scripts descargados! Revisa las instrucciones para ejecutarlos correctamente.');
+        }
+        
+        // Función para descargar script combinado
+        function downloadCombinedScript() {
+            let scriptContent = '';
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            let fileName = `full_optimization_${timestamp}`;
+            
+            // Cabecera del script
+            scriptContent += `# Script de optimización combinado\n`;
+            scriptContent += `# Generado el ${new Date().toLocaleString()}\n`;
+            scriptContent += `# Sistema operativo: ${selectedOS.toUpperCase()}\n`;
+            scriptContent += `# Optimizaciones incluidas: ${selectedOptimizations.join(', ')}\n\n`;
+            
+            // Añadir optimizaciones por categoría
+            for (const [category, optimizations] of Object.entries(optimizationsByCategory)) {
+                if (optimizations.length > 0) {
+                    scriptContent += `# ${category.toUpperCase()} OPTIMIZATIONS\n`;
+                    scriptContent += generateScriptSection(category, optimizations);
+                    scriptContent += '\n';
+                }
+            }
+            
+            if (selectedOS === 'windows') {
+                fileName += '.bat';
+                scriptContent = convertToBatch(scriptContent);
+            } else if (selectedOS === 'linux') {
+                fileName += '.sh';
+                scriptContent = '#!/bin/bash\n\n' + scriptContent;
+            } else if (selectedOS === 'macos') {
+                fileName += '.command';
+                scriptContent = '#!/bin/bash\n\n' + scriptContent;
+            }
+            
+            downloadFile(fileName, scriptContent);
+            alert('¡Script combinado descargado! Revisa las instrucciones para ejecutarlo correctamente.');
+        }
+        
+        // Función para generar script por categoría
+        function generateScriptForCategory(category, optimizations) {
+            let scriptContent = '';
+            
+            // Cabecera del script
+            scriptContent += `# ${category.toUpperCase()} OPTIMIZATION SCRIPT\n`;
+            scriptContent += `# Generado el ${new Date().toLocaleString()}\n`;
+            scriptContent += `# Sistema operativo: ${selectedOS.toUpperCase()}\n`;
+            scriptContent += `# Optimizaciones: ${optimizations.join(', ')}\n\n`;
+            
+            // Añadir sección de optimizaciones
+            scriptContent += generateScriptSection(category, optimizations);
+            
+            if (selectedOS === 'windows') {
+                return convertToBatch(scriptContent);
+            } else {
+                return '#!/bin/bash\n\n' + scriptContent;
+            }
+        }
+        
+        // Función para generar sección de script
+        function generateScriptSection(category, optimizations) {
+            let sectionContent = '';
+            
+            if (selectedOS === 'windows') {
+                sectionContent += `echo.\necho EJECUTANDO OPTIMIZACIONES DE ${category.toUpperCase()}...\necho.\n`;
+                
+                if (category === 'performance') {
+                    if (optimizations.includes('defrag')) {
+                        sectionContent += `echo Desfragmentando discos HDD...\n`;
+                        sectionContent += `defrag C: /U /V\n`;
+                        sectionContent += `echo.\n`;
+                    }
+                    
+                    if (optimizations.includes('trim')) {
+                        sectionContent += `echo Optimizando SSD (TRIM)...\n`;
+                        sectionContent += `optimize-volume C -retrim\n`;
+                        sectionContent += `echo.\n`;
+                    }
+                    
+                    if (optimizations.includes('services')) {
+                        sectionContent += `echo Desactivando servicios no esenciales...\n`;
+                        sectionContent += `sc config "SysMain" start= disabled\n`;
+                        sectionContent += `sc stop "SysMain"\n`;
+                        sectionContent += `echo.\n`;
+                    }
+                }
+                
+                if (category === 'cleaning') {
+                    if (optimizations.includes('tempfiles')) {
+                        sectionContent += `echo Limpiando archivos temporales...\n`;
+                        sectionContent += `del /q /f /s %TEMP%\\*.*\n`;
+                        sectionContent += `del /q /f /s %WINDIR%\\Temp\\*.*\n`;
+                        sectionContent += `echo.\n`;
+                    }
+                    
+                    if (optimizations.includes('recyclebin')) {
+                        sectionContent += `echo Vaciando papelera de reciclaje...\n`;
+                        sectionContent += `rd /s /q %systemdrive%\\$Recycle.bin\n`;
+                        sectionContent += `echo.\n`;
+                    }
+                }
+                
+                // Más optimizaciones pueden añadirse aquí...
+                
+            } else if (selectedOS === 'linux' || selectedOS === 'macos') {
+                sectionContent += `echo ""\necho "EJECUTANDO OPTIMIZACIONES DE ${category.toUpperCase()}..."\necho ""\n`;
+                
+                if (category === 'performance') {
+                    if (optimizations.includes('trim')) {
+                        sectionContent += `echo "Optimizando SSD (TRIM)..."\n`;
+                        sectionContent += `fstrim -av\n`;
+                        sectionContent += `echo ""\n`;
+                    }
+                }
+                
+                if (category === 'cleaning') {
+                    if (optimizations.includes('tempfiles')) {
+                        sectionContent += `echo "Limpiando archivos temporales..."\n`;
+                        sectionContent += `rm -rf /tmp/*\n`;
+                        sectionContent += `rm -rf /var/tmp/*\n`;
+                        if (selectedOS === 'macos') {
+                            sectionContent += `rm -rf ~/Library/Caches/*\n`;
+                        }
+                        sectionContent += `echo ""\n`;
+                    }
+                }
+                
+                // Más optimizaciones pueden añadirse aquí...
+            }
+            
+            sectionContent += `echo "Optimizaciones de ${category} completadas!"\n`;
+            return sectionContent;
+        }
+        
+        // Función para convertir a script batch de Windows
+        function convertToBatch(content) {
+            return `@echo off\n\n${content.replace(/#.*\n/g, ':: $&\n').replace(/echo "/g, 'echo ').replace(/"\n/g, '\n')}`;
+        }
+        
+        // Función para descargar archivo
+        function downloadFile(fileName, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
