@@ -271,6 +271,55 @@
             color: var(--black);
             box-shadow: 0 0 20px var(--neon-blue);
         }
+        
+        /* Plan Nexus */
+        .nexus-plan {
+            width: 100%;
+            max-width: 1120px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(30, 30, 30, 0.9));
+            border: 2px solid var(--neon-blue);
+            margin-top: 60px;
+            padding: 60px 40px;
+        }
+        .nexus-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3);
+        }
+        .nexus-plan h3 {
+            font-size: 2.8rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+        .nexus-plan .plan-price {
+            font-size: 4.5rem;
+        }
+        .nexus-plan .plan-features {
+            column-count: 3;
+            column-gap: 40px;
+            min-height: auto;
+        }
+        
+        /* Plan Beta */
+        .beta-plan {
+            width: 300px;
+            margin-bottom: 40px;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid var(--white);
+        }
+        .beta-plan .plan-badge {
+            background: var(--white);
+            color: var(--black);
+        }
+        .beta-plan .btn-plan {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+        .beta-plan .btn-plan:hover {
+            background: transparent;
+            color: var(--white);
+            box-shadow: 0 0 20px var(--white);
+        }
 
         /* --- Footer --- */
         .footer {
@@ -335,6 +384,9 @@
                 width: 320px;
                 padding: 40px 30px;
             }
+            .nexus-plan .plan-features {
+                column-count: 2;
+            }
         }
         @media (max-width: 1000px) {
             .plans-container {
@@ -347,6 +399,13 @@
             }
             .plans-hero h1 {
                 font-size: 3rem;
+            }
+            .nexus-plan .plan-features {
+                column-count: 1;
+            }
+            .nexus-plan {
+                width: 80%;
+                max-width: 500px;
             }
         }
         @media (max-width: 768px) {
@@ -403,6 +462,25 @@
     <section class="plans-section">
         <div class="container">
             <h2>DESCUBRE TU PLAN IDEAL</h2>
+            
+            <!-- Plan Beta -->
+            <div class="plans-container" style="justify-content: center;">
+                <div class="plan-card beta-plan">
+                    <div class="plan-badge">BETA TESTER</div>
+                    <h3>Plan Beta</h3>
+                    <div class="plan-price">0€ <span>/mes</span></div>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Prueba nuestras funciones básicas sin costo</p>
+                    <ul class="plan-features">
+                        <li>Acceso limitado a la plataforma</li>
+                        <li>Soporte comunitario</li>
+                        <li>Recursos básicos de aprendizaje</li>
+                        <li>Participación en encuestas</li>
+                        <li>Acceso a versiones beta de nuevas funciones</li>
+                    </ul>
+                    <button class="btn-plan">OBTENER GRATIS</button>
+                </div>
+            </div>
+            
             <div class="plans-container">
                 <!-- Plan Base -->
                 <div class="plan-card">
@@ -455,6 +533,32 @@
                         <li>Asesoría legal incluida</li>
                     </ul>
                     <button class="btn-plan">CONTRATAR</button>
+                </div>
+            </div>
+            
+            <!-- Plan Nexus -->
+            <div class="plans-container">
+                <div class="plan-card nexus-plan">
+                    <div class="plan-badge">EXCLUSIVO</div>
+                    <div class="discount-badge">🔥 50% OFF</div>
+                    <h3>Plan Nexus</h3>
+                    <div class="plan-price">499€ <span>/único pago</span> <span class="discount-percent">(antes 999€)</span></div>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px; font-size: 1.2rem;">El paquete definitivo para profesionales de esports</p>
+                    <ul class="plan-features">
+                        <li>Acceso vitalicio a todos los servicios premium</li>
+                        <li>Representación personalizada 24/7</li>
+                        <li>Asesoramiento estratégico personalizado</li>
+                        <li>Acceso ilimitado a todos los cursos y talleres</li>
+                        <li>Gestión completa de marca personal</li>
+                        <li>Conexiones garantizadas con patrocinadores</li>
+                        <li>Asesoría legal y contractual permanente</li>
+                        <li>Viajes y entradas VIP a eventos mundiales</li>
+                        <li>Equipo dedicado de managers personales</li>
+                        <li>Desarrollo de contenido profesional</li>
+                        <li>Análisis avanzado de rendimiento</li>
+                        <li>Acceso a la red exclusiva Nexus</li>
+                    </ul>
+                    <button class="btn-plan" style="padding: 20px 40px; font-size: 1.2rem;">OBTENER ACCESO VITALICIO</button>
                 </div>
             </div>
         </div>
