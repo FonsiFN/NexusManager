@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Blog</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+            --discount-red: #FF3D3D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero Blog --- */
+        .blog-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
+                url('https://i.imgur.com/esports-bg-2.jpg') center/cover;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--gray), transparent);
+        }
+        .blog-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .blog-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Sección Blog --- */
+        .blog-section {
+            padding: 100px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .blog-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--neon-blue);
+            padding: 50px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.1);
+            border-radius: 5px;
+        }
+        .blog-header {
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .blog-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .author-name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+        .author-role {
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .blog-content {
+            color: var(--white);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+        .lead-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 2rem !important;
+        }
+        .highlight-text {
+            font-weight: 600;
+            color: var(--white);
+            padding: 1.5rem;
+            border-left: 3px solid var(--neon-blue);
+            margin: 2rem 0;
+            background: rgba(0, 240, 255, 0.05);
+            font-style: italic;
+        }
+        .blog-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .btn-blog {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .btn-blog:hover {
+            background: var(--neon-blue);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 80px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .blog-hero h1 {
+                font-size: 3rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .blog-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            .blog-container {
+                padding: 30px;
+                width: 90%;
+            }
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+            .nav-links a {
+                margin-left: 20px;
+                font-size: 0.85rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+            .blog-container {
+                padding: 20px;
+            }
+            .blog-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Planes</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/blog">Blog</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>EL BLOG DE NEXUS</h1>
+            <p>Perspectivas y estrategias para construir tu carrera en los esports</p>
+        </div>
+    </section>
+
+    <!-- Sección Blog -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-container">
+                <div class="blog-header">
+                    <h1>EL ENFOQUE NEXUS</h1>
+                    <div class="author-info">
+                        <span class="author-name">Fonsi</span>
+                        <span class="author-role">CEO & Fundador de Nexus Manager</span>
+                    </div>
+                </div>
+                
+                <div class="blog-content">
+                    <p class="lead-text">Soy Fonsi, CEO de Nexus Manager, y te voy a contar como va todo esto</p>
+                    
+                    <p>En Nexus, estamos aquí para ayudarte a transformar tu pasión por los videojuegos en una carrera sólida, estable y profesional. No solo buscamos que crezcas, sino que lo hagas de forma inteligente, con el respaldo y la estructura que necesitas para hacerlo bien.</p>
+
+                    <p>Lo primero es que no estamos solo para buscar patrocinadores, sino para ayudarte a montártelo bien desde el principio. Sabemos que para crecer en este mundo, no basta con ser un buen jugador o creador de contenido. Necesitas una marca personal fuerte, un contenido que enganche y una comunidad que te apoye. Nosotros te damos las herramientas para conseguir todo eso. No es magia, es estrategia.</p>
+
+                    <p>El acompañamiento que ofrecemos es de lo más completo. Desde el primer momento, analizamos tu contenido y tu presencia digital. Te ayudamos a optimizar tu perfil, tu estilo y tu plan de acción. Queremos que cada publicación, cada stream, cada video sea una oportunidad para conectar de verdad con tu comunidad. No te dejamos a ciegas. Te mostramos lo que funciona, lo que te hace destacar y cómo escalar todo eso para que sigas creciendo.</p>
+
+                    <p>También tenemos en cuenta todo lo que no se ve, pero que es igual de importante: la parte legal, los contratos, los derechos de imagen y todo el aspecto fiscal. Te protegemos de cualquier lío, para que no pierdas tiempo ni energía en esas cosas y puedas concentrarte solo en lo que realmente te apasiona: crear y competir.</p>
+
+                    <p class="highlight-text">Lo que diferencia a Nexus es la comunidad. Aquí no estás solo. Además de asesorarte en tu carrera, te conectamos con otros creadores, con los que podrás compartir experiencias, ideas y proyectos. Esa red de apoyo es lo que te ayuda a ir más lejos, porque cuando compartimos, todos crecemos.</p>
+
+                    <p>Y si hablamos de oportunidades, en Nexus tendrás acceso a marcas, eventos y torneos que solo unas pocas personas pueden conseguir. Nosotros te abrimos esas puertas, para que puedas llegar más lejos, más rápido.</p>
+
+                    <p>Aquí no se trata de tener suerte, sino de tener las herramientas, el enfoque y la actitud correcta. Lo que haces tiene que estar alineado con tus metas, y te ayudamos a que eso suceda. Si estás listo para tomar las riendas de tu carrera, trabajar duro y aprovechar todo lo que el mundo de los esports tiene para ofrecer, este es tu lugar.</p>
+                    
+                    <div class="blog-cta">
+                        <button class="btn-blog">¡A DARLE CAÑA! </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/fg3jk3Heq6"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
