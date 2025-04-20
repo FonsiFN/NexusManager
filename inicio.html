@@ -438,6 +438,226 @@ body {
     opacity: 1;
 }
 
+/* --- Sección "Por qué elegir Nexus Manager" --- */
+.why-choose-us {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 50px 0;
+}
+
+.reason-card {
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+}
+
+.reason-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+}
+
+.reason-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+.reason-card:hover:before {
+    left: 100%;
+}
+
+.reason-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px var(--accent);
+}
+
+.reason-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.reason-card p {
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.glow-bar {
+    height: 3px;
+    background: var(--accent);
+    width: 0;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.reason-card:hover .glow-bar {
+    width: 100%;
+}
+
+/* --- Sección "Para CEOs, Proplayers y Streamers" --- */
+.target-audience {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, var(--gray), var(--black));
+    position: relative;
+}
+
+.target-audience h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+}
+
+.target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.target-card {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 40px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border-top: 3px solid;
+}
+
+.target-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.target-card.ceo {
+    border-color: var(--green-tick);
+}
+
+.target-card.proplayer {
+    border-color: var(--blue-tick);
+}
+
+.target-card.streamer {
+    border-color: var(--purple-tick);
+}
+
+.target-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.target-card.ceo h3 {
+    color: var(--green-tick);
+}
+
+.target-card.proplayer h3 {
+    color: var(--blue-tick);
+}
+
+.target-card.streamer h3 {
+    color: var(--purple-tick);
+}
+
+.target-card h3:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+}
+
+.target-card.ceo h3:after {
+    background: var(--green-tick);
+    box-shadow: 0 0 10px var(--green-tick);
+}
+
+.target-card.proplayer h3:after {
+    background: var(--blue-tick);
+    box-shadow: 0 0 10px var(--blue-tick);
+}
+
+.target-card.streamer h3:after {
+    background: var(--purple-tick);
+    box-shadow: 0 0 10px var(--purple-tick);
+}
+
+.target-features {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.target-features li {
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.target-features li:before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.target-card.ceo .target-features li:before {
+    color: var(--green-tick);
+}
+
+.target-card.proplayer .target-features li:before {
+    color: var(--blue-tick);
+}
+
+.target-card.streamer .target-features li:before {
+    color: var(--purple-tick);
+}
+
+.target-card .icon-container {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.target-card.ceo .icon-container {
+    color: var(--green-tick);
+    text-shadow: 0 0 10px var(--green-tick);
+}
+
+.target-card.proplayer .icon-container {
+    color: var(--blue-tick);
+    text-shadow: 0 0 10px var(--blue-tick);
+}
+
+.target-card.streamer .icon-container {
+    color: var(--purple-tick);
+    text-shadow: 0 0 10px var(--purple-tick);
+}
+
 /* --- Footer --- */
 .footer {
     background-color: var(--black);
@@ -557,7 +777,8 @@ body {
         font-size: 1rem;
     }
     .info-section h2, 
-    .features h2 {
+    .features h2,
+    .target-audience h2 {
         font-size: 2rem;
     }
     .nav-links a {
@@ -570,8 +791,13 @@ body {
     .plan-card {
         padding: 20px;
     }
-    .features-grid {
+    .features-grid,
+    .target-grid,
+    .why-choose-us {
         grid-template-columns: 1fr;
+    }
+    .reason-card {
+        padding: 20px;
     }
 }
     </style>
@@ -614,51 +840,112 @@ body {
             <h2>INFORMACIÓN</h2>
             <div class="info-content">
                 <h3>¿Qué es Nexus Manager?</h3>
-                <p>Nexus Manager es una agencia de gestión y asesoría diseñada específicamente para streamers, proplayers e influencers. Su propósito es ayudar a los creadores de contenido y jugadores profesionales a crecer, optimizar su marca personal y maximizar sus oportunidades dentro de la industria del gaming y el entretenimiento digital.</p>
-                
-                <h3>¿Qué ofrece Nexus Manager?</h3>
-                <p>Nexus Manager proporciona asesoramiento personalizado, herramientas exclusivas y soporte estratégico para que sus miembros puedan mejorar su presencia en redes, obtener colaboraciones y acceder a beneficios únicos. Su equipo está compuesto por expertos en gestión de comunidades, marketing digital y optimización de contenido.</p>
-                
-                <h3>Planes de Nexus Manager</h3>
+                <p>Nexus Manager es una agencia especializada en potenciar al máximo a proplayers, líderes de equipos y streamers, enfocada principalmente en el competitivo de Fortnite. No es una plataforma abierta al público general, sino un espacio exclusivo para quienes tienen verdadera visión, talento y compromiso con su crecimiento dentro del ecosistema esports.</p>
+
+<p>La agencia ofrece un acompañamiento completo: asesoría personalizada, desarrollo de marca, negociación de contratos, planificación competitiva, y acceso a recursos únicos para elevar el nivel de cada jugador o equipo. El objetivo es simple: convertir talento en resultados reales.</p>
+
+<p>Para los líderes de equipos y creadores de organizaciones, Nexus Manager se convierte en un respaldo estratégico que permite transformar ideas en estructuras profesionales, sostenibles y competitivas. Desde la gestión interna hasta la visibilidad externa, la agencia cubre cada aspecto necesario para destacar dentro de la escena.</p>
+
+<p>Los proplayers reciben un enfoque individualizado, enfocado en el rendimiento, imagen y trayectoria profesional. La agencia actúa como mentor, representante y guía en un mundo donde el talento necesita estar bien gestionado para alcanzar el éxito y vivir del competitivo.</p>
+
+<p>Nexus Manager no promete resultados fáciles, sino una alianza con los que de verdad quieren ganar torneos, crecer en redes y dejar huella en la comunidad. Si tienes la mentalidad, la agencia te da los medios. Este es el siguiente paso para quienes no buscan ser parte del montón, sino marcar diferencia en Fortnite y más allá.</p>
+                              
+                <h3>¿Que ofrecemos?</h3>
                 
                 <div class="plan-card">
                     <h4>Plan Base</h4>
                     <ul class="plan-features plan-base">
-                        <li>Acceso a asesoría general sobre crecimiento en redes</li>
-                        <li>Consejos básicos sobre branding y optimización de contenido</li>
-                        <li>Acceso a recursos y plantillas prediseñadas</li>
-                        <li>Recomendaciones para mejorar el engagement con la audiencia</li>
-                    </ul>
-                </div>
-                
-                <div class="plan-card">
-                    <h4>Plan VIP</h4>
-                    <ul class="plan-features plan-vip">
-                        <li>Todos los beneficios del Plan Base</li>
-                        <li>Análisis detallado de contenido y estrategias de mejora</li>
-                        <li>Contacto directo con asesores especializados</li>
-                        <li>Acceso anticipado a herramientas y novedades</li>
-                        <li>Oportunidades de networking con otros creadores y jugadores</li>
-                    </ul>
-                </div>
-                
-                <div class="plan-card">
-                    <h4>Plan Partner (Exclusivo)</h4>
-                    <ul class="plan-features plan-partner">
-                        <li>Todos los beneficios del Plan VIP</li>
-                        <li>Gestión avanzada de redes sociales y estrategias de crecimiento</li>
-                        <li>Oportunidades de colaboraciones con marcas y patrocinadores</li>
-                        <li>Acceso a eventos y torneos privados</li>
-                        <li>Soporte premium y herramientas de monetización</li>
-                        <li>Acceso exclusivo al bot NexusManager para gestionar comunidades</li>
+                        <li>Asesoría Personalizada – Estrategias adaptadas a las metas de cada jugador o equipo...</li>
+                        <li>Desarrollo de Marca – Posicionamiento único en redes sociales y contenido atractivo...</li>
+                        <li>Gestión de Contratos – Negociaciones con organizaciones, sponsors y colaboraciones...</li>
+                        <li>Planificación Competitiva – Scrims, mejora de habilidades y mucho mas...</li>
+                        <li>Recursos Exclusivos – Conexiones con la industria, analistas y herramientas de alto nivel...</li>
                     </ul>
                 </div>
                 
                 <h3>¿Por qué elegir Nexus Manager?</h3>
-                <p>Nexus Manager no es solo una agencia de asesoría; es una comunidad diseñada para potenciar a los creadores y jugadores. Con acceso a herramientas especializadas, asesoramiento profesional y oportunidades exclusivas, los miembros pueden llevar su carrera al siguiente nivel en la industria del gaming y los esports.</p>
+                
+                <div class="why-choose-us">
+                    <!-- Tarjeta 1: Enfoque Exclusivo -->
+                    <div class="reason-card" style="--accent: #00F0FF;">
+                        <div class="reason-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Enfoque Elite</h4>
+                        <p>Trabajamos solo con talentos comprometidos. No somos una agencia masiva; cada cliente recibe atención <strong>100% personalizada</strong>.</p>
+                        <div class="glow-bar"></div>
+                    </div>
+
+                    <!-- Tarjeta 2: Resultados Comprobados -->
+                    <div class="reason-card" style="--accent: #FF2A6D;">
+                        <div class="reason-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h4>Resultados Reales</h4>
+                        <p>Hemos ayudado a jugadores a <strong>ganar torneos</strong>, a streamers a <strong>triplicar su audiencia</strong> y a orgs a conseguir sponsors.</p>
+                        <div class="glow-bar"></div>
+                    </div>
+
+                    <!-- Tarjeta 3: Red Exclusiva -->
+                    <div class="reason-card" style="--accent: #BD00FF;">
+                        <div class="reason-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h4>Conexiones de Alto Nivel</h4>
+                        <p>Acceso a <strong>scrims privados</strong>, contactos con organizaciones Top y oportunidades que no encontrarás en otras agencias.</p>
+                        <div class="glow-bar"></div>
+                    </div>
+
+                    <!-- Tarjeta 4: Estrategia Integral -->
+                    <div class="reason-card" style="--accent: #00FF9D;">
+                        <div class="reason-icon">
+                            <i class="fas fa-chess-queen"></i>
+                        </div>
+                        <h4>Estrategia 360°</h4>
+                        <p>No solo gestionamos; te enseñamos a <strong>construir una carrera sostenible</strong> en esports, con planes a corto y largo plazo.</p>
+                        <div class="glow-bar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Sección para CEOs, Proplayers y Streamers -->
+    <section class="target-audience">
+        <div class="container">
+            <h2>NUESTROS SERVICIOS ESPECIALIZADOS</h2>
+            <div class="target-grid">
+                <!-- Tarjeta para CEOs -->
+                <div class="target-card ceo">
+                    <div class="icon-container">
+                        <i class="fas fa-chess-king"></i>
+                    </div>
+                    <h3>PARA CEOs DE EQUIPOS</h3>
+                    <p class="target-subtitle">Transformamos tu visión en una estructura profesional y rentable</p>
+                    <ul class="target-features">
+                        <li><strong>Construcción de Marca:</strong> Diseño de identidad corporativa y estrategia de redes sociales</li>
+                        <li><strong>Gestión Operativa:</strong> Reclutamiento de talento y creación de departamentos</li>
+                        <li><strong>Monetización:</strong> Negociación con patrocinadores y modelos de ingresos</li>
+                        <li><strong>Desarrollo Competitivo:</strong> Planificación de torneos y bootcamps</li>
+                        <li><strong>Estructura Legal:</strong> Contratos para jugadores y staff</li>
+                    </ul>
+                </div>
+
+                <!-- Tarjeta para Proplayers -->
+                <div class="target-card proplayer">
+                    <div class="icon-container">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>PARA PROPLAYERS</h3>
+                    <p class="target-subtitle">No solo te gestionamos; te convertimos en un icono del juego</p>
+                    <ul class="target-features">
+                        <li><strong>Carrera Competitiva:</strong> Plan para torneos (FNCS, Cash Cups, LANs)</li>
+                        <li><strong>Marca Personal:</strong> Posicionamiento en redes y guía de contenido</li>
+                        <li><strong>Contratos y Finanzas:</strong> Negociación con equipos y sponsors</li>
+                        <li><strong>Análisis de Juego:</strong> VOD reviews con coaches expertos</li>
+                        <li><strong>Salud y Rendimiento:</strong> Workshops con psicólogos deportivos</li>
+                    </ul>
+                </div>
 
     <!-- Features -->
     <section class="features">
