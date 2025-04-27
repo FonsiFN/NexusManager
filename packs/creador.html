@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Planes Esports</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+            --discount-red: #FF3D3D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
 
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+/* Estilos para el selector de packs */
+.pack-selector-container {
+    margin-top: 30px;
+    position: relative;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pack-selector {
+    width: 100%;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50px;
+    color: var(--white);
+    font-size: 1.1rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.pack-selector:hover {
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.pack-selector:focus {
+    outline: none;
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* Flecha personalizada */
+.pack-selector-container:after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: var(--neon-blue);
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+/* Opciones del selector */
+.pack-selector option {
+    background: var(--gray);
+    color: var(--white);
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.pack-selector option:hover {
+    background: var(--neon-blue);
+    color: var(--black);
+}
+        /* --- Hero Mejorado --- */
+        .plans-hero {
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
+                url('https://i.imgur.com/esports-bg-2.jpg') center/cover;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .plans-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--gray), transparent);
+        }
+        .plans-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .plans-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Sección Planes Mejorada --- */
+        .plans-section {
+            padding: 100px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .plans-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .plans-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 80px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            padding-top: 30px;
+        }
+        .plans-section h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 25px auto 0;
+        }
+        .plans-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .plan-card {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--neon-blue);
+            padding: 50px 35px;
+            position: relative;
+            transition: all 0.5s;
+            width: 360px;
+            max-width: 100%;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        .plan-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--neon-blue);
+            color: var(--black);
+            padding: 8px 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 240, 255, 0.3);
+        }
+        .discount-badge {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--discount-red);
+            color: var(--white);
+            padding: 8px 15px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(255, 61, 61, 0.3);
+        }
+        .plan-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+            text-align: center;
+        }
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin: 25px 0;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+        .discount-percent {
+            font-size: 1.2rem;
+            color: var(--discount-red);
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .plan-price span {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .plan-features {
+            list-style: none;
+            margin-bottom: 40px;
+            text-align: left;
+            min-height: 280px;
+        }
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.05rem;
+        }
+        .plan-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn-plan {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            width: 100%;
+            border-radius: 5px;
+        }
+        .btn-plan:hover {
+            background: var(--neon-blue);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+        
+        /* Plan Nexus */
+        .nexus-plan {
+            width: 100%;
+            max-width: 1120px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(30, 30, 30, 0.9));
+            border: 2px solid var(--neon-blue);
+            margin-top: 60px;
+            padding: 60px 40px;
+        }
+        .nexus-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3);
+        }
+        .nexus-plan h3 {
+            font-size: 2.8rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+        .nexus-plan .plan-price {
+            font-size: 4.5rem;
+        }
+        .nexus-plan .plan-features {
+            column-count: 3;
+            column-gap: 40px;
+            min-height: auto;
+        }
+        
+        /* Plan Beta */
+        .beta-plan {
+            width: 300px;
+            margin-bottom: 40px;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid var(--white);
+        }
+        .beta-plan .plan-badge {
+            background: var(--white);
+            color: var(--black);
+        }
+        .beta-plan .btn-plan {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+        .beta-plan .btn-plan:hover {
+            background: transparent;
+            color: var(--white);
+            box-shadow: 0 0 20px var(--white);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 80px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .plans-container {
+                gap: 30px;
+            }
+            .plan-card {
+                width: 320px;
+                padding: 40px 30px;
+            }
+            .nexus-plan .plan-features {
+                column-count: 2;
+            }
+        }
+        @media (max-width: 1000px) {
+            .plans-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .plan-card {
+                width: 80%;
+                max-width: 500px;
+            }
+            .plans-hero h1 {
+                font-size: 3rem;
+            }
+            .nexus-plan .plan-features {
+                column-count: 1;
+            }
+            .nexus-plan {
+                width: 80%;
+                max-width: 500px;
+            }
+        }
+        @media (max-width: 768px) {
+            .plans-hero {
+                height: 40vh;
+                min-height: 300px;
+            }
+            .plans-hero h1 {
+                font-size: 2.5rem;
+            }
+            .plans-section h2 {
+                font-size: 2.2rem;
+                margin-bottom: 60px;
+            }
+            .plan-card {
+                width: 90%;
+                min-width: auto;
+                padding: 35px 25px;
+            }
+            .nav-links a {
+                margin-left: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Planes</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+<section class="plans-hero">
+    <div class="container">
+        <h1>NUESTROS PLANES</h1>
+        <p>Elige el paquete perfecto para llevar tu carrera al siguiente nivel</p>
+        
+        <!-- Menú desplegable agregado -->
+        <div class="pack-selector-container">
+            <select class="pack-selector" onchange="location = this.value;">
+                <option value="" selected disabled>Selecciona tu categoría</option>
+                <option value="packs-jugador.html">Packs Jugador</option>
+                <option value="packs-creador.html">Packs Creador</option>
+                <option value="packs-organizador.html">Packs Organizador</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+    <!-- Sección Planes -->
+    <section class="plans-section">
+        <div class="container">
+            <h2>PLANES PARA CREADORES DE CONTENIDO</h2>
+            
+            <div class="plans-container">
+                <!-- Plan Iniciación -->
+                <div class="plan-card">
+                    <h3>Emergente</h3>
+                    <div class="plan-badge">BÁSICO</div>
+                    <div class="plan-price">4,99€ <span>/mes</span></div>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para creadores que están comenzando</p>
+                    <ul class="plan-features">
+                        <li>Análisis básico de tu contenido</li>
+                        <li>Plantillas para redes sociales</li>
+                        <li>Guía de crecimiento inicial</li>
+                        <li>Acceso a webinars mensuales</li>
+                        <li>Soporte por email</li>
+                    </ul>
+                    <button class="btn-plan">COMENZAR</button>
+                </div>
+
+                <!-- Plan Crecimiento -->
+                <div class="plan-card">
+                    <div class="plan-badge">POPULAR</div>
+                    <div class="discount-badge">🔥 25% OFF</div>
+                    <h3>Crecimiento</h3>
+                    <div class="plan-price">12,99€ <span>/mes</span></div>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para creadores en fase de crecimiento</p>
+                    <ul class="plan-features">
+                        <li>Análisis avanzado de contenido</li>
+                        <li>Estrategias personalizadas de crecimiento</li>
+                        <li>Acceso a herramientas de análisis</li>
+                        <li>Sesiones mensuales con expertos</li>
+                        <li>Oportunidades de colaboración</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
+                    <button class="btn-plan">CRECER</button>
+                </div>
+
+                <!-- Plan Profesional -->
+                <div class="plan-card">
+                    <div class="plan-badge">PRO</div>
+                    <div class="discount-badge">🔥 35% OFF</div>
+                    <h3>Profesional</h3>
+                    <div class="plan-price">24,99€ <span>/mes</span></div>
+                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para creadores que buscan profesionalizarse</p>
+                    <ul class="plan-features">
+                        <li>Análisis completo de marca personal</li>
+                        <li>Coaching semanal de contenido</li>
+                        <li>Estrategias avanzadas de monetización</li>
+                        <li>Conexión con patrocinadores</li>
+                        <li>Gestión de redes sociales</li>
+                        <li>Asesoría legal básica</li>
+                        <li>Soporte 24/7</li>
+                    </ul>
+                    <button class="btn-plan">PROFESIONALIZAR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- [Footer igual que en jugador.html] -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/fg3jk3Heq6"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
