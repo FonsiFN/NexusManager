@@ -51,6 +51,18 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       transform: translateY(0);
       transition: var(--transition);
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .auth-container:hover {
@@ -207,6 +219,12 @@
       margin-bottom: 1.5rem;
       font-size: 0.9rem;
       display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .alert-danger {
@@ -277,7 +295,7 @@
           <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
         </div>
         
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="loginBtn">
           <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
         </button>
       </form>
@@ -298,7 +316,7 @@
       signInWithPopup 
     } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
 
-    // Configuración de Firebase (reemplaza con tus datos)
+    // Configuración de Firebase con tus credenciales
     const firebaseConfig = {
       apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
       authDomain: "nexusauth-login.firebaseapp.com",
@@ -319,6 +337,7 @@
     const googleLogin = document.getElementById('googleLogin');
     const errorAlert = document.getElementById('errorAlert');
     const successAlert = document.getElementById('successAlert');
+    const loginBtn = document.getElementById('loginBtn');
 
     // Mostrar alerta de error
     function showError(message) {
@@ -349,13 +368,17 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
+      // Deshabilitar botón durante el inicio de sesión
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
+      
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         showSuccess('¡Inicio de sesión exitoso! Redirigiendo...');
         
-        // Redirigir después de 2 segundos
+        // Redirigir a NexusManager después de 2 segundos
         setTimeout(() => {
-          window.location.href = 'dashboard.html';
+          window.location.href = 'https://fonsifn.github.io/NexusManager/';
         }, 2000);
       } catch (error) {
         let errorMessage;
@@ -376,6 +399,10 @@
             errorMessage = 'Error al iniciar sesión: ' + error.message;
         }
         showError(errorMessage);
+      } finally {
+        // Rehabilitar botón
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
       }
     });
 
@@ -385,15 +412,32 @@
         const result = await signInWithPopup(auth, provider);
         showSuccess('¡Inicio de sesión con Google exitoso! Redirigiendo...');
         
+        // Redirigir a NexusManager después de 2 segundos
         setTimeout(() => {
-          window.location.href = 'dashboard.html';
+          window.location.href = 'https://fonsifn.github.io/NexusManager/';
         }, 2000);
       } catch (error) {
-        showError('Error al iniciar sesión con Google: ' + error.message);
+        let errorMessage = 'Error al iniciar sesión con Google: ';
+        
+        switch (error.code) {
+          case 'auth/account-exists-with-different-credential':
+            errorMessage += 'Ya existe una cuenta con este email usando otro método de autenticación';
+            break;
+          case 'auth/popup-closed-by-user':
+            errorMessage = 'El popup de autenticación fue cerrado';
+            break;
+          case 'auth/cancelled-popup-request':
+            errorMessage = 'Solicitud de autenticación cancelada';
+            break;
+          default:
+            errorMessage += error.message;
+        }
+        
+        showError(errorMessage);
       }
     });
 
-    // Verificar si hay parámetros de éxito en la URL
+    // Verificar si hay parámetros de éxito en la URL (después del registro)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {
       showSuccess('¡Registro exitoso! Por favor inicia sesión');
