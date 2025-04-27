@@ -451,12 +451,23 @@
     </header>
 
     <!-- Hero -->
-    <section class="plans-hero">
-        <div class="container">
-            <h1>NUESTROS PLANES</h1>
-            <p>Elige el paquete perfecto para llevar tu carrera al siguiente nivel</p>
+    <!-- Hero -->
+<section class="plans-hero">
+    <div class="container">
+        <h1>NUESTROS PLANES</h1>
+        <p>Elige el paquete perfecto para llevar tu carrera al siguiente nivel</p>
+        
+        <!-- Menú desplegable agregado -->
+        <div class="pack-selector-container">
+            <select class="pack-selector" onchange="location = this.value;">
+                <option value="" selected disabled>Selecciona tu categoría</option>
+                <option value="packs-jugador.html">Packs Jugador</option>
+                <option value="packs-creador.html">Packs Creador</option>
+                <option value="packs-organizador.html">Packs Organizador</option>
+            </select>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Sección Planes -->
     <section class="plans-section">
