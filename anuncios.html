@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Anuncios</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+            --discount-red: #FF3D3D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero Anuncios --- */
+        .announcements-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
+                url('https://i.imgur.com/announcements-bg.jpg') center/cover;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .announcements-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--gray), transparent);
+        }
+        .announcements-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .announcements-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Sección Anuncios --- */
+        .announcements-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .announcements-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .announcements-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            padding-top: 30px;
+        }
+        .announcements-section h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 25px auto 0;
+        }
+        
+        /* Contenedor de Anuncios */
+        .announcements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Tarjeta de Anuncio */
+        .announcement-card {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        
+        /* Encabezado del Anuncio */
+        .announcement-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .announcement-icon {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        .announcement-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        .announcement-date {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Contenido del Anuncio */
+        .announcement-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Badge de Tipo */
+        .announcement-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--neon-blue);
+            color: var(--black);
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+        
+        /* Badge de Importancia */
+        .announcement-importance {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            padding: 5px 15px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .importance-high {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .importance-medium {
+            background: var(--neon-blue);
+            color: var(--black);
+        }
+        .importance-low {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 80px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .announcements-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            .announcements-hero h1 {
+                font-size: 2.5rem;
+            }
+            .announcements-section h2 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .announcement-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .announcement-icon {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+            .nav-links a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Packs</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="announcements-hero">
+        <div class="container">
+            <h1>ANUNCIOS</h1>
+            <p>Mantente al día con las últimas novedades y actualizaciones de NexusManager</p>
+        </div>
+    </section>
+
+    <!-- Sección Anuncios -->
+    <section class="announcements-section">
+        <h2>ÚLTIMAS NOTICIAS</h2>
+        
+        <div class="announcements-container">
+            <!-- Anuncio 1 - Importante -->
+            <div class="announcement-card">
+                <span class="announcement-importance importance-high">IMPORTANTE</span>
+                <div class="announcement-header">
+                    <div class="announcement-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h3 class="announcement-title">Actualización del Sistema - Mantenimiento Programado</h3>
+                        <span class="announcement-date">Publicado: 15 de Junio, 2025</span>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    <p>El próximo <strong>20 de Junio de 2025</strong> realizaremos una actualización importante de nuestro sistema. Durante este período, que se extenderá desde las <strong>02:00 hasta las 06:00 (UTC)</strong>, los servicios de NexusManager no estarán disponibles.</p>
+                    <p>Esta actualización incluye mejoras significativas en la seguridad, rendimiento y nuevas características que pronto anunciaremos. Agradecemos su comprensión y paciencia durante este tiempo.</p>
+                    <p>Recomendamos a todos los usuarios guardar cualquier trabajo pendiente antes del inicio del mantenimiento.</p>
+                </div>
+                <div>
+                    <span class="announcement-badge">Actualización</span>
+                    <span class="announcement-badge">Sistema</span>
+                </div>
+            </div>
+            
+            <!-- Anuncio 2 - Nueva característica -->
+            <div class="announcement-card">
+                <span class="announcement-importance importance-medium">NOVEDAD</span>
+                <div class="announcement-header">
+                    <div class="announcement-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div>
+                        <h3 class="announcement-title">Lanzamiento: Panel de Estadísticas Avanzadas</h3>
+                        <span class="announcement-date">Publicado: 10 de Junio, 2025</span>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    <p>¡Estamos emocionados de anunciar el lanzamiento de nuestro nuevo <strong>Panel de Estadísticas Avanzadas</strong> para todos los usuarios de los planes VIP y Partner!</p>
+                    <p>Esta nueva característica incluye:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Análisis detallado del crecimiento de tu audiencia</li>
+                        <li>Comparativas con otros creadores de contenido</li>
+                        <li>Recomendaciones personalizadas para mejorar tu rendimiento</li>
+                        <li>Proyecciones de crecimiento basadas en tus métricas actuales</li>
+                    </ul>
+                    <p>Los usuarios del Plan Base tendrán acceso a una versión limitada de estas estadísticas. ¡Actualiza tu plan para desbloquear todo el potencial!</p>
+                </div>
+                <div>
+                    <span class="announcement-badge">Nueva Función</span>
+                    <span class="announcement-badge">Estadísticas</span>
+                </div>
+            </div>
+            
+            <!-- Anuncio 3 - Evento -->
+            <div class="announcement-card">
+                <div class="announcement-header">
+                    <div class="announcement-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="announcement-title">Webinar Exclusivo: Estrategias para Crecimiento en Twitch</h3>
+                        <span class="announcement-date">Publicado: 5 de Junio, 2025</span>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    <p>¡No te pierdas nuestro próximo webinar exclusivo para miembros NexusManager! <strong>"Estrategias Avanzadas para Crecimiento en Twitch"</strong> se llevará a cabo el <strong>25 de Junio a las 18:00 (UTC)</strong>.</p>
+                    <p>Nuestro invitado especial será <strong>StreamerPro</strong>, uno de los streamers más exitosos de la plataforma, quien compartirá:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Técnicas probadas para aumentar tu audiencia</li>
+                        <li>Cómo monetizar efectivamente tu contenido</li>
+                        <li>Errores comunes y cómo evitarlos</li>
+                        <li>Sesión de Q&A al final del evento</li>
+                    </ul>
+                    <p>Este evento es gratuito para usuarios de los planes VIP y Partner. Usuarios del Plan Base pueden adquirir entradas por solo 9,99€.</p>
+                    <p>¡Regístrate ahora desde tu panel de control para reservar tu lugar!</p>
+                </div>
+                <div>
+                    <span class="announcement-badge">Evento</span>
+                    <span class="announcement-badge">Twitch</span>
+                    <span class="announcement-badge">Webinar</span>
+                </div>
+            </div>
+            
+            <!-- Anuncio 4 - General -->
+            <div class="announcement-card">
+                <div class="announcement-header">
+                    <div class="announcement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h3 class="announcement-title">Nueva Comunidad NexusManager en Discord</h3>
+                        <span class="announcement-date">Publicado: 1 de Junio, 2025</span>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    <p>¡Nos complace anunciar el lanzamiento oficial de nuestra <strong>Comunidad NexusManager en Discord</strong>!</p>
+                    <p>Este espacio está diseñado para que todos nuestros usuarios puedan:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Conectar con otros creadores y jugadores</li>
+                        <li>Recibir soporte directo de nuestro equipo</li>
+                        <li>Participar en eventos exclusivos</li>
+                        <li>Acceder a canales con recursos y consejos</li>
+                        <li>Colaborar en proyectos conjuntos</li>
+                    </ul>
+                    <p>Únete ahora a nuestra comunidad usando el siguiente enlace: <a href="https://discord.gg/fg3jk3Heq6" style="color: var(--neon-blue);">https://discord.gg/fg3jk3Heq6</a></p>
+                    <p>Los usuarios de los planes VIP y Partner recibirán roles especiales con beneficios adicionales en el servidor.</p>
+                </div>
+                <div>
+                    <span class="announcement-badge">Comunidad</span>
+                    <span class="announcement-badge">Discord</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/fg3jk3Heq6"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
