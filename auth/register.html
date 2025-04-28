@@ -311,6 +311,12 @@
       
       <form id="registerForm">
         <div class="form-group">
+          <label for="nexusKey">Clave NexusKey</label>
+          <input type="password" id="nexusKey" class="form-control" placeholder="Ingresa la clave de acceso NexusKey" required>
+          <i class="fas fa-key input-icon"></i>
+        </div>
+        
+        <div class="form-group">
           <label for="name">Nombre Completo</label>
           <input type="text" id="name" class="form-control" placeholder="Tu nombre" required>
           <i class="fas fa-user input-icon"></i>
@@ -383,6 +389,9 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
+    // Clave NexusKey válida
+    const VALID_NEXUS_KEY = "G!z8R#pXq1$Vd2@Lw7Mk%YtN";
+
     // Elementos del DOM
     const registerForm = document.getElementById('registerForm');
     const googleRegister = document.getElementById('googleRegister');
@@ -391,6 +400,7 @@
     const passwordInput = document.getElementById('password');
     const strengthBar = document.getElementById('strengthBar');
     const registerBtn = document.getElementById('registerBtn');
+    const nexusKeyInput = document.getElementById('nexusKey');
 
     // Mostrar alerta de error
     function showError(message) {
@@ -463,13 +473,20 @@
     registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      const nexusKey = nexusKeyInput.value;
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
       const terms = document.getElementById('terms').checked;
       
-      // Validaciones
+      // Validar NexusKey primero
+      if (nexusKey !== VALID_NEXUS_KEY) {
+        showError('Clave NexusKey incorrecta. No tienes permiso para registrarte.');
+        return;
+      }
+      
+      // Validaciones restantes
       if (!terms) {
         showError('Debes aceptar los términos y condiciones');
         return;
@@ -529,8 +546,15 @@
       }
     });
 
-    // Registro con Google
+    // Registro con Google - también requiere NexusKey
     googleRegister.addEventListener('click', async () => {
+      const nexusKey = nexusKeyInput.value;
+      
+      if (nexusKey !== VALID_NEXUS_KEY) {
+        showError('Clave NexusKey incorrecta. No tienes permiso para registrarte.');
+        return;
+      }
+      
       try {
         const result = await signInWithPopup(auth, provider);
         showSuccess('¡Registro con Google exitoso! Redirigiendo...');
