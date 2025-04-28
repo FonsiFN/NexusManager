@@ -141,6 +141,230 @@ body {
     box-shadow: 0 0 10px var(--neon-blue);
 }
 
+/* User Menu */
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.user-avatar:hover {
+    background: rgba(0, 240, 255, 0.1);
+}
+
+.user-avatar img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-blue);
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1001;
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.user-dropdown a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.user-dropdown a:hover {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--neon-blue);
+}
+
+.user-menu.active .user-dropdown {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Profile Editor Modal */
+.profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.profile-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.profile-modal-content {
+    background: var(--gray);
+    border: 1px solid var(--neon-blue);
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.profile-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-modal-close:hover {
+    color: var(--neon-blue);
+    transform: rotate(90deg);
+}
+
+.profile-modal h2 {
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.profile-avatar-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-edit img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-blue);
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.profile-avatar-edit input[type="file"] {
+    display: none;
+}
+
+.profile-avatar-edit label {
+    background: var(--neon-blue);
+    color: var(--black);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.profile-avatar-edit label:hover {
+    background: var(--white);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--white);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2);
+}
+
+.profile-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--neon-blue);
+    color: var(--black);
+}
+
+.btn-primary:hover {
+    background: var(--white);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 240, 255, 0.1);
+}
+
 /* --- Hero Section --- */
 .hero {
     height: 100vh;
@@ -644,6 +868,18 @@ body {
     .service-card h4 {
         font-size: 1.3rem;
     }
+    
+    .user-menu {
+        margin-left: 15px;
+    }
+    
+    .user-avatar span {
+        display: none;
+    }
+    
+    .user-dropdown {
+        width: 160px;
+    }
 }
     </style>
 </head>
@@ -665,8 +901,49 @@ body {
                     <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
                 </ul>
             </nav>
+            
+            <!-- Menú de usuario -->
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar" id="userAvatar">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+                         alt="Avatar" 
+                         class="profile-avatar">
+                    <span id="userName">Usuario</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" id="editProfileBtn"><i class="fas fa-user-edit"></i> Editar Perfil</a>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+            </div>
         </div>
     </header>
+
+    <!-- Modal de edición de perfil -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-content">
+            <span class="profile-modal-close" id="closeProfileModal">&times;</span>
+            <h2>Editar Perfil</h2>
+            
+            <div class="profile-avatar-edit">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+                     alt="Avatar" 
+                     id="profileModalAvatar">
+                <input type="file" id="avatarUpload" accept="image/*">
+                <label for="avatarUpload">Cambiar foto</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="profileNameInput">Nombre de usuario</label>
+                <input type="text" id="profileNameInput" placeholder="Tu nombre">
+            </div>
+            
+            <div class="profile-modal-actions">
+                <button class="btn btn-secondary" id="cancelProfileEdit">Cancelar</button>
+                <button class="btn btn-primary" id="saveProfileChanges">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
@@ -829,7 +1106,206 @@ body {
     <!-- Toast Notification -->
     <div class="toast" id="toast">Mensaje de notificación</div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+
     <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
+            authDomain: "nexusauth-login.firebaseapp.com",
+            projectId: "nexusauth-login",
+            storageBucket: "nexusauth-login.firebasestorage.app",
+            messagingSenderId: "316746372020",
+            appId: "1:316746372020:web:868ea1706c9cba81a9d8e1",
+            measurementId: "G-ZL3ND06V35"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // Elementos del DOM
+        const userMenu = document.getElementById('userMenu');
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userDropdown = document.getElementById('userDropdown');
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const profileModal = document.getElementById('profileModal');
+        const closeProfileModal = document.getElementById('closeProfileModal');
+        const cancelProfileEdit = document.getElementById('cancelProfileEdit');
+        const saveProfileChanges = document.getElementById('saveProfileChanges');
+        const profileModalAvatar = document.getElementById('profileModalAvatar');
+        const profileNameInput = document.getElementById('profileNameInput');
+        const avatarUpload = document.getElementById('avatarUpload');
+        const toast = document.getElementById('toast');
+
+        // Variables
+        let currentUser = null;
+        let selectedFile = null;
+
+        // Mostrar toast
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Toggle del menú de usuario
+        userAvatar.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!userMenu.contains(e.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+
+        // Abrir modal de edición de perfil
+        editProfileBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            userMenu.classList.remove('active');
+            profileModal.classList.add('active');
+            
+            // Cargar datos actuales
+            profileNameInput.value = userName.textContent;
+            profileModalAvatar.src = userAvatar.querySelector('img').src;
+        });
+
+        // Cerrar modal de edición de perfil
+        function closeModal() {
+            profileModal.classList.remove('active');
+            selectedFile = null;
+        }
+
+        closeProfileModal.addEventListener('click', closeModal);
+        cancelProfileEdit.addEventListener('click', closeModal);
+
+        // Selección de nueva imagen de avatar
+        avatarUpload.addEventListener('change', (e) => {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    profileModalAvatar.src = event.target.result;
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        });
+
+        // Guardar cambios del perfil
+        saveProfileChanges.addEventListener('click', async () => {
+            const newName = profileNameInput.value.trim();
+            
+            if (!newName) {
+                showToast('El nombre no puede estar vacío');
+                return;
+            }
+            
+            try {
+                // Actualizar nombre de usuario
+                if (newName !== userName.textContent) {
+                    await currentUser.updateProfile({
+                        displayName: newName
+                    });
+                    
+                    // Guardar en Realtime Database
+                    await database.ref('users/' + currentUser.uid).update({
+                        displayName: newName
+                    });
+                    
+                    userName.textContent = newName;
+                }
+                
+                // Subir nueva imagen de avatar si hay una seleccionada
+                if (selectedFile) {
+                    const storageRef = storage.ref('avatars/' + currentUser.uid);
+                    const uploadTask = storageRef.put(selectedFile);
+                    
+                    uploadTask.on('state_changed', 
+                        null, 
+                        (error) => {
+                            showToast('Error al subir la imagen: ' + error.message);
+                        }, 
+                        async () => {
+                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                            
+                            // Actualizar foto de perfil en Auth
+                            await currentUser.updateProfile({
+                                photoURL: downloadURL
+                            });
+                            
+                            // Guardar URL en Realtime Database
+                            await database.ref('users/' + currentUser.uid).update({
+                                photoURL: downloadURL
+                            });
+                            
+                            // Actualizar imágenes en la UI
+                            userAvatar.querySelector('img').src = downloadURL;
+                            profileModalAvatar.src = downloadURL;
+                        }
+                    );
+                }
+                
+                showToast('Perfil actualizado correctamente');
+                closeModal();
+            } catch (error) {
+                showToast('Error al actualizar el perfil: ' + error.message);
+            }
+        });
+
+        // Cerrar sesión
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                showToast('Sesión cerrada correctamente');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            }).catch(error => {
+                showToast('Error al cerrar sesión: ' + error.message);
+            });
+        });
+
+        // Observador de estado de autenticación
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                currentUser = user;
+                
+                // Mostrar información del usuario
+                userName.textContent = user.displayName || 'Usuario';
+                userAvatar.querySelector('img').src = user.photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+                
+                // Obtener datos adicionales de la base de datos
+                database.ref('users/' + user.uid).once('value').then((snapshot) => {
+                    const userData = snapshot.val();
+                    if (userData) {
+                        if (userData.displayName) {
+                            userName.textContent = userData.displayName;
+                        }
+                        if (userData.photoURL) {
+                            userAvatar.querySelector('img').src = userData.photoURL;
+                        }
+                    }
+                });
+            } else {
+                // Redirigir a login si no hay usuario autenticado
+                window.location.href = 'login.html';
+            }
+        });
+
         // Crear partículas flotantes
         function createParticles() {
             const container = document.getElementById('particles-js');
@@ -880,17 +1356,6 @@ body {
             }
             
             setTimeout(type, 1000);
-        }
-
-        // Mostrar toast
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         }
 
         // Efecto de scroll
