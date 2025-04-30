@@ -1375,15 +1375,16 @@
             };
 
             // Validación numérica
-            if (isNaN(playerData.kd) {
-                showError('El ratio K/D debe ser un número');
-                return;
-            }
+            // Validación numérica
+if (isNaN(playerData.kd)) {
+    showError('El ratio K/D debe ser un número');
+    return;
+}
 
-            if (isNaN(playerData.winRate)) {
-                showError('El Win Rate debe ser un número');
-                return;
-            }
+if (isNaN(playerData.winRate)) {
+    showError('El Win Rate debe ser un número');
+    return;
+}
 
             // Mostrar loading
             showButtonLoading(submitBtnText, submitBtnLoader);
