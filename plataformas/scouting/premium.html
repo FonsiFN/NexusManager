@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS SCOUTING PRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00c896;
+            --dark: #0f1923;
+            --light: #f8f9fa;
+            --danger: #ff4655;
+            --secondary: #1a2e35;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .search-section {
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background-color: #00e6b8;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background-color: #00e6b8;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #ff2d3f;
+        }
+        
+        .players-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .players-table th {
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .players-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .players-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .players-table tr:hover {
+            background-color: rgba(0, 200, 150, 0.1);
+        }
+        
+        .player-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .player-link:hover {
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .badge-primary {
+            background-color: rgba(0, 200, 150, 0.2);
+            color: var(--primary);
+        }
+        
+        .badge-warning {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .badge-danger {
+            background-color: rgba(255, 70, 85, 0.2);
+            color: var(--danger);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .filters {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-crosshairs"></i> NEXUS SCOUTING PRO</h1>
+            <p>Plataforma avanzada de scouting para jugadores competitivos</p>
+        </header>
+        
+        <div class="search-section">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar jugadores por nombre, rango, rol o región...">
+                <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="regionFilter">Región</label>
+                    <select id="regionFilter">
+                        <option value="">Todas las regiones</option>
+                        <option value="EU">Europa</option>
+                        <option value="NA">Norte América</option>
+                        <option value="SA">Sudamérica</option>
+                        <option value="AS">Asia</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="rankFilter">Rango</label>
+                    <select id="rankFilter">
+                        <option value="">Todos los rangos</option>
+                        <option value="Radiante">Radiante</option>
+                        <option value="Inmortal">Inmortal</option>
+                        <option value="Diamante">Diamante</option>
+                        <option value="Platino">Platino</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="roleFilter">Rol</label>
+                    <select id="roleFilter">
+                        <option value="">Todos los roles</option>
+                        <option value="Fragger">Fragger</option>
+                        <option value="Support">Support</option>
+                        <option value="IGL">IGL</option>
+                        <option value="Flex">Flex</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="statusFilter">Estado</label>
+                    <select id="statusFilter">
+                        <option value="">Todos los estados</option>
+                        <option value="Prospect">Prospect</option>
+                        <option value="En observación">En observación</option>
+                        <option value="Reclutado">Reclutado</option>
+                        <option value="Descarte">Descarte</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="addPlayerBtn"><i class="fas fa-plus"></i> Agregar Jugador</button>
+                <button class="btn btn-danger" id="resetBtn"><i class="fas fa-sync-alt"></i> Reiniciar Filtros</button>
+            </div>
+        </div>
+        
+        <table class="players-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rango</th>
+                    <th>Rol</th>
+                    <th>Región</th>
+                    <th>K/D</th>
+                    <th>Win Rate</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="playersTableBody">
+                <!-- Jugadores se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Modal para agregar/editar jugador -->
+    <div class="modal" id="playerModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 class="modal-title" id="modalTitle">Agregar Nuevo Jugador</h2>
+            
+            <form id="playerForm">
+                <input type="hidden" id="playerId">
+                
+                <div class="form-group">
+                    <label for="playerName">Nombre del Jugador *</label>
+                    <input type="text" id="playerName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerRank">Rango *</label>
+                    <select id="playerRank" class="form-control" required>
+                        <option value="">Seleccionar rango</option>
+                        <option value="Radiante">Radiante</option>
+                        <option value="Inmortal">Inmortal</option>
+                        <option value="Diamante">Diamante</option>
+                        <option value="Platino">Platino</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerRole">Rol Principal *</label>
+                    <select id="playerRole" class="form-control" required>
+                        <option value="">Seleccionar rol</option>
+                        <option value="Fragger">Fragger</option>
+                        <option value="Support">Support</option>
+                        <option value="IGL">IGL</option>
+                        <option value="Flex">Flex</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerRegion">Región *</label>
+                    <select id="playerRegion" class="form-control" required>
+                        <option value="">Seleccionar región</option>
+                        <option value="EU">Europa</option>
+                        <option value="NA">Norte América</option>
+                        <option value="SA">Sudamérica</option>
+                        <option value="AS">Asia</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerKD">Ratio K/D *</label>
+                    <input type="number" step="0.01" id="playerKD" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerWinRate">Win Rate (%) *</label>
+                    <input type="number" step="0.1" id="playerWinRate" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerLink">Enlace de Perfil *</label>
+                    <input type="url" id="playerLink" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerStatus">Estado *</label>
+                    <select id="playerStatus" class="form-control" required>
+                        <option value="Prospect">Prospect</option>
+                        <option value="En observación">En observación</option>
+                        <option value="Reclutado">Reclutado</option>
+                        <option value="Descarte">Descarte</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerNotes">Notas</label>
+                    <textarea id="playerNotes" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-danger" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Jugador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Datos de ejemplo (simulando una base de datos)
+        let players = [
+            {
+                id: 1,
+                name: "Jugador1",
+                rank: "Radiante",
+                role: "Fragger",
+                region: "EU",
+                kd: 1.8,
+                winRate: 65.2,
+                status: "Prospect",
+                link: "#",
+                notes: "Excelente puntería, buen trabajo en equipo."
+            },
+            {
+                id: 2,
+                name: "Jugador2",
+                rank: "Inmortal",
+                role: "Support",
+                region: "NA",
+                kd: 1.2,
+                winRate: 58.7,
+                status: "En observación",
+                link: "#",
+                notes: "Buen soporte, necesita mejorar comunicación."
+            },
+            {
+                id: 3,
+                name: "Jugador3",
+                rank: "Diamante",
+                role: "IGL",
+                region: "SA",
+                kd: 1.4,
+                winRate: 62.1,
+                status: "Prospect",
+                link: "#",
+                notes: "Liderazgo natural, estrategias innovadoras."
+            },
+            {
+                id: 4,
+                name: "Jugador4",
+                rank: "Radiante",
+                role: "Flex",
+                region: "AS",
+                kd: 1.7,
+                winRate: 68.3,
+                status: "Reclutado",
+                link: "#",
+                notes: "Versátil, se adapta a cualquier situación."
+            }
+        ];
+        
+        // Contraseña de administrador
+        const ADMIN_PASSWORD = "N3xu5Pr0!2023";
+        
+        // Elementos del DOM
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const regionFilter = document.getElementById('regionFilter');
+        const rankFilter = document.getElementById('rankFilter');
+        const roleFilter = document.getElementById('roleFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const addPlayerBtn = document.getElementById('addPlayerBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const playersTableBody = document.getElementById('playersTableBody');
+        const playerModal = document.getElementById('playerModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const playerForm = document.getElementById('playerForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const modalClose = document.querySelector('.modal-close');
+        
+        // Variables de estado
+        let currentPlayerId = null;
+        
+        // Funciones principales
+        function renderPlayers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const region = regionFilter.value;
+            const rank = rankFilter.value;
+            const role = roleFilter.value;
+            const status = statusFilter.value;
+            
+            // Filtrar jugadores
+            const filteredPlayers = players.filter(player => {
+                const matchesSearch = 
+                    player.name.toLowerCase().includes(searchTerm) ||
+                    player.rank.toLowerCase().includes(searchTerm) ||
+                    player.role.toLowerCase().includes(searchTerm) ||
+                    player.region.toLowerCase().includes(searchTerm);
+                
+                const matchesRegion = region === '' || player.region === region;
+                const matchesRank = rank === '' || player.rank === rank;
+                const matchesRole = role === '' || player.role === role;
+                const matchesStatus = status === '' || player.status === status;
+                
+                return matchesSearch && matchesRegion && matchesRank && matchesRole && matchesStatus;
+            });
+            
+            // Renderizar tabla
+            playersTableBody.innerHTML = '';
+            
+            if (filteredPlayers.length === 0) {
+                playersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No se encontraron jugadores</td></tr>';
+                return;
+            }
+            
+            filteredPlayers.forEach(player => {
+                // Determinar clase de badge según el estado
+                let badgeClass = 'badge-primary';
+                if (player.status === 'En observación') badgeClass = 'badge-warning';
+                if (player.status === 'Reclutado') badgeClass = 'badge-primary';
+                if (player.status === 'Descarte') badgeClass = 'badge-danger';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><a href="${player.link}" class="player-link" target="_blank">${player.name}</a></td>
+                    <td>${player.rank}</td>
+                    <td>${player.role}</td>
+                    <td>${player.region}</td>
+                    <td>${player.kd}</td>
+                    <td>${player.winRate}%</td>
+                    <td><span class="badge ${badgeClass}">${player.status}</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm edit-btn" data-id="${player.id}"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="${player.id}"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                
+                playersTableBody.appendChild(row);
+            });
+            
+            // Agregar event listeners a los botones
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', () => editPlayer(parseInt(btn.dataset.id)));
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => deletePlayer(parseInt(btn.dataset.id)));
+            });
+        }
+        
+        function openModal(player = null) {
+            if (player) {
+                // Modo edición
+                currentPlayerId = player.id;
+                modalTitle.textContent = 'Editar Jugador';
+                
+                document.getElementById('playerId').value = player.id;
+                document.getElementById('playerName').value = player.name;
+                document.getElementById('playerRank').value = player.rank;
+                document.getElementById('playerRole').value = player.role;
+                document.getElementById('playerRegion').value = player.region;
+                document.getElementById('playerKD').value = player.kd;
+                document.getElementById('playerWinRate').value = player.winRate;
+                document.getElementById('playerLink').value = player.link;
+                document.getElementById('playerStatus').value = player.status;
+                document.getElementById('playerNotes').value = player.notes || '';
+            } else {
+                // Modo agregar
+                currentPlayerId = null;
+                modalTitle.textContent = 'Agregar Nuevo Jugador';
+                playerForm.reset();
+            }
+            
+            playerModal.classList.add('active');
+        }
+        
+        function closeModal() {
+            playerModal.classList.remove('active');
+        }
+        
+        function addPlayer(e) {
+            e.preventDefault();
+            
+            const password = prompt('Ingrese la contraseña de administrador para continuar:');
+            if (password !== ADMIN_PASSWORD) {
+                alert('Contraseña incorrecta. Acción no autorizada.');
+                return;
+            }
+            
+            const newPlayer = {
+                id: currentPlayerId || players.length + 1,
+                name: document.getElementById('playerName').value,
+                rank: document.getElementById('playerRank').value,
+                role: document.getElementById('playerRole').value,
+                region: document.getElementById('playerRegion').value,
+                kd: parseFloat(document.getElementById('playerKD').value),
+                winRate: parseFloat(document.getElementById('playerWinRate').value),
+                status: document.getElementById('playerStatus').value,
+                link: document.getElementById('playerLink').value,
+                notes: document.getElementById('playerNotes').value
+            };
+            
+            if (currentPlayerId) {
+                // Actualizar jugador existente
+                const index = players.findIndex(p => p.id === currentPlayerId);
+                if (index !== -1) {
+                    players[index] = newPlayer;
+                }
+            } else {
+                // Agregar nuevo jugador
+                players.push(newPlayer);
+            }
+            
+            renderPlayers();
+            closeModal();
+        }
+        
+        function editPlayer(id) {
+            const player = players.find(p => p.id === id);
+            if (player) {
+                openModal(player);
+            }
+        }
+        
+        function deletePlayer(id) {
+            const password = prompt('Ingrese la contraseña de administrador para eliminar este jugador:');
+            if (password !== ADMIN_PASSWORD) {
+                alert('Contraseña incorrecta. Acción no autorizada.');
+                return;
+            }
+            
+            if (confirm('¿Está seguro que desea eliminar este jugador?')) {
+                const index = players.findIndex(p => p.id === id);
+                if (index !== -1) {
+                    players.splice(index, 1);
+                    renderPlayers();
+                }
+            }
+        }
+        
+        function resetFilters() {
+            searchInput.value = '';
+            regionFilter.value = '';
+            rankFilter.value = '';
+            roleFilter.value = '';
+            statusFilter.value = '';
+            renderPlayers();
+        }
+        
+        // Event Listeners
+        searchInput.addEventListener('input', renderPlayers);
+        searchBtn.addEventListener('click', renderPlayers);
+        regionFilter.addEventListener('change', renderPlayers);
+        rankFilter.addEventListener('change', renderPlayers);
+        roleFilter.addEventListener('change', renderPlayers);
+        statusFilter.addEventListener('change', renderPlayers);
+        addPlayerBtn.addEventListener('click', () => openModal());
+        resetBtn.addEventListener('click', resetFilters);
+        playerForm.addEventListener('submit', addPlayer);
+        cancelBtn.addEventListener('click', closeModal);
+        modalClose.addEventListener('click', closeModal);
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        playerModal.addEventListener('click', (e) => {
+            if (e.target === playerModal) {
+                closeModal();
+            }
+        });
+        
+        // Inicializar la tabla al cargar la página
+        document.addEventListener('DOMContentLoaded', renderPlayers);
+    </script>
+</body>
+</html>
