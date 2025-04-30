@@ -6,6 +6,7 @@
     <title>NEXUS SCOUTING PRO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Estilos de la aplicación principal */
         :root {
             --primary: #00c896;
             --dark: #0f1923;
@@ -279,7 +280,264 @@
             gap: 10px;
             margin-top: 20px;
         }
-        
+
+        /* Estilos del login */
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeInUp 0.5s ease-out;
+            margin: 50px auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-header {
+            padding: 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #4361ee, #4cc9f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .auth-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .auth-body {
+            padding: 2rem;
+        }
+
+        .auth-form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .auth-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .auth-form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--light);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .auth-form-control:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 2.5rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .auth-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .auth-btn-primary {
+            background: #4361ee;
+            color: white;
+        }
+
+        .auth-btn-primary:hover {
+            background: #3a56d4;
+            transform: translateY(-2px);
+        }
+
+        .auth-btn-google {
+            background: #4285f4;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .auth-btn-google:hover {
+            background: #357ae8;
+        }
+
+        .auth-btn-google i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .auth-footer {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-footer a {
+            color: #4361ee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .auth-footer a:hover {
+            color: #4cc9f0;
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .alert-danger {
+            background: rgba(247, 37, 133, 0.1);
+            border: 1px solid rgba(247, 37, 133, 0.2);
+            color: #f72585;
+        }
+
+        .alert-success {
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid rgba(76, 201, 240, 0.2);
+            color: #4cc9f0;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .forgot-password:hover {
+            color: #4361ee;
+        }
+
+        /* Clases para mostrar/ocultar contenido */
+        .logged-in-content {
+            display: none;
+        }
+
+        .logged-out-content {
+            display: block;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: flex-end;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .search-bar {
                 flex-direction: column;
@@ -297,231 +555,267 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-crosshairs"></i> NEXUS SCOUTING PRO</h1>
-            <p>Plataforma avanzada de scouting para jugadores competitivos</p>
-        </header>
-        
-        <div class="search-section">
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Buscar jugadores por nombre, rango, rol o región...">
-                <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
+    <!-- Contenido cuando el usuario está autenticado -->
+    <div id="appContent" class="logged-in-content">
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-crosshairs"></i> NEXUS SCOUTING PRO</h1>
+                <p>Plataforma avanzada de scouting para jugadores competitivos</p>
+            </header>
+
+            <div class="user-info">
+                <div id="userDisplayName"></div>
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
             </div>
             
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="regionFilter">Región</label>
-                    <select id="regionFilter">
-                        <option value="">Todas las regiones</option>
-                        <option value="EU">Europa</option>
-                        <option value="NA">Norte América</option>
-                        <option value="SA">Sudamérica</option>
-                        <option value="AS">Asia</option>
-                    </select>
+            <div class="search-section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar jugadores por nombre, rango, rol o región...">
+                    <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
                 </div>
                 
-                <div class="filter-group">
-                    <label for="rankFilter">Rango</label>
-                    <select id="rankFilter">
-                        <option value="">Todos los rangos</option>
-                        <option value="Radiante">Radiante</option>
-                        <option value="Inmortal">Inmortal</option>
-                        <option value="Diamante">Diamante</option>
-                        <option value="Platino">Platino</option>
-                    </select>
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="regionFilter">Región</label>
+                        <select id="regionFilter">
+                            <option value="">Todas las regiones</option>
+                            <option value="EU">Europa</option>
+                            <option value="NA">Norte América</option>
+                            <option value="SA">Sudamérica</option>
+                            <option value="AS">Asia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="rankFilter">Rango</label>
+                        <select id="rankFilter">
+                            <option value="">Todos los rangos</option>
+                            <option value="Radiante">Radiante</option>
+                            <option value="Inmortal">Inmortal</option>
+                            <option value="Diamante">Diamante</option>
+                            <option value="Platino">Platino</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="roleFilter">Rol</label>
+                        <select id="roleFilter">
+                            <option value="">Todos los roles</option>
+                            <option value="Fragger">Fragger</option>
+                            <option value="Support">Support</option>
+                            <option value="IGL">IGL</option>
+                            <option value="Flex">Flex</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="statusFilter">Estado</label>
+                        <select id="statusFilter">
+                            <option value="">Todos los estados</option>
+                            <option value="Prospect">Prospect</option>
+                            <option value="En observación">En observación</option>
+                            <option value="Reclutado">Reclutado</option>
+                            <option value="Descarte">Descarte</option>
+                        </select>
+                    </div>
                 </div>
                 
-                <div class="filter-group">
-                    <label for="roleFilter">Rol</label>
-                    <select id="roleFilter">
-                        <option value="">Todos los roles</option>
-                        <option value="Fragger">Fragger</option>
-                        <option value="Support">Support</option>
-                        <option value="IGL">IGL</option>
-                        <option value="Flex">Flex</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label for="statusFilter">Estado</label>
-                    <select id="statusFilter">
-                        <option value="">Todos los estados</option>
-                        <option value="Prospect">Prospect</option>
-                        <option value="En observación">En observación</option>
-                        <option value="Reclutado">Reclutado</option>
-                        <option value="Descarte">Descarte</option>
-                    </select>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="addPlayerBtn"><i class="fas fa-plus"></i> Agregar Jugador</button>
+                    <button class="btn btn-danger" id="resetBtn"><i class="fas fa-sync-alt"></i> Reiniciar Filtros</button>
                 </div>
             </div>
             
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="addPlayerBtn"><i class="fas fa-plus"></i> Agregar Jugador</button>
-                <button class="btn btn-danger" id="resetBtn"><i class="fas fa-sync-alt"></i> Reiniciar Filtros</button>
-            </div>
+            <table class="players-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Rango</th>
+                        <th>Rol</th>
+                        <th>Región</th>
+                        <th>K/D</th>
+                        <th>Win Rate</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="playersTableBody">
+                    <!-- Jugadores se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
         </div>
         
-        <table class="players-table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Rango</th>
-                    <th>Rol</th>
-                    <th>Región</th>
-                    <th>K/D</th>
-                    <th>Win Rate</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="playersTableBody">
-                <!-- Jugadores se cargarán aquí dinámicamente -->
-            </tbody>
-        </table>
-    </div>
-    
-    <!-- Modal para agregar/editar jugador -->
-    <div class="modal" id="playerModal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2 class="modal-title" id="modalTitle">Agregar Nuevo Jugador</h2>
-            
-            <form id="playerForm">
-                <input type="hidden" id="playerId">
+        <!-- Modal para agregar/editar jugador -->
+        <div class="modal" id="playerModal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <h2 class="modal-title" id="modalTitle">Agregar Nuevo Jugador</h2>
                 
-                <div class="form-group">
-                    <label for="playerName">Nombre del Jugador *</label>
-                    <input type="text" id="playerName" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerRank">Rango *</label>
-                    <select id="playerRank" class="form-control" required>
-                        <option value="">Seleccionar rango</option>
-                        <option value="Radiante">Radiante</option>
-                        <option value="Inmortal">Inmortal</option>
-                        <option value="Diamante">Diamante</option>
-                        <option value="Platino">Platino</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerRole">Rol Principal *</label>
-                    <select id="playerRole" class="form-control" required>
-                        <option value="">Seleccionar rol</option>
-                        <option value="Fragger">Fragger</option>
-                        <option value="Support">Support</option>
-                        <option value="IGL">IGL</option>
-                        <option value="Flex">Flex</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerRegion">Región *</label>
-                    <select id="playerRegion" class="form-control" required>
-                        <option value="">Seleccionar región</option>
-                        <option value="EU">Europa</option>
-                        <option value="NA">Norte América</option>
-                        <option value="SA">Sudamérica</option>
-                        <option value="AS">Asia</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerKD">Ratio K/D *</label>
-                    <input type="number" step="0.01" id="playerKD" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerWinRate">Win Rate (%) *</label>
-                    <input type="number" step="0.1" id="playerWinRate" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerLink">Enlace de Perfil *</label>
-                    <input type="url" id="playerLink" class="form-control" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerStatus">Estado *</label>
-                    <select id="playerStatus" class="form-control" required>
-                        <option value="Prospect">Prospect</option>
-                        <option value="En observación">En observación</option>
-                        <option value="Reclutado">Reclutado</option>
-                        <option value="Descarte">Descarte</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerNotes">Notas</label>
-                    <textarea id="playerNotes" class="form-control" rows="3"></textarea>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn btn-danger" id="cancelBtn">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Jugador</button>
-                </div>
-            </form>
+                <form id="playerForm">
+                    <input type="hidden" id="playerId">
+                    
+                    <div class="form-group">
+                        <label for="playerName">Nombre del Jugador *</label>
+                        <input type="text" id="playerName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerRank">Rango *</label>
+                        <select id="playerRank" class="form-control" required>
+                            <option value="">Seleccionar rango</option>
+                            <option value="Radiante">Radiante</option>
+                            <option value="Inmortal">Inmortal</option>
+                            <option value="Diamante">Diamante</option>
+                            <option value="Platino">Platino</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerRole">Rol Principal *</label>
+                        <select id="playerRole" class="form-control" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="Fragger">Fragger</option>
+                            <option value="Support">Support</option>
+                            <option value="IGL">IGL</option>
+                            <option value="Flex">Flex</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerRegion">Región *</label>
+                        <select id="playerRegion" class="form-control" required>
+                            <option value="">Seleccionar región</option>
+                            <option value="EU">Europa</option>
+                            <option value="NA">Norte América</option>
+                            <option value="SA">Sudamérica</option>
+                            <option value="AS">Asia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerKD">Ratio K/D *</label>
+                        <input type="number" step="0.01" id="playerKD" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerWinRate">Win Rate (%) *</label>
+                        <input type="number" step="0.1" id="playerWinRate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerLink">Enlace de Perfil *</label>
+                        <input type="url" id="playerLink" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerStatus">Estado *</label>
+                        <select id="playerStatus" class="form-control" required>
+                            <option value="Prospect">Prospect</option>
+                            <option value="En observación">En observación</option>
+                            <option value="Reclutado">Reclutado</option>
+                            <option value="Descarte">Descarte</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerNotes">Notas</label>
+                        <textarea id="playerNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-danger" id="cancelBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Jugador</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    
+
+    <!-- Contenido cuando el usuario no está autenticado -->
+    <div id="loginContent" class="logged-out-content">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Iniciar Sesión</h1>
+                <p>Accede a tu cuenta de NexusScouting</p>
+            </div>
+            
+            <div class="alert alert-danger" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
+            
+            <div class="auth-body">
+                <button class="auth-btn auth-btn-google" id="googleLogin">
+                    <i class="fab fa-google"></i> Continuar con Google
+                </button>
+                
+                <div class="divider">o inicia con tu email</div>
+                
+                <form id="loginForm">
+                    <div class="auth-form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" class="auth-form-control" placeholder="tucorreo@ejemplo.com" required>
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" class="auth-form-control" placeholder="••••••••" required>
+                        <i class="fas fa-lock input-icon"></i>
+                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn auth-btn-primary" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                </form>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
     <script>
-        // Datos de ejemplo (simulando una base de datos)
-        let players = [
-            {
-                id: 1,
-                name: "Jugador1",
-                rank: "Radiante",
-                role: "Fragger",
-                region: "EU",
-                kd: 1.8,
-                winRate: 65.2,
-                status: "Prospect",
-                link: "#",
-                notes: "Excelente puntería, buen trabajo en equipo."
-            },
-            {
-                id: 2,
-                name: "Jugador2",
-                rank: "Inmortal",
-                role: "Support",
-                region: "NA",
-                kd: 1.2,
-                winRate: 58.7,
-                status: "En observación",
-                link: "#",
-                notes: "Buen soporte, necesita mejorar comunicación."
-            },
-            {
-                id: 3,
-                name: "Jugador3",
-                rank: "Diamante",
-                role: "IGL",
-                region: "SA",
-                kd: 1.4,
-                winRate: 62.1,
-                status: "Prospect",
-                link: "#",
-                notes: "Liderazgo natural, estrategias innovadoras."
-            },
-            {
-                id: 4,
-                name: "Jugador4",
-                rank: "Radiante",
-                role: "Flex",
-                region: "AS",
-                kd: 1.7,
-                winRate: 68.3,
-                status: "Reclutado",
-                link: "#",
-                notes: "Versátil, se adapta a cualquier situación."
-            }
-        ];
-        
-        // Contraseña de administrador
-        const ADMIN_PASSWORD = "N3xu5Pr0!2023";
-        
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
+            authDomain: "nexusauth-login.firebaseapp.com",
+            projectId: "nexusauth-login",
+            storageBucket: "nexusauth-login.firebasestorage.app",
+            messagingSenderId: "316746372020",
+            appId: "1:316746372020:web:868ea1706c9cba81a9d8e1",
+            measurementId: "G-ZL3ND06V35"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Referencia a la colección de jugadores
+        const playersRef = db.collection("players");
+
         // Elementos del DOM
+        const appContent = document.getElementById('appContent');
+        const loginContent = document.getElementById('loginContent');
+        const userDisplayName = document.getElementById('userDisplayName');
+        const userAvatar = document.getElementById('userAvatar');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginForm = document.getElementById('loginForm');
+        const googleLogin = document.getElementById('googleLogin');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerLink = document.getElementById('registerLink');
+        const registerModal = document.getElementById('registerModal');
+        const registerForm = document.getElementById('registerForm');
+        const cancelRegisterBtn = document.getElementById('cancelRegisterBtn');
+        
+        // Elementos de la aplicación principal
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const regionFilter = document.getElementById('regionFilter');
@@ -535,12 +829,208 @@
         const modalTitle = document.getElementById('modalTitle');
         const playerForm = document.getElementById('playerForm');
         const cancelBtn = document.getElementById('cancelBtn');
-        const modalClose = document.querySelector('.modal-close');
-        
+        const modalClose = document.querySelectorAll('.modal-close');
+
         // Variables de estado
         let currentPlayerId = null;
-        
-        // Funciones principales
+        let players = [];
+
+        // Mostrar alerta de error
+        function showError(message) {
+            errorAlert.textContent = message;
+            errorAlert.style.display = 'block';
+            successAlert.style.display = 'none';
+            
+            setTimeout(() => {
+                errorAlert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Mostrar alerta de éxito
+        function showSuccess(message) {
+            successAlert.textContent = message;
+            successAlert.style.display = 'block';
+            errorAlert.style.display = 'none';
+            
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+            }, 3000);
+        }
+
+        // Manejar estado de autenticación
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // Usuario autenticado
+                loginContent.classList.remove('logged-out-content');
+                loginContent.classList.add('logged-in-content');
+                appContent.classList.remove('logged-in-content');
+                appContent.classList.add('logged-out-content');
+                
+                // Mostrar información del usuario
+                userDisplayName.textContent = user.displayName || user.email;
+                userAvatar.textContent = user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
+                
+                // Cargar jugadores
+                loadPlayers();
+            } else {
+                // Usuario no autenticado
+                appContent.classList.remove('logged-out-content');
+                appContent.classList.add('logged-in-content');
+                loginContent.classList.remove('logged-in-content');
+                loginContent.classList.add('logged-out-content');
+            }
+        });
+
+        // Inicio de sesión con email/contraseña
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Deshabilitar botón durante el inicio de sesión
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
+            
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                showSuccess('¡Inicio de sesión exitoso!');
+            } catch (error) {
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        errorMessage = 'El correo electrónico no es válido';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'Esta cuenta ha sido deshabilitada';
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = 'No existe una cuenta con este correo';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Contraseña incorrecta';
+                        break;
+                    default:
+                        errorMessage = 'Error al iniciar sesión: ' + error.message;
+                }
+                showError(errorMessage);
+            } finally {
+                // Rehabilitar botón
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+            }
+        });
+
+        // Inicio de sesión con Google
+        googleLogin.addEventListener('click', async () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            
+            try {
+                await auth.signInWithPopup(provider);
+                showSuccess('¡Inicio de sesión con Google exitoso!');
+            } catch (error) {
+                let errorMessage = 'Error al iniciar sesión con Google: ';
+                
+                switch (error.code) {
+                    case 'auth/account-exists-with-different-credential':
+                        errorMessage += 'Ya existe una cuenta con este email usando otro método de autenticación';
+                        break;
+                    case 'auth/popup-closed-by-user':
+                        errorMessage = 'El popup de autenticación fue cerrado';
+                        break;
+                    case 'auth/cancelled-popup-request':
+                        errorMessage = 'Solicitud de autenticación cancelada';
+                        break;
+                    default:
+                        errorMessage += error.message;
+                }
+                
+                showError(errorMessage);
+            }
+        });
+
+        // Cerrar sesión
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                showSuccess('Sesión cerrada correctamente');
+            }).catch(error => {
+                showError('Error al cerrar sesión: ' + error.message);
+            });
+        });
+
+        // Mostrar modal de registro
+        registerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.classList.add('active');
+        });
+
+        // Cerrar modal de registro
+        cancelRegisterBtn.addEventListener('click', () => {
+            registerModal.classList.remove('active');
+        });
+
+        // Registro de nuevo usuario
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const name = document.getElementById('registerName').value;
+            
+            if (password !== confirmPassword) {
+                showError('Las contraseñas no coinciden');
+                return;
+            }
+            
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                
+                // Actualizar perfil del usuario con el nombre
+                await userCredential.user.updateProfile({
+                    displayName: name
+                });
+                
+                showSuccess('¡Registro exitoso! Bienvenido a NexusScouting');
+                registerModal.classList.remove('active');
+                registerForm.reset();
+            } catch (error) {
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'Este correo electrónico ya está en uso';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'El correo electrónico no es válido';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'La contraseña es demasiado débil';
+                        break;
+                    default:
+                        errorMessage = 'Error al registrar: ' + error.message;
+                }
+                showError(errorMessage);
+            }
+        });
+
+        // Cargar jugadores desde Firestore
+        function loadPlayers() {
+            playersRef.orderBy('name').onSnapshot(snapshot => {
+                players = [];
+                snapshot.forEach(doc => {
+                    players.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                renderPlayers();
+            }, error => {
+                console.error('Error cargando jugadores:', error);
+                showError('Error al cargar los jugadores');
+            });
+        }
+
+        // Renderizar jugadores en la tabla
         function renderPlayers() {
             const searchTerm = searchInput.value.toLowerCase();
             const region = regionFilter.value;
@@ -599,14 +1089,15 @@
             
             // Agregar event listeners a los botones
             document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', () => editPlayer(parseInt(btn.dataset.id)));
+                btn.addEventListener('click', () => editPlayer(btn.dataset.id));
             });
             
             document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', () => deletePlayer(parseInt(btn.dataset.id)));
+                btn.addEventListener('click', () => deletePlayer(btn.dataset.id));
             });
         }
-        
+
+        // Abrir modal para agregar/editar jugador
         function openModal(player = null) {
             if (player) {
                 // Modo edición
@@ -632,22 +1123,17 @@
             
             playerModal.classList.add('active');
         }
-        
+
+        // Cerrar modal
         function closeModal() {
             playerModal.classList.remove('active');
         }
-        
-        function addPlayer(e) {
+
+        // Guardar jugador en Firestore
+        async function savePlayer(e) {
             e.preventDefault();
             
-            const password = prompt('Ingrese la contraseña de administrador para continuar:');
-            if (password !== ADMIN_PASSWORD) {
-                alert('Contraseña incorrecta. Acción no autorizada.');
-                return;
-            }
-            
-            const newPlayer = {
-                id: currentPlayerId || players.length + 1,
+            const playerData = {
                 name: document.getElementById('playerName').value,
                 rank: document.getElementById('playerRank').value,
                 role: document.getElementById('playerRole').value,
@@ -656,47 +1142,53 @@
                 winRate: parseFloat(document.getElementById('playerWinRate').value),
                 status: document.getElementById('playerStatus').value,
                 link: document.getElementById('playerLink').value,
-                notes: document.getElementById('playerNotes').value
+                notes: document.getElementById('playerNotes').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
             
-            if (currentPlayerId) {
-                // Actualizar jugador existente
-                const index = players.findIndex(p => p.id === currentPlayerId);
-                if (index !== -1) {
-                    players[index] = newPlayer;
+            try {
+                if (currentPlayerId) {
+                    // Actualizar jugador existente
+                    await playersRef.doc(currentPlayerId).update(playerData);
+                    showSuccess('Jugador actualizado correctamente');
+                } else {
+                    // Agregar nuevo jugador
+                    await playersRef.add(playerData);
+                    showSuccess('Jugador agregado correctamente');
                 }
-            } else {
-                // Agregar nuevo jugador
-                players.push(newPlayer);
+                
+                closeModal();
+            } catch (error) {
+                console.error('Error guardando jugador:', error);
+                showError('Error al guardar el jugador');
             }
-            
-            renderPlayers();
-            closeModal();
         }
-        
+
+        // Editar jugador
         function editPlayer(id) {
             const player = players.find(p => p.id === id);
             if (player) {
                 openModal(player);
             }
         }
-        
-        function deletePlayer(id) {
-            const password = prompt('Ingrese la contraseña de administrador para eliminar este jugador:');
-            if (password !== ADMIN_PASSWORD) {
-                alert('Contraseña incorrecta. Acción no autorizada.');
+
+        // Eliminar jugador
+        async function deletePlayer(id) {
+            if (!confirm('¿Está seguro que desea eliminar este jugador?')) {
                 return;
             }
             
-            if (confirm('¿Está seguro que desea eliminar este jugador?')) {
-                const index = players.findIndex(p => p.id === id);
-                if (index !== -1) {
-                    players.splice(index, 1);
-                    renderPlayers();
-                }
+            try {
+                await playersRef.doc(id).delete();
+                showSuccess('Jugador eliminado correctamente');
+            } catch (error) {
+                console.error('Error eliminando jugador:', error);
+                showError('Error al eliminar el jugador');
             }
         }
-        
+
+        // Reiniciar filtros
         function resetFilters() {
             searchInput.value = '';
             regionFilter.value = '';
@@ -705,8 +1197,8 @@
             statusFilter.value = '';
             renderPlayers();
         }
-        
-        // Event Listeners
+
+        // Event Listeners para la aplicación principal
         searchInput.addEventListener('input', renderPlayers);
         searchBtn.addEventListener('click', renderPlayers);
         regionFilter.addEventListener('change', renderPlayers);
@@ -715,19 +1207,30 @@
         statusFilter.addEventListener('change', renderPlayers);
         addPlayerBtn.addEventListener('click', () => openModal());
         resetBtn.addEventListener('click', resetFilters);
-        playerForm.addEventListener('submit', addPlayer);
+        playerForm.addEventListener('submit', savePlayer);
         cancelBtn.addEventListener('click', closeModal);
-        modalClose.addEventListener('click', closeModal);
         
-        // Cerrar modal al hacer clic fuera del contenido
-        playerModal.addEventListener('click', (e) => {
-            if (e.target === playerModal) {
-                closeModal();
-            }
+        // Cerrar modales al hacer clic en la X
+        modalClose.forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                document.querySelector('.modal.active').classList.remove('active');
+            });
         });
         
-        // Inicializar la tabla al cargar la página
-        document.addEventListener('DOMContentLoaded', renderPlayers);
+        // Cerrar modales al hacer clic fuera del contenido
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Verificar si hay parámetros de éxito en la URL (después del registro)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            showSuccess('¡Registro exitoso! Por favor inicia sesión');
+        }
     </script>
 </body>
 </html>
