@@ -1086,6 +1086,82 @@
                 
                 playersTableBody.appendChild(row);
             });
+
+<script>
+        // Configuración específica para tu proyecto scouting-pro-nexus
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
+            authDomain: "scouting-pro-nexus.firebaseapp.com",
+            projectId: "scouting-pro-nexus",
+            storageBucket: "scouting-pro-nexus.appspot.com",
+            messagingSenderId: "351190930586",
+            appId: "1:351190930586:web:6b44bdbeeb00c51f28bb23"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Referencia a la colección de jugadores con tu estructura
+        const playersRef = db.collection("scouting-pro-players");
+
+        // Función corregida para agregar jugadores
+        async function savePlayer(e) {
+            e.preventDefault();
+            
+            const user = auth.currentUser;
+            if (!user) {
+                showError('Debes iniciar sesión para esta acción');
+                closeModal();
+                return;
+            }
+
+            // Validar campos requeridos
+            const requiredFields = ['playerName', 'playerRank', 'playerRole', 'playerRegion'];
+            const missingFields = requiredFields.filter(field => !document.getElementById(field).value);
+            
+            if (missingFields.length > 0) {
+                showError(`Faltan campos requeridos: ${missingFields.join(', ')}`);
+                return;
+            }
+
+            const playerData = {
+                name: document.getElementById('playerName').value.trim(),
+                rank: document.getElementById('playerRank').value,
+                role: document.getElementById('playerRole').value,
+                region: document.getElementById('playerRegion').value,
+                kd: parseFloat(document.getElementById('playerKD').value) || 0,
+                winRate: parseFloat(document.getElementById('playerWinRate').value) || 0,
+                status: document.getElementById('playerStatus').value,
+                link: document.getElementById('playerLink').value.trim(),
+                notes: document.getElementById('playerNotes').value.trim(),
+                createdBy: user.uid,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                if (currentPlayerId) {
+                    await playersRef.doc(currentPlayerId).update(playerData);
+                    showSuccess('Jugador actualizado!');
+                } else {
+                    await playersRef.add(playerData);
+                    showSuccess('Jugador agregado!');
+                }
+                
+                closeModal();
+                playerForm.reset();
+            } catch (error) {
+                console.error("Error en Firestore:", error);
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Asegurar que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vinculación correcta del formulario
+            playerForm.addEventListener('submit', savePlayer);
             
             // Agregar event listeners a los botones
             document.querySelectorAll('.edit-btn').forEach(btn => {
