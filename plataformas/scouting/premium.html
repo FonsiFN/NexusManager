@@ -6,13 +6,13 @@
     <title>NEXUS SCOUTING PRO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Estilos de la aplicación principal */
         :root {
             --primary: #00c896;
             --dark: #0f1923;
             --light: #f8f9fa;
             --danger: #ff4655;
             --secondary: #1a2e35;
-            --gray: #6c757d;
         }
         
         * {
@@ -25,14 +25,12 @@
         body {
             background-color: var(--dark);
             color: var(--light);
-            min-height: 100vh;
+            padding: 20px;
         }
         
-        /* Estilos de la aplicación */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         
         header {
@@ -44,39 +42,6 @@
             color: var(--primary);
             font-size: 2.5rem;
             margin-bottom: 10px;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .logout-btn {
-            background: none;
-            border: none;
-            color: var(--danger);
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        .logout-btn:hover {
-            text-decoration: underline;
         }
         
         .search-section {
@@ -159,9 +124,6 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
         
         .btn-primary {
@@ -272,8 +234,6 @@
             max-width: 500px;
             padding: 25px;
             position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
         }
         
         .modal-close {
@@ -283,8 +243,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: rgba(255, 255, 255, 0.5);
-            background: none;
-            border: none;
         }
         
         .modal-close:hover {
@@ -316,17 +274,13 @@
             color: var(--light);
         }
         
-        .form-control:focus {
-            outline: 2px solid var(--primary);
-        }
-        
         .form-actions {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         /* Estilos del login */
         .auth-container {
             width: 100%;
@@ -338,16 +292,35 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeInUp 0.5s ease-out;
             margin: 50px auto;
         }
-        
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
         .auth-header {
             padding: 2rem;
             text-align: center;
             background: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .auth-header h1 {
             font-size: 1.8rem;
             font-weight: 600;
@@ -357,21 +330,21 @@
             background-clip: text;
             color: transparent;
         }
-        
+
         .auth-header p {
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
-        
+
         .auth-body {
             padding: 2rem;
         }
-        
+
         .auth-form-group {
             margin-bottom: 1.5rem;
             position: relative;
         }
-        
+
         .auth-form-group label {
             display: block;
             margin-bottom: 0.5rem;
@@ -379,7 +352,7 @@
             font-weight: 500;
             color: rgba(255, 255, 255, 0.8);
         }
-        
+
         .auth-form-control {
             width: 100%;
             padding: 0.8rem 1rem;
@@ -388,22 +361,22 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             color: var(--light);
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
+
         .auth-form-control:focus {
             outline: none;
             border-color: #4361ee;
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
-        
+
         .input-icon {
             position: absolute;
             right: 1rem;
             top: 2.5rem;
             color: rgba(255, 255, 255, 0.5);
         }
-        
+
         .auth-btn {
             display: inline-flex;
             align-items: center;
@@ -415,53 +388,53 @@
             border-radius: 12px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
+
         .auth-btn-primary {
             background: #4361ee;
             color: white;
         }
-        
+
         .auth-btn-primary:hover {
             background: #3a56d4;
             transform: translateY(-2px);
         }
-        
+
         .auth-btn-google {
             background: #4285f4;
             color: white;
             margin-bottom: 1rem;
         }
-        
+
         .auth-btn-google:hover {
             background: #357ae8;
         }
-        
+
         .auth-btn-google i {
             margin-right: 0.5rem;
             font-size: 1.2rem;
         }
-        
+
         .auth-footer {
             padding: 1.5rem 2rem;
             text-align: center;
             background: rgba(0, 0, 0, 0.1);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .auth-footer a {
             color: #4361ee;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
+
         .auth-footer a:hover {
             color: #4cc9f0;
             text-decoration: underline;
         }
-        
+
         .divider {
             display: flex;
             align-items: center;
@@ -469,21 +442,21 @@
             color: rgba(255, 255, 255, 0.3);
             font-size: 0.8rem;
         }
-        
+
         .divider::before, .divider::after {
             content: "";
             flex: 1;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .divider::before {
             margin-right: 1rem;
         }
-        
+
         .divider::after {
             margin-left: 1rem;
         }
-        
+
         .alert {
             padding: 1rem;
             border-radius: 12px;
@@ -492,24 +465,24 @@
             display: none;
             animation: fadeIn 0.3s ease-out;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
+
         .alert-danger {
             background: rgba(247, 37, 133, 0.1);
             border: 1px solid rgba(247, 37, 133, 0.2);
             color: #f72585;
         }
-        
+
         .alert-success {
             background: rgba(76, 201, 240, 0.1);
             border: 1px solid rgba(76, 201, 240, 0.2);
             color: #4cc9f0;
         }
-        
+
         .forgot-password {
             display: block;
             text-align: right;
@@ -517,32 +490,54 @@
             margin-top: 0.5rem;
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
+
         .forgot-password:hover {
             color: #4361ee;
         }
-        
+
         /* Clases para mostrar/ocultar contenido */
-        .hidden {
-            display: none !important;
+        .logged-in-content {
+            display: none;
         }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+
+        .logged-out-content {
+            display: block;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: flex-end;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
         }
-        
+
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .search-bar {
                 flex-direction: column;
@@ -556,20 +551,12 @@
             .filter-group {
                 width: 100%;
             }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Contenido cuando el usuario está autenticado -->
-    <div id="appContent" class="hidden">
+    <div id="appContent" class="logged-in-content">
         <div class="container">
             <header>
                 <h1><i class="fas fa-crosshairs"></i> NEXUS SCOUTING PRO</h1>
@@ -577,7 +564,7 @@
             </header>
 
             <div class="user-info">
-                <span id="userDisplayName"></span>
+                <div id="userDisplayName"></div>
                 <div class="user-avatar" id="userAvatar"></div>
                 <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
             </div>
@@ -654,9 +641,7 @@
                     </tr>
                 </thead>
                 <tbody id="playersTableBody">
-                    <tr>
-                        <td colspan="8" style="text-align: center;">Cargando jugadores...</td>
-                    </tr>
+                    <!-- Jugadores se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
         </div>
@@ -664,7 +649,7 @@
         <!-- Modal para agregar/editar jugador -->
         <div class="modal" id="playerModal">
             <div class="modal-content">
-                <button class="modal-close">&times;</button>
+                <span class="modal-close">&times;</span>
                 <h2 class="modal-title" id="modalTitle">Agregar Nuevo Jugador</h2>
                 
                 <form id="playerForm">
@@ -710,17 +695,17 @@
                     
                     <div class="form-group">
                         <label for="playerKD">Ratio K/D *</label>
-                        <input type="number" step="0.01" id="playerKD" class="form-control" required min="0" value="1.0">
+                        <input type="number" step="0.01" id="playerKD" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="playerWinRate">Win Rate (%) *</label>
-                        <input type="number" step="0.1" id="playerWinRate" class="form-control" required min="0" max="100" value="50.0">
+                        <input type="number" step="0.1" id="playerWinRate" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="playerLink">Enlace de Perfil *</label>
-                        <input type="url" id="playerLink" class="form-control" required placeholder="https://">
+                        <input type="url" id="playerLink" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
@@ -735,15 +720,12 @@
                     
                     <div class="form-group">
                         <label for="playerNotes">Notas</label>
-                        <textarea id="playerNotes" class="form-control" rows="3" placeholder="Observaciones adicionales..."></textarea>
+                        <textarea id="playerNotes" class="form-control" rows="3"></textarea>
                     </div>
                     
                     <div class="form-actions">
                         <button type="button" class="btn btn-danger" id="cancelBtn">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" id="submitBtn">
-                            <span id="submitBtnText">Guardar Jugador</span>
-                            <span id="submitBtnLoader" class="loading hidden"></span>
-                        </button>
+                        <button type="submit" class="btn btn-primary">Guardar Jugador</button>
                     </div>
                 </form>
             </div>
@@ -751,7 +733,7 @@
     </div>
 
     <!-- Contenido cuando el usuario no está autenticado -->
-    <div id="loginContent">
+    <div id="loginContent" class="logged-out-content">
         <div class="auth-container">
             <div class="auth-header">
                 <h1>Iniciar Sesión</h1>
@@ -779,12 +761,11 @@
                         <label for="password">Contraseña</label>
                         <input type="password" id="password" class="auth-form-control" placeholder="••••••••" required>
                         <i class="fas fa-lock input-icon"></i>
-                        <a href="#" class="forgot-password" id="forgotPassword">¿Olvidaste tu contraseña?</a>
+                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
                     </div>
                     
                     <button type="submit" class="auth-btn auth-btn-primary" id="loginBtn">
-                        <span id="loginBtnText"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</span>
-                        <span id="loginBtnLoader" class="loading hidden"></span>
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                     </button>
                 </form>
             </div>
@@ -798,12 +779,12 @@
     <!-- Modal de registro -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
+            <span class="modal-close">&times;</span>
             <h2 class="modal-title">Crear nueva cuenta</h2>
             
             <form id="registerForm">
                 <div class="form-group">
-                    <label for="registerName">Nombre completo *</label>
+                    <label for="registerName">Nombre completo</label>
                     <input type="text" id="registerName" class="form-control" required>
                 </div>
                 
@@ -814,44 +795,17 @@
                 
                 <div class="form-group">
                     <label for="registerPassword">Contraseña *</label>
-                    <input type="password" id="registerPassword" class="form-control" required minlength="6">
+                    <input type="password" id="registerPassword" class="form-control" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="registerConfirmPassword">Confirmar Contraseña *</label>
-                    <input type="password" id="registerConfirmPassword" class="form-control" required minlength="6">
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
                 </div>
                 
                 <div class="form-actions">
                     <button type="button" class="btn btn-danger" id="cancelRegisterBtn">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="registerBtn">
-                        <span id="registerBtnText">Registrarse</span>
-                        <span id="registerBtnLoader" class="loading hidden"></span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal para recuperar contraseña -->
-    <div class="modal" id="passwordResetModal">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <h2 class="modal-title">Recuperar contraseña</h2>
-            
-            <form id="passwordResetForm">
-                <div class="form-group">
-                    <label for="resetEmail">Correo Electrónico *</label>
-                    <input type="email" id="resetEmail" class="form-control" required>
-                    <p class="small-text">Te enviaremos un enlace para restablecer tu contraseña</p>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn btn-danger" id="cancelResetBtn">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="resetPasswordBtn">
-                        <span id="resetPasswordBtnText">Enviar enlace</span>
-                        <span id="resetPasswordBtnLoader" class="loading hidden"></span>
-                    </button>
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
                 </div>
             </form>
         </div>
@@ -863,14 +817,15 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Configuración específica para tu proyecto scouting-pro-nexus
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
-            authDomain: "scouting-pro-nexus.firebaseapp.com",
-            projectId: "scouting-pro-nexus",
-            storageBucket: "scouting-pro-nexus.appspot.com",
-            messagingSenderId: "351190930586",
-            appId: "1:351190930586:web:6b44bdbeeb00c51f28bb23"
+            authDomain: "nexusauth-login.firebaseapp.com",
+            projectId: "nexusauth-login",
+            storageBucket: "nexusauth-login.firebasestorage.app",
+            messagingSenderId: "316746372020",
+            appId: "1:316746372020:web:868ea1706c9cba81a9d8e1",
+            measurementId: "G-ZL3ND06V35"
         };
 
         // Inicializar Firebase
@@ -892,22 +847,10 @@
         const errorAlert = document.getElementById('errorAlert');
         const successAlert = document.getElementById('successAlert');
         const loginBtn = document.getElementById('loginBtn');
-        const loginBtnText = document.getElementById('loginBtnText');
-        const loginBtnLoader = document.getElementById('loginBtnLoader');
         const registerLink = document.getElementById('registerLink');
         const registerModal = document.getElementById('registerModal');
         const registerForm = document.getElementById('registerForm');
-        const registerBtn = document.getElementById('registerBtn');
-        const registerBtnText = document.getElementById('registerBtnText');
-        const registerBtnLoader = document.getElementById('registerBtnLoader');
         const cancelRegisterBtn = document.getElementById('cancelRegisterBtn');
-        const forgotPassword = document.getElementById('forgotPassword');
-        const passwordResetModal = document.getElementById('passwordResetModal');
-        const passwordResetForm = document.getElementById('passwordResetForm');
-        const resetPasswordBtn = document.getElementById('resetPasswordBtn');
-        const resetPasswordBtnText = document.getElementById('resetPasswordBtnText');
-        const resetPasswordBtnLoader = document.getElementById('resetPasswordBtnLoader');
-        const cancelResetBtn = document.getElementById('cancelResetBtn');
         
         // Elementos de la aplicación principal
         const searchInput = document.getElementById('searchInput');
@@ -922,11 +865,8 @@
         const playerModal = document.getElementById('playerModal');
         const modalTitle = document.getElementById('modalTitle');
         const playerForm = document.getElementById('playerForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const submitBtnText = document.getElementById('submitBtnText');
-        const submitBtnLoader = document.getElementById('submitBtnLoader');
         const cancelBtn = document.getElementById('cancelBtn');
-        const modalCloseButtons = document.querySelectorAll('.modal-close');
+        const modalClose = document.querySelectorAll('.modal-close');
 
         // Variables de estado
         let currentPlayerId = null;
@@ -954,37 +894,27 @@
             }, 3000);
         }
 
-        // Mostrar loading en botón
-        function showButtonLoading(buttonText, buttonLoader) {
-            buttonText.classList.add('hidden');
-            buttonLoader.classList.remove('hidden');
-        }
-
-        // Ocultar loading en botón
-        function hideButtonLoading(buttonText, buttonLoader) {
-            buttonText.classList.remove('hidden');
-            buttonLoader.classList.add('hidden');
-        }
-
         // Manejar estado de autenticación
         auth.onAuthStateChanged(user => {
             if (user) {
                 // Usuario autenticado
-                loginContent.classList.add('hidden');
-                appContent.classList.remove('hidden');
+                loginContent.classList.remove('logged-out-content');
+                loginContent.classList.add('logged-in-content');
+                appContent.classList.remove('logged-in-content');
+                appContent.classList.add('logged-out-content');
                 
                 // Mostrar información del usuario
                 userDisplayName.textContent = user.displayName || user.email;
-                userAvatar.textContent = user.displayName ? 
-                    user.displayName.charAt(0).toUpperCase() : 
-                    user.email.charAt(0).toUpperCase();
+                userAvatar.textContent = user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
                 
                 // Cargar jugadores
                 loadPlayers();
             } else {
                 // Usuario no autenticado
-                appContent.classList.add('hidden');
-                loginContent.classList.remove('hidden');
+                appContent.classList.remove('logged-out-content');
+                appContent.classList.add('logged-in-content');
+                loginContent.classList.remove('logged-in-content');
+                loginContent.classList.add('logged-out-content');
             }
         });
 
@@ -995,19 +925,13 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Validación básica
-            if (!email || !password) {
-                showError('Por favor complete todos los campos');
-                return;
-            }
-            
-            // Mostrar loading
-            showButtonLoading(loginBtnText, loginBtnLoader);
+            // Deshabilitar botón durante el inicio de sesión
             loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
             
             try {
                 await auth.signInWithEmailAndPassword(email, password);
-                showSuccess('¡Bienvenido de nuevo!');
+                showSuccess('¡Inicio de sesión exitoso!');
             } catch (error) {
                 let errorMessage;
                 switch (error.code) {
@@ -1023,17 +947,14 @@
                     case 'auth/wrong-password':
                         errorMessage = 'Contraseña incorrecta';
                         break;
-                    case 'auth/too-many-requests':
-                        errorMessage = 'Demasiados intentos. Cuenta temporalmente bloqueada';
-                        break;
                     default:
                         errorMessage = 'Error al iniciar sesión: ' + error.message;
                 }
                 showError(errorMessage);
             } finally {
-                // Ocultar loading
-                hideButtonLoading(loginBtnText, loginBtnLoader);
+                // Rehabilitar botón
                 loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
             }
         });
 
@@ -1042,32 +963,26 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             
             try {
-                showButtonLoading(loginBtnText, loginBtnLoader);
-                googleLogin.disabled = true;
-                
                 await auth.signInWithPopup(provider);
-                showSuccess('¡Bienvenido!');
+                showSuccess('¡Inicio de sesión con Google exitoso!');
             } catch (error) {
                 let errorMessage = 'Error al iniciar sesión con Google: ';
                 
                 switch (error.code) {
                     case 'auth/account-exists-with-different-credential':
-                        errorMessage += 'Ya existe una cuenta con este email usando otro método';
+                        errorMessage += 'Ya existe una cuenta con este email usando otro método de autenticación';
                         break;
                     case 'auth/popup-closed-by-user':
-                        errorMessage = 'Ventana de autenticación cerrada';
+                        errorMessage = 'El popup de autenticación fue cerrado';
                         break;
                     case 'auth/cancelled-popup-request':
-                        errorMessage = 'Solicitud cancelada';
+                        errorMessage = 'Solicitud de autenticación cancelada';
                         break;
                     default:
                         errorMessage += error.message;
                 }
                 
                 showError(errorMessage);
-            } finally {
-                hideButtonLoading(loginBtnText, loginBtnLoader);
-                googleLogin.disabled = false;
             }
         });
 
@@ -1089,7 +1004,6 @@
         // Cerrar modal de registro
         cancelRegisterBtn.addEventListener('click', () => {
             registerModal.classList.remove('active');
-            registerForm.reset();
         });
 
         // Registro de nuevo usuario
@@ -1101,25 +1015,10 @@
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
             const name = document.getElementById('registerName').value;
             
-            // Validaciones
-            if (!name || !email || !password || !confirmPassword) {
-                showError('Todos los campos son requeridos');
-                return;
-            }
-            
             if (password !== confirmPassword) {
                 showError('Las contraseñas no coinciden');
                 return;
             }
-            
-            if (password.length < 6) {
-                showError('La contraseña debe tener al menos 6 caracteres');
-                return;
-            }
-            
-            // Mostrar loading
-            showButtonLoading(registerBtnText, registerBtnLoader);
-            registerBtn.disabled = true;
             
             try {
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
@@ -1129,17 +1028,17 @@
                     displayName: name
                 });
                 
-                showSuccess('¡Registro exitoso! Bienvenido/a ' + name);
+                showSuccess('¡Registro exitoso! Bienvenido a NexusScouting');
                 registerModal.classList.remove('active');
                 registerForm.reset();
             } catch (error) {
                 let errorMessage;
                 switch (error.code) {
                     case 'auth/email-already-in-use':
-                        errorMessage = 'Este correo ya está registrado';
+                        errorMessage = 'Este correo electrónico ya está en uso';
                         break;
                     case 'auth/invalid-email':
-                        errorMessage = 'Correo electrónico no válido';
+                        errorMessage = 'El correo electrónico no es válido';
                         break;
                     case 'auth/weak-password':
                         errorMessage = 'La contraseña es demasiado débil';
@@ -1148,91 +1047,23 @@
                         errorMessage = 'Error al registrar: ' + error.message;
                 }
                 showError(errorMessage);
-            } finally {
-                // Ocultar loading
-                hideButtonLoading(registerBtnText, registerBtnLoader);
-                registerBtn.disabled = false;
-            }
-        });
-
-        // Mostrar modal para recuperar contraseña
-        forgotPassword.addEventListener('click', (e) => {
-            e.preventDefault();
-            passwordResetModal.classList.add('active');
-        });
-
-        // Cerrar modal de recuperación
-        cancelResetBtn.addEventListener('click', () => {
-            passwordResetModal.classList.remove('active');
-            passwordResetForm.reset();
-        });
-
-        // Enviar email para recuperar contraseña
-        passwordResetForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('resetEmail').value;
-            
-            if (!email) {
-                showError('Por favor ingrese su correo electrónico');
-                return;
-            }
-            
-            // Mostrar loading
-            showButtonLoading(resetPasswordBtnText, resetPasswordBtnLoader);
-            resetPasswordBtn.disabled = true;
-            
-            try {
-                await auth.sendPasswordResetEmail(email);
-                showSuccess('Correo enviado. Revise su bandeja de entrada');
-                passwordResetModal.classList.remove('active');
-                passwordResetForm.reset();
-            } catch (error) {
-                let errorMessage;
-                switch (error.code) {
-                    case 'auth/invalid-email':
-                        errorMessage = 'Correo electrónico no válido';
-                        break;
-                    case 'auth/user-not-found':
-                        errorMessage = 'No existe una cuenta con este correo';
-                        break;
-                    default:
-                        errorMessage = 'Error al enviar correo: ' + error.message;
-                }
-                showError(errorMessage);
-            } finally {
-                // Ocultar loading
-                hideButtonLoading(resetPasswordBtnText, resetPasswordBtnLoader);
-                resetPasswordBtn.disabled = false;
             }
         });
 
         // Cargar jugadores desde Firestore
         function loadPlayers() {
-            playersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Cargando jugadores...</td></tr>';
-            
-            playersRef.orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+            playersRef.orderBy('name').onSnapshot(snapshot => {
                 players = [];
                 snapshot.forEach(doc => {
-                    const player = doc.data();
                     players.push({
                         id: doc.id,
-                        name: player.name,
-                        rank: player.rank,
-                        role: player.role,
-                        region: player.region,
-                        kd: player.kd,
-                        winRate: player.winRate,
-                        status: player.status,
-                        link: player.link,
-                        notes: player.notes,
-                        createdAt: player.createdAt?.toDate() || new Date()
+                        ...doc.data()
                     });
                 });
                 renderPlayers();
             }, error => {
                 console.error('Error cargando jugadores:', error);
-                playersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--danger);">Error al cargar jugadores</td></tr>';
+                showError('Error al cargar los jugadores');
             });
         }
 
@@ -1272,16 +1103,17 @@
                 // Determinar clase de badge según el estado
                 let badgeClass = 'badge-primary';
                 if (player.status === 'En observación') badgeClass = 'badge-warning';
+                if (player.status === 'Reclutado') badgeClass = 'badge-primary';
                 if (player.status === 'Descarte') badgeClass = 'badge-danger';
                 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><a href="${player.link || '#'}" class="player-link" target="_blank">${player.name}</a></td>
+                    <td><a href="${player.link}" class="player-link" target="_blank">${player.name}</a></td>
                     <td>${player.rank}</td>
                     <td>${player.role}</td>
                     <td>${player.region}</td>
-                    <td>${player.kd.toFixed(2)}</td>
-                    <td>${player.winRate.toFixed(1)}%</td>
+                    <td>${player.kd}</td>
+                    <td>${player.winRate}%</td>
                     <td><span class="badge ${badgeClass}">${player.status}</span></td>
                     <td>
                         <button class="btn btn-primary btn-sm edit-btn" data-id="${player.id}"><i class="fas fa-edit"></i></button>
@@ -1316,7 +1148,7 @@
                 document.getElementById('playerRegion').value = player.region;
                 document.getElementById('playerKD').value = player.kd;
                 document.getElementById('playerWinRate').value = player.winRate;
-                document.getElementById('playerLink').value = player.link || '';
+                document.getElementById('playerLink').value = player.link;
                 document.getElementById('playerStatus').value = player.status;
                 document.getElementById('playerNotes').value = player.notes || '';
             } else {
@@ -1324,8 +1156,6 @@
                 currentPlayerId = null;
                 modalTitle.textContent = 'Agregar Nuevo Jugador';
                 playerForm.reset();
-                document.getElementById('playerKD').value = '1.0';
-                document.getElementById('playerWinRate').value = '50.0';
             }
             
             playerModal.classList.add('active');
@@ -1340,55 +1170,19 @@
         async function savePlayer(e) {
             e.preventDefault();
             
-            const user = auth.currentUser;
-            if (!user) {
-                showError('Debes iniciar sesión para esta acción');
-                closeModal();
-                return;
-            }
-
-            // Validar campos requeridos
-            const requiredFields = ['playerName', 'playerRank', 'playerRole', 'playerRegion', 'playerKD', 'playerWinRate', 'playerLink'];
-            const missingFields = [];
-            
-            requiredFields.forEach(field => {
-                const value = document.getElementById(field).value;
-                if (!value) missingFields.push(field.replace('player', ''));
-            });
-            
-            if (missingFields.length > 0) {
-                showError(`Faltan campos requeridos: ${missingFields.join(', ')}`);
-                return;
-            }
-
             const playerData = {
-                name: document.getElementById('playerName').value.trim(),
+                name: document.getElementById('playerName').value,
                 rank: document.getElementById('playerRank').value,
                 role: document.getElementById('playerRole').value,
                 region: document.getElementById('playerRegion').value,
                 kd: parseFloat(document.getElementById('playerKD').value),
                 winRate: parseFloat(document.getElementById('playerWinRate').value),
                 status: document.getElementById('playerStatus').value,
-                link: document.getElementById('playerLink').value.trim(),
-                notes: document.getElementById('playerNotes').value.trim(),
+                link: document.getElementById('playerLink').value,
+                notes: document.getElementById('playerNotes').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
-
-            // Validación numérica
-            // Validación numérica
-if (isNaN(playerData.kd)) {
-    showError('El ratio K/D debe ser un número');
-    return;
-}
-
-if (isNaN(playerData.winRate)) {
-    showError('El Win Rate debe ser un número');
-    return;
-}
-
-            // Mostrar loading
-            showButtonLoading(submitBtnText, submitBtnLoader);
-            submitBtn.disabled = true;
             
             try {
                 if (currentPlayerId) {
@@ -1397,21 +1191,14 @@ if (isNaN(playerData.winRate)) {
                     showSuccess('Jugador actualizado correctamente');
                 } else {
                     // Agregar nuevo jugador
-                    playerData.createdBy = user.uid;
-                    playerData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
                     await playersRef.add(playerData);
                     showSuccess('Jugador agregado correctamente');
                 }
                 
                 closeModal();
-                playerForm.reset();
             } catch (error) {
                 console.error('Error guardando jugador:', error);
-                showError('Error al guardar el jugador: ' + error.message);
-            } finally {
-                // Ocultar loading
-                hideButtonLoading(submitBtnText, submitBtnLoader);
-                submitBtn.disabled = false;
+                showError('Error al guardar el jugador');
             }
         }
 
@@ -1425,7 +1212,7 @@ if (isNaN(playerData.winRate)) {
 
         // Eliminar jugador
         async function deletePlayer(id) {
-            if (!confirm('¿Está seguro que desea eliminar este jugador? Esta acción no se puede deshacer.')) {
+            if (!confirm('¿Está seguro que desea eliminar este jugador?')) {
                 return;
             }
             
@@ -1434,7 +1221,7 @@ if (isNaN(playerData.winRate)) {
                 showSuccess('Jugador eliminado correctamente');
             } catch (error) {
                 console.error('Error eliminando jugador:', error);
-                showError('Error al eliminar el jugador: ' + error.message);
+                showError('Error al eliminar el jugador');
             }
         }
 
@@ -1461,7 +1248,7 @@ if (isNaN(playerData.winRate)) {
         cancelBtn.addEventListener('click', closeModal);
         
         // Cerrar modales al hacer clic en la X
-        modalCloseButtons.forEach(closeBtn => {
+        modalClose.forEach(closeBtn => {
             closeBtn.addEventListener('click', () => {
                 document.querySelector('.modal.active').classList.remove('active');
             });
@@ -1481,20 +1268,6 @@ if (isNaN(playerData.winRate)) {
         if (urlParams.has('success')) {
             showSuccess('¡Registro exitoso! Por favor inicia sesión');
         }
-
-        // Inicializar la aplicación
-        document.addEventListener('DOMContentLoaded', () => {
-            // Verificar si hay un usuario logueado al cargar
-            auth.onAuthStateChanged(user => {
-                if (user) {
-                    loginContent.classList.add('hidden');
-                    appContent.classList.remove('hidden');
-                } else {
-                    appContent.classList.add('hidden');
-                    loginContent.classList.remove('hidden');
-                }
-            });
-        });
     </script>
 </body>
 </html>
