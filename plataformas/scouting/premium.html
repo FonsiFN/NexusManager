@@ -817,8 +817,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
+        // Configuración de Firebase para Autenticación
+        const firebaseConfigAuth = {
             apiKey: "AIzaSyCEJU0U6sl8o5vy2vaVe32o-QU2GQhvc3Q",
             authDomain: "nexusauth-login.firebaseapp.com",
             projectId: "nexusauth-login",
@@ -828,13 +828,28 @@
             measurementId: "G-ZL3ND06V35"
         };
 
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        // Configuración de Firebase para Datos (Jugadores)
+        const firebaseConfigData = {
+            apiKey: "AIzaSyCtvc99FdiqdM9nODUsPU2yxPRYCJzDjWo",
+            authDomain: "scouting-pro-nexus.firebaseapp.com",
+            projectId: "scouting-pro-nexus",
+            storageBucket: "scouting-pro-nexus.firebasestorage.app",
+            messagingSenderId: "351190930586",
+            appId: "1:351190930586:web:25373dc865e74fb328bb23",
+            measurementId: "G-XX4YF4Y5WJ"
+        };
 
-        // Referencia a la colección de jugadores
-        const playersRef = db.collection("players");
+        // Inicializar ambas instancias de Firebase
+        const authApp = firebase.initializeApp(firebaseConfigAuth, "authApp");
+        const dataApp = firebase.initializeApp(firebaseConfigData, "dataApp");
+
+        // Obtener referencias de los servicios
+        const auth = authApp.auth();
+        const dbData = dataApp.firestore();
+        const dbAuth = authApp.firestore();
+
+        // Referencia a la colección de jugadores en la base de datos de datos
+        const playersRef = dbData.collection("players");
 
         // Elementos del DOM
         const appContent = document.getElementById('appContent');
