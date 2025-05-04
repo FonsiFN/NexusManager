@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusManager | Planes Esports</title>
+    <title>NexusManager | Packs Jugador</title>
     <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -380,6 +380,84 @@
             box-shadow: 0 0 20px var(--white);
         }
 
+        /* Estilos para la tabla de comparación */
+        .comparison-table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 80px auto 0;
+            border-collapse: collapse;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+        
+        .comparison-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--neon-blue);
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        
+        .comparison-table td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            font-size: 1rem;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .feature-name {
+            text-align: left;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .comparison-table .checkmark {
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-table .x-mark {
+            color: var(--discount-red);
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(0, 240, 255, 0.05);
+        }
+        
+        .table-container {
+            padding: 0 20px;
+            margin-bottom: 100px;
+        }
+        
+        .table-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .table-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 15px auto 0;
+        }
+
         /* --- Footer --- */
         .footer {
             background-color: var(--black);
@@ -466,6 +544,11 @@
                 width: 80%;
                 max-width: 500px;
             }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
         }
         @media (max-width: 768px) {
             .plans-hero {
@@ -488,19 +571,13 @@
                 margin-left: 20px;
                 font-size: 0.85rem;
             }
+            
+            .comparison-table th, 
+            .comparison-table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
         }
-    </style>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusManager | Packs Jugador</title>
-    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* [Todo el CSS anterior se mantiene igual] */
     </style>
 </head>
 <body>
@@ -598,9 +675,133 @@
                     <button class="btn-plan">DOMINAR</button>
                 </div>
             </div>
+            
+            <!-- Tabla de comparación -->
+            <div class="table-container">
+                <h3 class="table-title">COMPARATIVA DE PLANES</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Iniciación (4,99€/mes)</th>
+                            <th>Competitivo (9,99€/mes)</th>
+                            <th>Élite (19,99€/mes)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Análisis de partidas</td>
+                            <td>Básico (2/mes)</td>
+                            <td>Avanzado (5/mes)</td>
+                            <td>Ilimitado</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Guías de estrategias</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Acceso a scrims semanales</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Recursos para mejorar mecánicas</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Entrenamientos personalizados</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Acceso a torneos exclusivos</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Sesiones con coaches profesionales</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Scouting por parte de equipos</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Coaching 1 a 1 semanal</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Preparación para torneos oficiales</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Representación en negociaciones</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Conexión directa con organizaciones</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Plan de desarrollo profesional</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Soporte</td>
+                            <td>Email</td>
+                            <td>Prioritario</td>
+                            <td>24/7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <!-- [Footer se mantiene igual] -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a>
+                <a href="https://fonsifn.github.io/NexusManager/planes">Packs</a>
+                <a href="https://fonsifn.github.io/NexusManager/anuncios">Anuncios</a>
+                <a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a>
+                <a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2023 NexusManager. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
