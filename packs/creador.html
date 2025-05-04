@@ -379,7 +379,97 @@
             color: var(--white);
             box-shadow: 0 0 20px var(--white);
         }
+/* Estilos para la tabla de comparación */
+.comparison-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 80px auto 0;
+    border-collapse: collapse;
+    background: rgba(30, 30, 30, 0.8);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
 
+.comparison-table th {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--neon-blue);
+    padding: 20px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--neon-blue);
+}
+
+.comparison-table td {
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    font-size: 1rem;
+}
+
+.comparison-table .feature-name {
+    text-align: left;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.comparison-table .checkmark {
+    color: var(--neon-blue);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.comparison-table .x-mark {
+    color: var(--discount-red);
+    font-weight: bold;
+}
+
+.comparison-table tr:hover {
+    background: rgba(0, 240, 255, 0.05);
+}
+
+.table-container {
+    padding: 0 20px;
+    margin-bottom: 100px;
+}
+
+.table-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--neon-blue);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.table-title:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--neon-blue);
+    margin: 15px auto 0;
+}
+
+@media (max-width: 768px) {
+    .comparison-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .comparison-table th, 
+    .comparison-table td {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .table-title {
+        font-size: 1.5rem;
+    }
+}
         /* --- Footer --- */
         .footer {
             background-color: var(--black);
@@ -585,11 +675,121 @@
                         <li>Soporte 24/7</li>
                     </ul>
                     <button class="btn-plan">PROFESIONALIZAR</button>
-                </div>
+                
+<!-- Sección Planes -->
+    <section class="plans-section">
+        <div class="container">
+            <h2>PLANES PARA CREADORES DE CONTENIDO</h2>
+            
+            <div class="plans-container">
+                <!-- ... (tus 3 plan-cards existentes se mantienen igual) ... -->
             </div>
-        </div>
-    </section>
 
+            <!-- Tabla de Comparación -->
+            <div class="table-container">
+                <h3 class="table-title">COMPARATIVA DE PLANES</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Emergente (4,99€/mes)</th>
+                            <th>Crecimiento (12,99€/mes)</th>
+                            <th>Profesional (24,99€/mes)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Análisis de contenido</td>
+                            <td>Básico</td>
+                            <td>Avanzado</td>
+                            <td>Lleno</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Plantillas para redes sociales</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Guía de crecimiento inicial</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="x-mark">❌</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Acceso a webinars mensuales</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                            <td class="x-mark">❌</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Estrategias personalizadas de crecimiento</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Acceso a herramientas de análisis</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Sesiones mensuales con expertos</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Oportunidades de colaboración</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Coaching semanal de contenido</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Estrategias avanzadas de monetización</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Conexión con patrocinadores</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Gestión de redes sociales</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Asesoría legal básica</td>
+                            <td class="x-mark">❌</td>
+                            <td class="x-mark">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Soporte</td>
+                            <td>Correo electrónico</td>
+                            <td>Prioridad</td>
+                            <td>24/7</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+</section>
 <!-- [Footer igual que en jugador.html] -->
 
     <!-- Footer -->
