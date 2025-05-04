@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager Pro | Análisis Avanzado para Jugadores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-green: #0a2e1a;
+            --medium-green: #1a5c2c;
+            --light-green: #2ecc71;
+            --neon-green: #00ff88;
+            --white: #f8f9fa;
+            --gray: #2c3e50;
+            --accent: #27ae60;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-green), var(--gray));
+            color: var(--white);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .analysis-card {
+            background: rgba(26, 92, 44, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .analysis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
+        }
+        
+        .analysis-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.3);
+        }
+        
+        .analysis-header i {
+            font-size: 2.8rem;
+            color: var(--neon-green);
+            margin-right: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .analysis-header h2 {
+            margin: 0;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-green), var(--light-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--neon-green);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(46, 204, 113, 0.5);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.2);
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .analysis-button {
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+            color: var(--dark-green);
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .analysis-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+        }
+        
+        .analysis-button:active {
+            transform: translateY(1px);
+        }
+        
+        .analysis-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .analysis-button:hover::after {
+            opacity: 1;
+        }
+        
+        .results-container {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(10, 46, 26, 0.7);
+            border-radius: 12px;
+            border-left: 5px solid var(--neon-green);
+            box-shadow: var(--shadow);
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .results-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .results-header i {
+            font-size: 1.8rem;
+            color: var(--neon-green);
+            margin-right: 15px;
+        }
+        
+        .results-header h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .metric-group {
+            margin-bottom: 25px;
+            background: rgba(26, 92, 44, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--light-green);
+        }
+        
+        .metric-title {
+            color: var(--neon-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .metric-title i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .metric-value {
+            font-weight: 700;
+            color: var(--neon-green);
+            background: rgba(0, 255, 136, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .metric-feedback {
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+        
+        .metric-tips {
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .metric-tips li {
+            margin-bottom: 8px;
+            position: relative;
+            list-style-type: none;
+        }
+        
+        .metric-tips li::before {
+            content: '→';
+            color: var(--neon-green);
+            position: absolute;
+            left: -20px;
+        }
+        
+        .save-report {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .save-btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .save-btn i {
+            margin-right: 8px;
+        }
+        
+        .save-btn:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .progress-container {
+            margin-top: 30px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--light-green), var(--neon-green));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1s ease-out;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+            
+            .analysis-card {
+                padding: 20px;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .analysis-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Efecto de partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(0, 255, 136, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efecto de partículas -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="analysis-card">
+            <div class="analysis-header">
+                <i class="fas fa-chart-line"></i>
+                <h2>ANÁLISIS DE RENDIMIENTO</h2>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label><i class="fas fa-crosshairs"></i> K/D Ratio (Últimos 7 días)</label>
+                    <input type="number" id="kd-ratio" step="0.1" placeholder="Ej: 2.5" min="0">
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-trophy"></i> Victorias (Últimos 7 días)</label>
+                    <input type="number" id="wins" placeholder="Ej: 12" min="0">
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-clock"></i> Horas jugadas (Semana)</label>
+                    <input type="number" id="hours-played" placeholder="Ej: 25" min="0">
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-level-up-alt"></i> Nivel en Fortnite</label>
+                    <select id="player-level">
+                        <option value="beginner">Principiante (0-100)</option>
+                        <option value="intermediate">Intermedio (100-300)</option>
+                        <option value="advanced">Avanzado (300+)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                <button onclick="analyzePlayer()" class="analysis-button">
+                    <i class="fas fa-rocket"></i> Analizar Rendimiento
+                </button>
+            </div>
+            
+            <div id="player-results" class="results-container">
+                <div class="results-header">
+                    <i class="fas fa-star"></i>
+                    <h3>INFORME DE RENDIMIENTO</h3>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overall-progress"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span>Principiante</span>
+                        <span>Intermedio</span>
+                        <span>Avanzado</span>
+                        <span>Élite</span>
+                    </div>
+                </div>
+                
+                <div id="player-feedback"></div>
+                
+                <div class="save-report">
+                    <button class="save-btn" onclick="saveReport()">
+                        <i class="fas fa-save"></i> Guardar Informe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Crear partículas de fondo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Posición aleatoria
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100 + 100; // Comenzar abajo
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
+                
+                // Duración de animación aleatoria
+                const duration = Math.random() * 10 + 10;
+                
+                // Retraso aleatorio
+                const delay = Math.random() * -20;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Llamar a la función cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        function analyzePlayer() {
+            const kd = parseFloat(document.getElementById('kd-ratio').value) || 0;
+            const wins = parseInt(document.getElementById('wins').value) || 0;
+            const hours = parseInt(document.getElementById('hours-played').value) || 0;
+            const level = document.getElementById('player-level').value;
+            
+            // Validar entradas
+            if (kd < 0 || wins < 0 || hours < 0) {
+                alert("Por favor ingresa valores válidos (números positivos)");
+                return;
+            }
+            
+            let feedback = "";
+            let overallScore = 0;
+            
+            // Análisis K/D Ratio
+            const kdRating = analyzeKDRatio(kd, level);
+            overallScore += kdRating.score;
+            feedback += `
+                <div class="metric-group">
+                    <div class="metric-title">
+                        <i class="fas fa-crosshairs"></i>
+                        K/D RATIO: <span class="metric-value">${kd.toFixed(1)}</span>
+                    </div>
+                    <div class="metric-feedback">${kdRating.feedback}</div>
+                    ${kdRating.tips ? `
+                        <div class="metric-tips">
+                            <strong>Consejos para mejorar:</strong>
+                            <ul>${kdRating.tips}</ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Análisis de Victorias
+            const winsRating = analyzeWins(wins, hours, level);
+            overallScore += winsRating.score;
+            feedback += `
+                <div class="metric-group">
+                    <div class="metric-title">
+                        <i class="fas fa-trophy"></i>
+                        VICTORIAS: <span class="metric-value">${wins}</span> en <span class="metric-value">${hours}</span> horas
+                    </div>
+                    <div class="metric-feedback">${winsRating.feedback}</div>
+                    ${winsRating.tips ? `
+                        <div class="metric-tips">
+                            <strong>Consejos para mejorar:</strong>
+                            <ul>${winsRating.tips}</ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Análisis de Tiempo de Juego
+            const hoursRating = analyzePlayTime(hours, level);
+            overallScore += hoursRating.score;
+            feedback += `
+                <div class="metric-group">
+                    <div class="metric-title">
+                        <i class="fas fa-clock"></i>
+                        TIEMPO DE JUEGO: <span class="metric-value">${hours} horas</span>
+                    </div>
+                    <div class="metric-feedback">${hoursRating.feedback}</div>
+                    ${hoursRating.tips ? `
+                        <div class="metric-tips">
+                            <strong>Consejos para mejorar:</strong>
+                            <ul>${hoursRating.tips}</ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Calcular puntuación general (0-100)
+            overallScore = Math.min(Math.round((overallScore / 3) * 10), 100);
+            
+            // Mostrar resultados
+            document.getElementById('player-feedback').innerHTML = feedback;
+            document.getElementById('player-results').style.display = 'block';
+            
+            // Animar barra de progreso
+            setTimeout(() => {
+                document.getElementById('overall-progress').style.width = `${overallScore}%`;
+            }, 100);
+            
+            // Scroll a resultados
+            document.getElementById('player-results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function analyzeKDRatio(kd, level) {
+            let feedback, tips = '';
+            let score = 0; // Puntuación de 0 a 10
+            
+            if(level === 'beginner') {
+                if(kd < 0.5) {
+                    feedback = "Tu ratio K/D indica que necesitas trabajar en aspectos fundamentales como puntería y posicionamiento.";
+                    tips = "<li>Practica 30 min/día en mapas de entrenamiento creativo</li><li>Enfócate en sobrevivir antes que eliminar</li><li>Usa más cobertura y construcciones básicas</li><li>Juega con armas que te sean cómodas</li>";
+                    score = 3;
+                } else if(kd >= 0.5 && kd < 1.0) {
+                    feedback = "Estás en el rango normal para principiantes, mostrando comprensión básica del combate.";
+                    tips = "<li>Entrena con armas de precisión 15 min/día</li><li>Analiza tus repeticiones para identificar errores</li><li>Domina 2-3 armas específicas</li><li>Mejora tu puntería en movimiento</li>";
+                    score = 6;
+                } else {
+                    feedback = "¡Buen rendimiento para tu nivel! Demuestras habilidades superiores a la media de principiantes.";
+                    tips = "<li>Mantén este ritmo y sigue practicando</li><li>Comienza a aprender técnicas intermedias</li><li>Juega con jugadores más experimentados</li>";
+                    score = 8;
+                }
+            } else if(level === 'intermediate') {
+                if(kd < 1.2) {
+                    feedback = "Ratio por debajo del promedio para intermedios. Necesitas mejorar tu consistencia en combates.";
+                    tips = "<li>Enfócate en posicionamiento estratégico</li><li>Mejora tus cambios de armas rápidos</li><li>Estudia rutas de movimiento en el mapa</li><li>Trabaja en tu puntería bajo presión</li>";
+                    score = 4;
+                } else if(kd >= 1.2 && kd < 2.0) {
+                    feedback = "Rango sólido para intermedios. Tienes buen equilibrio entre agresividad y cautela.";
+                    tips = "<li>Perfecciona tus edits de construcción</li><li>Trabaja en tu game sense</li><li>Analiza partidas de jugadores profesionales</li><li>Mejora tu puntería a larga distancia</li>";
+                    score = 7;
+                } else {
+                    feedback = "¡Excelente ratio! Estás en el rango avanzado para jugadores intermedios.";
+                    tips = "<li>Perfecciona técnicas avanzadas de construcción</li><li>Considera jugar torneos locales</li><li>Analiza tus debilidades en situaciones específicas</li>";
+                    score = 9;
+                }
+            } else { // advanced
+                if(kd < 2.0) {
+                    feedback = "Por debajo de lo esperado para avanzados. Revisa tus decisiones en momentos clave.";
+                    tips = "<li>Analiza tus VODs con un coach</li><li>Trabaja en consistencia en diferentes escenarios</li><li>Mejora tu toma de decisiones en late game</li><li>Optimiza tu sensibilidad y configuración</li>";
+                    score = 5;
+                } else if(kd >= 2.0 && kd < 3.0) {
+                    feedback = "Rango competitivo sólido. Estás listo para torneos de alto nivel.";
+                    tips = "<li>Enfócate en metas específicas por sesión</li><li>Participa en más torneos competitivos</li><li>Analiza jugadores profesionales en tu misma posición</li><li>Perfecciona tus rotaciones</li>";
+                    score = 8;
+                } else {
+                    feedback = "¡Nivel semi-profesional! Tu ratio K/D está entre los mejores.";
+                    tips = "<li>Considera crear contenido o competir profesionalmente</li><li>Busca patrocinios o equipos</li><li>Mentorea a otros jugadores</li><li>Enfócate en mantener la consistencia</li>";
+                    score = 10;
+                }
+            }
+            
+            return { feedback, tips, score };
+        }
+        
+        function analyzeWins(wins, hours, level) {
+            const winsPerHour = hours > 0 ? (wins / hours) : 0;
+            let feedback, tips = '';
+            let score = 0;
+            
+            if(level === 'beginner') {
+                if(winsPerHour < 0.1) {
+                    feedback = "Pocas victorias para tu tiempo jugado. Enfócate en estrategias para llegar al late game.";
+                    tips = "<li>Juega más en modo Arena para práctica seria</li><li>Evita zonas muy concurridas al inicio</li><li>Mejora tu gestión de recursos</li><li>Observa jugadores con estilo de juego pasivo</li>";
+                    score = 3;
+                } else if(winsPerHour >= 0.1 && winsPerHour < 0.3) {
+                    feedback = "Rango normal de victorias para principiantes. Vas por buen camino.";
+                    tips = "<li>Sigue practicando el late game</li><li>Mejora tu toma de decisiones en top 10</li><li>Analiza las zonas finales del mapa</li><li>Aprende a rotar eficientemente</li>";
+                    score = 6;
+                } else {
+                    feedback = "¡Excelente ratio de victorias! Superas a la mayoría de principiantes.";
+                    tips = "<li>Intenta aumentar la dificultad jugando con intermedios</li><li>Juega en lobbies más competitivos</li><li>Analiza tus victorias para replicar estrategias</li>";
+                    score = 8;
+                }
+            } else if(level === 'intermediate') {
+                if(winsPerHour < 0.2) {
+                    feedback = "Ratio de victorias bajo para intermedios. Trabaja en tu juego en late game.";
+                    tips = "<li>Mejora tus rotaciones entre zonas</li><li>Analiza zonas del mapa donde rindes menos</li><li>Trabaja en tu construcción defensiva</li><li>Estudia patrones de storm</li>";
+                    score = 4;
+                } else if(winsPerHour >= 0.2 && winsPerHour < 0.5) {
+                    feedback = "Rango competitivo sólido. Tienes buen entendimiento del juego.";
+                    tips = "<li>Perfecciona tu uso de movilidad</li><li>Analiza decisiones en top 5</li><li>Mejora tu awareness de enemigos</li><li>Practica bajo presión</li>";
+                    score = 7;
+                } else {
+                    feedback = "¡Ratio de victorias excepcional! Estás listo para competir seriamente.";
+                    tips = "<li>Considera participar en torneos</li><li>Analiza jugadores profesionales</li><li>Perfecciona tus debilidades</li><li>Enfócate en consistencia</li>";
+                    score = 9;
+                }
+            } else { // advanced
+                if(winsPerHour < 0.3) {
+                    feedback = "Por debajo de lo esperado para avanzados. Revisa tus decisiones en late game.";
+                    tips = "<li>Analiza tus VODs con detalle</li><li>Trabaja en consistencia en diferentes escenarios</li><li>Mejora tu posicionamiento en zonas finales</li><li>Practica situaciones específicas</li>";
+                    score = 5;
+                } else if(winsPerHour >= 0.3 && winsPerHour < 0.7) {
+                    feedback = "Rango profesional. Tus victorias demuestran alto nivel de habilidad.";
+                    tips = "<li>Perfecciona técnicas avanzadas</li><li>Participa en torneos mayores</li><li>Analiza tus errores en victorias</li><li>Optimiza cada aspecto de tu juego</li>";
+                    score = 8;
+                } else {
+                    feedback = "¡Nivel elite! Tu ratio de victorias es comparable al de profesionales.";
+                    tips = "<li>Considera streaming o competición profesional</li><li>Crea guías para otros jugadores</li><li>Busca un equipo competitivo</li><li>Mantén tu motivación alta</li>";
+                    score = 10;
+                }
+            }
+            
+            return { feedback, tips, score };
+        }
+        
+        function analyzePlayTime(hours, level) {
+            const dailyAvg = hours / 7;
+            let feedback, tips = '';
+            let score = 0;
+            
+            if(level === 'beginner') {
+                if(hours < 10) {
+                    feedback = "Poco tiempo para mejorar significativamente. La práctica constante es clave.";
+                    tips = "<li>Intenta jugar al menos 2 horas diarias</li><li>Enfócate en sesiones de práctica estructuradas</li><li>Combina partidas con entrenamiento creativo</li><li>Establece un horario de juego</li>";
+                    score = 3;
+                } else if(hours >= 10 && hours < 20) {
+                    feedback = "Tiempo adecuado para progresar como principiante. Buen equilibrio.";
+                    tips = "<li>Mantén este ritmo de práctica</li><li>Distribuye tiempo entre partidas y entrenamiento</li><li>Toma descansos para evitar fatiga</li><li>Enfócate en mejorar un aspecto por sesión</li>";
+                    score = 6;
+                } else {
+                    feedback = "Mucho tiempo invertido - cuidado con el burnout. Calidad sobre cantidad.";
+                    tips = "<li>Asegúrate de tomar descansos regulares</li><li>Enfócate en práctica deliberada</li><li>Combina con ejercicio físico</li><li>Analiza tus sesiones para maximizar eficiencia</li>";
+                    score = 5; // Menor puntuación por posible burnout
+                }
+            } else if(level === 'intermediate') {
+                if(hours < 15) {
+                    feedback = "Podrías invertir más horas para mejorar consistentemente.";
+                    tips = "<li>Intenta llegar a 3 horas diarias estructuradas</li><li>Crea un plan de entrenamiento</li><li>Divide tu tiempo entre ranked y práctica</li><li>Establece metas semanales</li>";
+                    score = 4;
+                } else if(hours >= 15 && hours < 30) {
+                    feedback = "Rango óptimo para progresar como intermedio. Buen compromiso.";
+                    tips = "<li>Mantén este ritmo con consistencia</li><li>Divide tu tiempo entre ranked y práctica específica</li><li>Analiza tus progresos semanalmente</li><li>Toma un día de descanso semanal</li>";
+                    score = 7;
+                } else {
+                    feedback = "Muchas horas - vigila tu salud y evita el burnout.";
+                    tips = "<li>Considera reducir a 4-5 horas diarias más productivas</li><li>Enfócate en calidad de práctica</li><li>Prioriza descanso y recuperación</li><li>Mantén un diario de progreso</li>";
+                    score = 6; // Menor puntuación por riesgo de burnout
+                }
+            } else { // advanced
+                if(hours < 25) {
+                    feedback = "Pocas horas para mantener nivel avanzado. Necesitas más práctica.";
+                    tips = "<li>Establece un mínimo de 4 horas diarias</li><li>Crea un plan de entrenamiento profesional</li><li>Prioriza consistencia sobre cantidad</li><li>Contrata un coach para optimizar tiempo</li>";
+                    score = 5;
+                } else if(hours >= 25 && hours < 40) {
+                    feedback = "Rango profesional de dedicación. Bien equilibrado para competir.";
+                    tips = "<li>Mantén este compromiso con consistencia</li><li>Optimiza tus rutinas de práctica</li><li>Analiza tus sesiones para maximizar eficiencia</li><li>No descuides salud física y mental</li>";
+                    score = 8;
+                } else {
+                    feedback = "Horario de entrenamiento profesional completo. Cuidado con excesos.";
+                    tips = "<li>Asegúrate de tener descansos adecuados</li><li>Combina con ejercicio físico regular</li><li>Considera coaching profesional</li><li>Mantén balance con otras actividades</li>";
+                    score = 7; // Menor puntuación por posible exceso
+                }
+            }
+            
+            return { feedback, tips, score };
+        }
+        
+        function saveReport() {
+            const resultsContent = document.getElementById('player-results').innerText;
+            const blob = new Blob([resultsContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `analisis-nexusmanager-${new Date().toISOString().slice(0,10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Efecto visual
+            const btn = document.querySelector('.save-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i> Informe Guardado';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-save"></i> Guardar Informe';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
