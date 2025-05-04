@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusManager | Planes Esports</title>
+    <title>NexusManager | Adquisición de Packs</title>
     <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,8 +14,6 @@
             --neon-blue: #00F0FF;
             --white: #F2F2F2;
             --gray: #1E1E1E;
-            --accent: #FF2A6D;
-            --discount-red: #FF3D3D;
         }
         * {
             margin: 0;
@@ -27,6 +26,7 @@
             color: var(--white);
             overflow-x: hidden;
             padding-top: 80px;
+            line-height: 1.8;
         }
 
         /* --- Navbar --- */
@@ -79,7 +79,13 @@
         .nav-links a:hover:after {
             width: 100%;
         }
-/* Estilos para el selector de packs */
+
+        /* --- Contenido Principal --- */
+        .content-wrapper {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 0 30px;
+        }
 .pack-selector-container {
     margin-top: 30px;
     position: relative;
@@ -139,245 +145,51 @@
     background: var(--neon-blue);
     color: var(--black);
 }
-        /* --- Hero Mejorado --- */
-        .plans-hero {
-            height: 50vh;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: 
-                linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
-                url('https://i.imgur.com/esports-bg-2.jpg') center/cover;
-            margin-bottom: 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .plans-hero:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, var(--gray), transparent);
-        }
-        .plans-hero h1 {
+        .content-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4rem;
-            text-transform: uppercase;
+            font-size: 3.5rem;
             background: linear-gradient(90deg, var(--white), var(--neon-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-        .plans-hero p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* --- Sección Planes Mejorada --- */
-        .plans-section {
-            padding: 100px 0;
-            background-color: var(--gray);
-            position: relative;
-        }
-        .plans-section:before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, var(--gray), transparent);
-        }
-        .plans-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 80px;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            text-align: center;
-            position: relative;
-            padding-top: 30px;
-        }
-        .plans-section h2:after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: var(--neon-blue);
-            margin: 25px auto 0;
-        }
-        .plans-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .plan-card {
-            background: rgba(30, 30, 30, 0.8);
-            border: 1px solid var(--neon-blue);
-            padding: 50px 35px;
-            position: relative;
-            transition: all 0.5s;
-            width: 360px;
-            max-width: 100%;
-            flex: 1;
-            min-width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-        .plan-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
-        }
-        .plan-badge {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: var(--neon-blue);
-            color: var(--black);
-            padding: 8px 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(0, 240, 255, 0.3);
-        }
-        .discount-badge {
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            background: var(--discount-red);
-            color: var(--white);
-            padding: 8px 15px;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(255, 61, 61, 0.3);
-        }
-        .plan-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: var(--neon-blue);
-            text-align: center;
-        }
-        .plan-price {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin: 25px 0;
-            color: var(--white);
-            text-align: center;
-            position: relative;
-        }
-        .discount-percent {
-            font-size: 1.2rem;
-            color: var(--discount-red);
-            font-weight: bold;
-            margin-left: 5px;
-        }
-        .plan-price span {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-        .plan-features {
-            list-style: none;
             margin-bottom: 40px;
-            text-align: left;
-            min-height: 280px;
+            text-align: center;
+            text-transform: uppercase;
         }
-        .plan-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-            position: relative;
-            padding-left: 30px;
-            font-size: 1.05rem;
-        }
-        .plan-features li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
+        .content-subtitle {
             color: var(--neon-blue);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        .btn-plan {
-            background: transparent;
-            color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            padding: 15px 30px;
+            font-size: 1.5rem;
+            margin: 50px 0 20px;
+            text-align: center;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            width: 100%;
-            border-radius: 5px;
         }
-        .btn-plan:hover {
-            background: var(--neon-blue);
-            color: var(--black);
-            box-shadow: 0 0 20px var(--neon-blue);
+        .content-text {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            text-align: justify;
         }
-        
-        /* Plan Nexus */
-        .nexus-plan {
-            width: 100%;
-            max-width: 1120px;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(30, 30, 30, 0.9));
-            border: 2px solid var(--neon-blue);
-            margin-top: 60px;
-            padding: 60px 40px;
-        }
-        .nexus-plan:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3);
-        }
-        .nexus-plan h3 {
-            font-size: 2.8rem;
+        .highlight {
             color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
+            font-weight: 700;
         }
-        .nexus-plan .plan-price {
-            font-size: 4.5rem;
+        .discord-link {
+            display: inline-block;
+            background: #5865F2;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s;
         }
-        .nexus-plan .plan-features {
-            column-count: 3;
-            column-gap: 40px;
-            min-height: auto;
+        .discord-link:hover {
+            background: #4752C4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
         }
-        
-        /* Plan Beta */
-        .beta-plan {
-            width: 300px;
-            margin-bottom: 40px;
-            background: rgba(30, 30, 30, 0.6);
-            border: 1px solid var(--white);
-        }
-        .beta-plan .plan-badge {
-            background: var(--white);
-            color: var(--black);
-        }
-        .beta-plan .btn-plan {
-            background: var(--white);
-            color: var(--black);
-            border-color: var(--white);
-        }
-        .beta-plan .btn-plan:hover {
-            background: transparent;
-            color: var(--white);
-            box-shadow: 0 0 20px var(--white);
+        .text-center {
+            text-align: center;
         }
 
         /* --- Footer --- */
@@ -435,58 +247,16 @@
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .plans-container {
-                gap: 30px;
-            }
-            .plan-card {
-                width: 320px;
-                padding: 40px 30px;
-            }
-            .nexus-plan .plan-features {
-                column-count: 2;
-            }
-        }
-        @media (max-width: 1000px) {
-            .plans-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .plan-card {
-                width: 80%;
-                max-width: 500px;
-            }
-            .plans-hero h1 {
-                font-size: 3rem;
-            }
-            .nexus-plan .plan-features {
-                column-count: 1;
-            }
-            .nexus-plan {
-                width: 80%;
-                max-width: 500px;
-            }
-        }
         @media (max-width: 768px) {
-            .plans-hero {
-                height: 40vh;
-                min-height: 300px;
-            }
-            .plans-hero h1 {
+            .content-title {
                 font-size: 2.5rem;
             }
-            .plans-section h2 {
-                font-size: 2.2rem;
-                margin-bottom: 60px;
-            }
-            .plan-card {
-                width: 90%;
-                min-width: auto;
-                padding: 35px 25px;
+            .content-subtitle {
+                font-size: 1.3rem;
             }
             .nav-links a {
-                margin-left: 20px;
-                font-size: 0.85rem;
+                margin-left: 15px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -510,12 +280,47 @@
         </div>
     </header>
 
-    <!-- Hero -->
-    <!-- Hero -->
-<section class="plans-hero">
-    <div class="container">
-        <h1>NUESTROS PACKS</h1>
-        <p>Elige el paquete perfecto para llevar tu carrera al siguiente nivel</p>
+        
+        
+        </div>
+    </div>
+</section>
+
+    <!-- Contenido Principal -->
+    <div class="content-wrapper">
+        <h1 class="content-title">PROCESO DE ADQUISICIÓN</h1>
+        
+        <h2 class="content-subtitle">EXCLUSIVIDAD NEXUSMANAGER</h2>
+        <p class="content-text">
+            NexusManager opera bajo un modelo <span class="highlight">privado y exclusivo</span>, diseñado para profesionales serios comprometidos con su desarrollo en los esports. 
+            No somos una plataforma abierta al público general. Cada solicitud de pack es evaluada individualmente para garantizar 
+            que nuestros miembros comparten nuestros valores de excelencia, profesionalismo y crecimiento mutuo. Esta selectividad 
+            nos permite mantener un <span class="highlight">entorno de alto nivel</span> y ofrecer atención personalizada a cada miembro.
+        </p>
+        
+        <h2 class="content-subtitle">ENTREVISTA INICIAL</h2>
+        <p class="content-text">
+            El primer paso para adquirir cualquier pack de NexusManager es una <span class="highlight">entrevista personalizada</span> vía Discord. Esta sesión de 30-45 minutos 
+            nos permite evaluar tus objetivos, nivel de compromiso y adecuación a nuestra comunidad. Preparate para discutir tu 
+            historial en esports, metas profesionales y cómo planeas aprovechar los recursos de NexusManager. Esta entrevista es 
+            <span class="highlight">obligatoria</span> y sin costo, pero requiere reserva previa a través de nuestro sistema de tickets.
+        </p>
+        
+        <h2 class="content-subtitle">COMPROMISO Y POLÍTICAS</h2>
+        <p class="content-text">
+            Al unirte a NexusManager, aceptas comprometerte con nuestros <span class="highlight">términos de servicio y políticas de comunidad</span>. Esto incluye confidencialidad 
+            sobre los métodos y recursos internos, participación activa según el pack adquirido, y conducta profesional en todo momento. 
+            Los packs tienen una <span class="highlight">duración mínima de 3 meses</span> para garantizar resultados. Cualquier violación de nuestras políticas puede 
+            resultar en terminación inmediata del servicio sin reembolso.
+        </p>
+        
+        <h2 class="content-subtitle">PROCESO DE ACTIVACIÓN</h2>
+        <p class="content-text">
+            Tras la aprobación en la entrevista, recibirás un <span class="highlight">contrato digital</span> detallando los términos de tu pack seleccionado. Una vez firmado y 
+            realizado el pago inicial, tu acceso será configurado en un plazo de 24-48 horas. Tendrás una <span class="highlight">sesiÓn de onboarding</span> personalizada 
+            donde te presentaremos a tu manager asignado, accesos a plataformas privadas y calendario de sesiones. El pago recurrente 
+            se gestiona automáticamente, pero puedes cancelar con 15 días de antelación al final de tu período mínimo.
+        </p>
         
         <!-- Menú desplegable agregado -->
         <div class="pack-selector-container">
@@ -525,97 +330,7 @@
                 <option value="https://fonsifn.github.io/NexusManager/packs/creador">Packs Creador</option>
                 <option value="https://fonsifn.github.io/NexusManager/packs/organizador">Packs Organizador</option>
             </select>
-        </div>
     </div>
-</section>
-
-    <!-- Sección Planes -->
-    <section class="plans-section">
-        <div class="container">
-            <h2>DESCUBRE TU PACK IDEAL</h2>
-            
-            <div class="plans-container">
-                <!-- Plan Base -->
-                <div class="plan-card">
-                    <h3>Plan Base</h3>
-                    <div class="plan-badge">BÁSICO</div>
-                    <div class="plan-price">7,99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para quienes comienzan en el mundo de los esports</p>
-                    <ul class="plan-features">
-                        <li>Acceso a base de conocimientos</li>
-                        <li>Soporte básico por email</li>
-                        <li>Recursos para redes sociales</li>
-                        <li>Consejos de marketing inicial</li>
-                        <li>Acceso a webinars mensuales</li>
-                    </ul>
-                    <button class="btn-plan">CONTRATAR</button>
-                </div>
-
-                <!-- Plan VIP -->
-                <div class="plan-card">
-                    <div class="plan-badge">POPULAR</div>
-                    <div class="discount-badge">🔥 33% OFF</div>
-                    <h3>Plan VIP</h3>
-                    <div class="plan-price">14.99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para jugadores y streamers en crecimiento</p>
-                    <ul class="plan-features">
-                        <li>Consultorías personalizadas</li>
-                        <li>Asesoría en marketing digital</li>
-                        <li>Herramientas de análisis avanzado</li>
-                        <li>Sesiones de retroalimentación</li>
-                        <li>Soporte prioritario 24/7</li>
-                        <li>Descuentos en eventos</li>
-                    </ul>
-                    <button class="btn-plan">CONTRATAR</button>
-                </div>
-
-                <!-- Plan Partner -->
-                <div class="plan-card">
-                    <div class="plan-badge">ÉLITE</div>
-                    <div class="discount-badge">🔥 25% OFF</div>
-                    <h3>Plan Partner</h3>
-                    <div class="plan-price">29,99€ <span>/mes</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px;">Para profesionales que buscan dominar</p>
-                    <ul class="plan-features">
-                        <li>Representación en negociaciones</li>
-                        <li>Acceso VIP a eventos exclusivos</li>
-                        <li>Asesoría avanzada en marketing</li>
-                        <li>Análisis detallado de rendimiento</li>
-                        <li>Planificación estratégica de carrera</li>
-                        <li>Conexiones con patrocinadores</li>
-                        <li>Asesoría legal incluida</li>
-                    </ul>
-                    <button class="btn-plan">CONTRATAR</button>
-                </div>
-            </div>
-            
-            <!-- Plan Nexus -->
-            <div class="plans-container">
-                <div class="plan-card nexus-plan">
-                    <div class="plan-badge">EXCLUSIVO</div>
-                    <div class="discount-badge">🔥 50% OFF</div>
-                    <h3>Plan Nexus</h3>
-                    <div class="plan-price">499€ <span>/único pago</span> <span class="discount-percent">(antes 999€)</span></div>
-                    <p style="text-align: center; opacity: 0.9; margin-bottom: 20px; font-size: 1.2rem;">El paquete definitivo para profesionales de esports</p>
-                    <ul class="plan-features">
-                        <li>Acceso vitalicio a todos los servicios premium</li>
-                        <li>Representación personalizada 24/7</li>
-                        <li>Asesoramiento estratégico personalizado</li>
-                        <li>Acceso ilimitado a todos los cursos y talleres</li>
-                        <li>Gestión completa de marca personal</li>
-                        <li>Conexiones garantizadas con patrocinadores</li>
-                        <li>Asesoría legal y contractual permanente</li>
-                        <li>Viajes y entradas VIP a eventos mundiales</li>
-                        <li>Equipo dedicado de managers personales</li>
-                        <li>Desarrollo de contenido profesional</li>
-                        <li>Análisis avanzado de rendimiento</li>
-                        <li>Acceso a la red exclusiva Nexus</li>
-                    </ul>
-                    <button class="btn-plan" style="padding: 20px 40px; font-size: 1.2rem;">OBTENER ACCESO VITALICIO</button>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="footer">
