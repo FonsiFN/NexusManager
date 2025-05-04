@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusManager | Servicios</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/wVTfGfZ.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0D0D0D;
+            --neon-blue: #00F0FF;
+            --white: #F2F2F2;
+            --gray: #1E1E1E;
+            --accent: #FF2A6D;
+            --discount-red: #FF3D3D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* --- Hero Servicios --- */
+        .services-hero {
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
+                url('https://i.imgur.com/services-bg.jpg') center/cover;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .services-hero:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--gray), transparent);
+        }
+        .services-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .services-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Sección Servicios --- */
+        .services-section {
+            padding: 80px 0;
+            background-color: var(--gray);
+            position: relative;
+        }
+        .services-section:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--gray), transparent);
+        }
+        .services-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            padding-top: 30px;
+        }
+        .services-section h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 25px auto 0;
+        }
+        
+        /* Contenedor de Servicios */
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Tarjeta de Servicio */
+        .service-card {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        
+        /* Encabezado del Servicio */
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        
+        /* Contenido del Servicio */
+        .service-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Lista de servicios */
+        .service-list {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .service-list li {
+            margin-bottom: 10px;
+        }
+        
+        /* Ejemplo de banner */
+        .banner-example {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .banner-example img {
+            max-width: 100%;
+            border-radius: 5px;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 80px 0 50px;
+            text-align: center;
+            border-top: 1px solid var(--neon-blue);
+            position: relative;
+        }
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--black), transparent);
+        }
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--white);
+            margin: 0 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+        .footer-social {
+            margin-bottom: 30px;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+        .footer-copyright {
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .services-hero {
+                height: 30vh;
+                min-height: 250px;
+            }
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            .services-section h2 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .service-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .service-icon {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+            .nav-links a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://fonsifn.github.io/NexusManager/inicio">Inicio</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/planes">Packs</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/anuncios">Anuncios</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/contacto">Contacto</a></li>
+                    <li><a href="https://fonsifn.github.io/NexusManager/legal/terminos-y-servicios">Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>SERVICIOS</h1>
+            <p>Descubre cómo podemos ayudarte a llevar tu presencia digital al siguiente nivel</p>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section class="services-section">
+        <h2>NUESTROS SERVICIOS</h2>
+        
+        <div class="services-container">
+            <!-- Servicio 1 - Inicio -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div>
+                        <h3 class="service-title">INICIO</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>Tu comunidad. Tu marca. Tu equipo.</p>
+                    <p>En Nexus Manager ayudamos a creadores, jugadores y talentos a construir su marca, mejorar su contenido y conseguir oportunidades reales.</p>
+                </div>
+            </div>
+            
+            <!-- Servicio 2 - Branding -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div>
+                        <h3 class="service-title">BRANDING</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>Creamos tu identidad visual desde cero.</p>
+                    
+                    <p><strong>Servicios incluidos:</strong></p>
+                    <ul class="service-list">
+                        <li>Diseño de logo profesional</li>
+                        <li>Banners para Twitch, YouTube, Twitter</li>
+                        <li>Overlays personalizados para stream</li>
+                        <li>Paleta de colores y tipografías</li>
+                        <li>Kit visual para redes sociales</li>
+                        <li>Branding para propuestas y media kits</li>
+                    </ul>
+                    
+                    <p><strong>Entregables:</strong></p>
+                    <ul class="service-list">
+                        <li>Archivos editables + PNG</li>
+                        <li>Manual de marca básico</li>
+                        <li>Soporte para aplicar el branding</li>
+                    </ul>
+                    
+                    <div class="banner-example">
+                        <p>Ejemplo de banner creado para un cliente:</p>
+                        <img src="https://imgur.com/aWDmPMI.png" alt="Ejemplo de banner">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 3 - Asesoría -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="service-title">ASESORÍA PERSONALIZADA</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>Te guiamos paso a paso para crecer y mejorar.</p>
+                    
+                    <p><strong>Incluye:</strong></p>
+                    <ul class="service-list">
+                        <li>Sesiones 1 a 1 (Discord o Google Meet)</li>
+                        <li>Revisión de redes, contenido y streams</li>
+                        <li>Estrategia de crecimiento personalizada</li>
+                        <li>Optimización de perfiles y bio</li>
+                        <li>Consejos para engagement y comunidad</li>
+                        <li>Revisión mensual + ajustes</li>
+                    </ul>
+                    
+                    <p><strong>Ideal para:</strong></p>
+                    <ul class="service-list">
+                        <li>Streamers nuevos</li>
+                        <li>Jugadores competitivos</li>
+                        <li>Creadores de contenido</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Servicio 4 - Representación -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div>
+                        <h3 class="service-title">REPRESENTACIÓN</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>Conectamos talentos con oportunidades.</p>
+                    
+                    <p><strong>Ofrecemos:</strong></p>
+                    <ul class="service-list">
+                        <li>Creación y envío de propuestas a marcas</li>
+                        <li>Negociación de patrocinios</li>
+                        <li>Gestión de colaboraciones</li>
+                        <li>Presentación profesional del talento</li>
+                        <li>Soporte en contratos y acuerdos</li>
+                    </ul>
+                    
+                    <p><strong>Para quién es:</strong></p>
+                    <ul class="service-list">
+                        <li>Talentos en crecimiento que necesitan apoyo profesional</li>
+                        <li>Jugadores con rendimiento competitivo</li>
+                        <li>Influencers que buscan sponsors</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Servicio 5 - Scouting -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div>
+                        <h3 class="service-title">SCOUTING Y TALENTO</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <p>Buscamos y seleccionamos jugadores y creadores con potencial.</p>
+                    
+                    <p><strong>Cómo funciona:</strong></p>
+                    <ul class="service-list">
+                        <li>Definimos el perfil que buscas</li>
+                        <li>Analizamos jugadores con estadísticas (Tracker, redes, etc.)</li>
+                        <li>Evaluamos su comunidad, constancia y rendimiento</li>
+                        <li>Te entregamos un informe con los mejores candidatos</li>
+                    </ul>
+                    
+                    <p><strong>Ideal para:</strong></p>
+                    <ul class="service-list">
+                        <li>Equipos esports</li>
+                        <li>Organizaciones nuevas</li>
+                        <li>Proyectos que buscan talentos emergentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://imgur.com/wVTfGfZ.png" alt="NexusManager">
+            </div>
+            <div class="footer-links">
+                <a href="politicas/usuarios.html">Políticas</a>
+                <a href="faq.html">FAQ</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/fg3jk3Heq6"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-twitch"></i></a>
+            </div>
+            <p class="footer-copyright">© 2025 NexusManager. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
