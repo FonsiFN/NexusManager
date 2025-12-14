@@ -26,6 +26,7 @@
             background-color: var(--dark);
             color: var(--light);
             padding: 20px;
+            min-height: 100vh;
         }
         
         .container {
@@ -36,94 +37,156 @@
         header {
             text-align: center;
             margin-bottom: 30px;
+            padding: 20px 0;
         }
         
         h1 {
             color: var(--primary);
             font-size: 2.5rem;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        h1 i {
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-top: 5px;
         }
         
         .search-section {
             background-color: var(--secondary);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .search-bar {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         
         .search-bar input {
             flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.08);
             color: var(--light);
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 200, 150, 0.2);
+            background-color: rgba(255, 255, 255, 0.12);
         }
         
         .search-bar button {
-            padding: 12px 20px;
+            padding: 14px 24px;
             background-color: var(--primary);
             color: var(--dark);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+            min-width: 120px;
         }
         
         .search-bar button:hover {
             background-color: #00e6b8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 200, 150, 0.3);
+        }
+        
+        .search-bar button:active {
+            transform: translateY(0);
         }
         
         .filters {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         
         .filter-group {
             flex: 1;
-            min-width: 150px;
+            min-width: 180px;
         }
         
         .filter-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
         }
         
         .filter-group select {
             width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.08);
             color: var(--light);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300c896' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+        }
+        
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 200, 150, 0.2);
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .filter-group select:hover {
+            background-color: rgba(255, 255, 255, 0.12);
         }
         
         .action-buttons {
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
         }
         
         .btn {
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
             border: none;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
         }
         
         .btn-primary {
@@ -133,6 +196,8 @@
         
         .btn-primary:hover {
             background-color: #00e6b8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 200, 150, 0.3);
         }
         
         .btn-danger {
@@ -142,27 +207,46 @@
         
         .btn-danger:hover {
             background-color: #ff2d3f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 70, 85, 0.3);
+        }
+        
+        .players-table-container {
+            background-color: var(--secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 30px;
         }
         
         .players-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: var(--secondary);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .players-table th {
             background-color: var(--primary);
             color: var(--dark);
-            padding: 15px;
+            padding: 18px 20px;
             text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .players-table th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        .players-table th:last-child {
+            border-radius: 0 12px 0 0;
         }
         
         .players-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
         }
         
         .players-table tr:last-child td {
@@ -170,120 +254,106 @@
         }
         
         .players-table tr:hover {
-            background-color: rgba(0, 200, 150, 0.1);
+            background-color: rgba(0, 200, 150, 0.08);
         }
         
         .player-link {
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+            padding: 2px 0;
         }
         
         .player-link:hover {
+            color: #00e6b8;
             text-decoration: underline;
+            transform: translateX(2px);
         }
         
         .badge {
             display: inline-block;
-            padding: 3px 8px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
         
         .badge-primary {
-            background-color: rgba(0, 200, 150, 0.2);
+            background-color: rgba(0, 200, 150, 0.15);
             color: var(--primary);
+            border: 1px solid rgba(0, 200, 150, 0.3);
         }
         
         .badge-warning {
-            background-color: rgba(255, 193, 7, 0.2);
+            background-color: rgba(255, 193, 7, 0.15);
             color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
         }
         
         .badge-danger {
-            background-color: rgba(255, 70, 85, 0.2);
+            background-color: rgba(255, 70, 85, 0.15);
             color: var(--danger);
+            border: 1px solid rgba(255, 70, 85, 0.3);
         }
         
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+        .money-cell {
+            color: #00ff9d;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .pr-cell {
+            font-weight: 600;
+            color: #4cc9f0;
+        }
+        
+        .stats-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
+        .stat-item {
+            text-align: center;
+            flex: 1;
         }
         
-        .modal-content {
-            background-color: var(--secondary);
-            border-radius: 10px;
-            width: 100%;
-            max-width: 500px;
-            padding: 25px;
-            position: relative;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .modal-close:hover {
-            color: var(--danger);
-        }
-        
-        .modal-title {
-            margin-bottom: 20px;
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
             color: var(--primary);
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
             margin-bottom: 5px;
+        }
+        
+        .stat-label {
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
         }
         
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-        }
-        
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
             .search-bar {
                 flex-direction: column;
+            }
+            
+            .search-bar button {
+                width: 100%;
             }
             
             .filters {
@@ -294,6 +364,50 @@
             .filter-group {
                 width: 100%;
             }
+            
+            .players-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-section, .players-table-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e6b8;
         }
     </style>
 </head>
@@ -303,51 +417,54 @@
         <div class="container">
             <header>
                 <h1><i class="fas fa-crosshairs"></i> ZYX SCOUTING PRO</h1>
-                <p>Plataforma avanzada de scouting para jugadores competitivos</p>
+                <p class="subtitle">Plataforma avanzada de scouting para jugadores competitivos</p>
             </header>
             
             <div class="search-section">
                 <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Buscar jugadores por nombre, rango, rol o región...">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, rol, rango o región...">
                     <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
                 </div>
                 
                 <div class="filters">
                     <div class="filter-group">
-                        <label for="regionFilter">Región</label>
+                        <label for="regionFilter"><i class="fas fa-globe"></i> Región</label>
                         <select id="regionFilter">
                             <option value="">Todas las regiones</option>
-                            <option value="EU">Europa</option>
-                            <option value="NA">Norte América</option>
-                            <option value="SA">Sudamérica</option>
-                            <option value="AS">Asia</option>
+                            <option value="EU">Europa (EU)</option>
+                            <option value="NA">Norte América (NA)</option>
+                            <option value="SA">Sudamérica (SA)</option>
+                            <option value="AS">Asia (AS)</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="rankFilter">Rango</label>
+                        <label for="rankFilter"><i class="fas fa-chart-line"></i> Rango</label>
                         <select id="rankFilter">
                             <option value="">Todos los rangos</option>
-                            <option value="Radiante">Radiante</option>
-                            <option value="Inmortal">Inmortal</option>
-                            <option value="Diamante">Diamante</option>
-                            <option value="Platino">Platino</option>
+                            <option value="Cantera">ZYX Cantera</option>
+                            <option value="Rango 1">ZYX Rango 1</option>
+                            <option value="Rango 2">ZYX Rango 2</option>
+                            <option value="Rango 3">ZYX Rango 3</option>
+                            <option value="Pro">ZYX Pro</option>
+                            <option value="Oficial">ZYX Oficial</option>
+                            <option value="CEO">ZYX CEO</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="roleFilter">Rol</label>
+                        <label for="roleFilter"><i class="fas fa-user-tag"></i> Rol</label>
                         <select id="roleFilter">
                             <option value="">Todos los roles</option>
                             <option value="Fragger">Fragger</option>
                             <option value="Support">Support</option>
                             <option value="IGL">IGL</option>
-                            <option value="Flex">Flex</option>
+                            <option value="CEO">CEO</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="statusFilter">Estado</label>
+                        <label for="statusFilter"><i class="fas fa-flag"></i> Estado</label>
                         <select id="statusFilter">
                             <option value="">Todos los estados</option>
                             <option value="Prospect">Prospect</option>
@@ -359,178 +476,196 @@
                 </div>
                 
                 <div class="action-buttons">
-                    <button class="btn btn-primary" id="addPlayerBtn"><i class="fas fa-plus"></i> Agregar Jugador</button>
                     <button class="btn btn-danger" id="resetBtn"><i class="fas fa-sync-alt"></i> Reiniciar Filtros</button>
                 </div>
             </div>
             
-            <table class="players-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Rango</th>
-                        <th>Rol</th>
-                        <th>Región</th>
-                        <th>K/D</th>
-                        <th>Win Rate</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="playersTableBody">
-                    <!-- Jugadores se cargarán aquí dinámicamente -->
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Modal para agregar/editar jugador -->
-        <div class="modal" id="playerModal">
-            <div class="modal-content">
-                <span class="modal-close">&times;</span>
-                <h2 class="modal-title" id="modalTitle">Agregar Nuevo Jugador</h2>
-                
-                <form id="playerForm">
-                    <input type="hidden" id="playerId">
-                    
-                    <div class="form-group">
-                        <label for="playerName">Nombre del Jugador *</label>
-                        <input type="text" id="playerName" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerRank">Rango *</label>
-                        <select id="playerRank" class="form-control" required>
-                            <option value="">Seleccionar rango</option>
-                            <option value="Radiante">Radiante</option>
-                            <option value="Inmortal">Inmortal</option>
-                            <option value="Diamante">Diamante</option>
-                            <option value="Platino">Platino</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerRole">Rol Principal *</label>
-                        <select id="playerRole" class="form-control" required>
-                            <option value="">Seleccionar rol</option>
-                            <option value="Fragger">Fragger</option>
-                            <option value="Support">Support</option>
-                            <option value="IGL">IGL</option>
-                            <option value="Flex">Flex</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerRegion">Región *</label>
-                        <select id="playerRegion" class="form-control" required>
-                            <option value="">Seleccionar región</option>
-                            <option value="EU">Europa</option>
-                            <option value="NA">Norte América</option>
-                            <option value="SA">Sudamérica</option>
-                            <option value="AS">Asia</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerKD">Ratio K/D *</label>
-                        <input type="number" step="0.01" id="playerKD" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerWinRate">Win Rate (%) *</label>
-                        <input type="number" step="0.1" id="playerWinRate" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerLink">Enlace de Perfil *</label>
-                        <input type="url" id="playerLink" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerStatus">Estado *</label>
-                        <select id="playerStatus" class="form-control" required>
-                            <option value="Prospect">Prospect</option>
-                            <option value="En observación">En observación</option>
-                            <option value="Reclutado">Reclutado</option>
-                            <option value="Descarte">Descarte</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="playerNotes">Notas</label>
-                        <textarea id="playerNotes" class="form-control" rows="3"></textarea>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-danger" id="cancelBtn">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Jugador</button>
-                    </div>
-                </form>
+            <div class="players-table-container">
+                <table class="players-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Rango</th>
+                            <th>Rol</th>
+                            <th>Región</th>
+                            <th>PR</th>
+                            <th>Earnings</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="playersTableBody">
+                        <!-- Jugadores se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalPlayers">0</div>
+                    <div class="stat-label">Total Jugadores</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgPR">0.00</div>
+                    <div class="stat-label">PR Promedio</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalEarnings">$0</div>
+                    <div class="stat-label">Total Earnings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="recruitedPlayers">0</div>
+                    <div class="stat-label">Reclutados</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // DATOS DE EJEMPLO (puedes reemplazar esto con conexión a una base de datos)
+        // DATOS DE EJEMPLO
         let players = [
             {
                 id: '1',
                 name: 'ZYX Fonsi V2',
-                rank: 'Unreal',
+                rank: 'ZYX Pro',
                 role: 'Fragger',
                 region: 'EU',
-                kd: 1.45,
-                winRate: 62.3,
-                status: 'En observación',
-                link: 'https://tracker.gg/valorant/profile/sentinel',
-                notes: 'Excelente en duelos, necesita mejorar trabajo en equipo'
+                pr: 1.45,
+                earnings: 12500,
+                status: 'Reclutado',
+                link: '#',
+                notes: 'Excelente en duelos, trabajo en equipo mejorando'
             },
             {
                 id: '2',
                 name: 'ZYX Diuuk',
-                rank: 'Unreal',
+                rank: 'ZYX CEO',
                 role: 'CEO',
                 region: 'EU',
-                kd: 1.12,
-                winRate: 58.7,
-                status: 'Prospect',
-                link: 'https://tracker.gg/valorant/profile/vortex',
-                notes: 'Gran líder táctico, comunicación excepcional'
+                pr: 1.12,
+                earnings: 50000,
+                status: 'Reclutado',
+                link: '#',
+                notes: 'Fundador y CEO, visión estratégica excepcional'
             },
             {
                 id: '3',
-                name: 'Sofia "Nyx" Martínez',
-                rank: 'Diamante',
-                role: 'Support',
-                region: 'SA',
-                kd: 0.95,
-                winRate: 54.2,
-                status: 'Prospect',
-                link: 'https://tracker.gg/valorant/profile/nyx',
-                notes: 'Support consistente, utilidad óptima'
+                name: 'ZYX Scorpio',
+                rank: 'ZYX Rango 1',
+                role: 'IGL',
+                region: 'NA',
+                pr: 0.95,
+                earnings: 3500,
+                status: 'En observación',
+                link: '#',
+                notes: 'Gran líder táctico, necesita mejorar mecánicas'
             },
             {
                 id: '4',
-                name: 'Kenji "Ronin" Tanaka',
-                rank: 'Radiante',
-                role: 'Flex',
-                region: 'AS',
-                kd: 1.28,
-                winRate: 65.1,
-                status: 'Reclutado',
-                link: 'https://tracker.gg/valorant/profile/ronin',
-                notes: 'Jugador completo, adaptable a cualquier rol'
+                name: 'ZYX Phantom',
+                rank: 'ZYX Rango 2',
+                role: 'Fragger',
+                region: 'SA',
+                pr: 1.28,
+                earnings: 2200,
+                status: 'Prospect',
+                link: '#',
+                notes: 'Potencial alto, consistencia en desarrollo'
             },
             {
                 id: '5',
-                name: 'Marcus "Phantom" Johnson',
-                rank: 'Platino',
+                name: 'ZYX Raven',
+                rank: 'ZYX Cantera',
+                role: 'Support',
+                region: 'AS',
+                pr: 1.35,
+                earnings: 800,
+                status: 'Prospect',
+                link: '#',
+                notes: 'Nuevo talento, gran actitud para aprender'
+            },
+            {
+                id: '6',
+                name: 'ZYX Titan',
+                rank: 'ZYX Oficial',
+                role: 'Fragger',
+                region: 'EU',
+                pr: 1.62,
+                earnings: 18000,
+                status: 'Reclutado',
+                link: '#',
+                notes: 'Jugador clave del equipo principal'
+            },
+            {
+                id: '7',
+                name: 'ZYX Nova',
+                rank: 'ZYX Rango 3',
+                role: 'Support',
+                region: 'NA',
+                pr: 0.88,
+                earnings: 1500,
+                status: 'En observación',
+                link: '#',
+                notes: 'Support dedicado, necesita más experiencia'
+            },
+            {
+                id: '8',
+                name: 'ZYX Blaze',
+                rank: 'ZYX Cantera',
+                role: 'Fragger',
+                region: 'SA',
+                pr: 1.41,
+                earnings: 950,
+                status: 'Prospect',
+                link: '#',
+                notes: 'Mecánicas prometedoras, mentalidad competitiva'
+            },
+            {
+                id: '9',
+                name: 'ZYX Frost',
+                rank: 'ZYX Pro',
+                role: 'IGL',
+                region: 'EU',
+                pr: 1.05,
+                earnings: 14500,
+                status: 'Reclutado',
+                link: '#',
+                notes: 'Estratega principal, gran conocimiento del juego'
+            },
+            {
+                id: '10',
+                name: 'ZYX Viper',
+                rank: 'ZYX Rango 1',
+                role: 'Fragger',
+                region: 'AS',
+                pr: 1.33,
+                earnings: 4200,
+                status: 'Descarte',
+                link: '#',
+                notes: 'Buena mecánica pero problemas de actitud'
+            },
+            {
+                id: '11',
+                name: 'ZYX Storm',
+                rank: 'ZYX Rango 2',
                 role: 'Fragger',
                 region: 'NA',
-                kd: 1.35,
-                winRate: 51.8,
-                status: 'Descarte',
-                link: 'https://tracker.gg/valorant/profile/phantom',
-                notes: 'Agressivo pero inconsistente'
+                pr: 1.18,
+                earnings: 2800,
+                status: 'Prospect',
+                link: '#',
+                notes: 'Consistente, buen desempeño en torneos locales'
+            },
+            {
+                id: '12',
+                name: 'ZYX Aurora',
+                rank: 'ZYX Cantera',
+                role: 'Support',
+                region: 'EU',
+                pr: 0.92,
+                earnings: 650,
+                status: 'En observación',
+                link: '#',
+                notes: 'Aprendiz rápido, buen manejo de utilidad'
             }
         ];
 
@@ -541,63 +676,14 @@
         const rankFilter = document.getElementById('rankFilter');
         const roleFilter = document.getElementById('roleFilter');
         const statusFilter = document.getElementById('statusFilter');
-        const addPlayerBtn = document.getElementById('addPlayerBtn');
-        const resetBtn = document.getElementById('resetBtn');
         const playersTableBody = document.getElementById('playersTableBody');
-        const playerModal = document.getElementById('playerModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const playerForm = document.getElementById('playerForm');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const modalClose = document.querySelectorAll('.modal-close');
-
-        // VARIABLES DE ESTADO
-        let currentPlayerId = null;
-
-        // FUNCIONES DE UTILIDAD
-        function showAlert(message, type = 'success') {
-            // Crear alerta temporal
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
-            alertDiv.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 20px;
-                border-radius: 5px;
-                color: white;
-                font-weight: bold;
-                z-index: 10000;
-                animation: slideIn 0.3s ease-out;
-            `;
-            
-            if (type === 'success') {
-                alertDiv.style.backgroundColor = '#00c896';
-            } else {
-                alertDiv.style.backgroundColor = '#ff4655';
-            }
-            
-            alertDiv.textContent = message;
-            document.body.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                alertDiv.style.animation = 'slideOut 0.3s ease-out';
-                setTimeout(() => alertDiv.remove(), 300);
-            }, 3000);
-        }
-
-        // Agregar estilos de animación para las alertas
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+        const resetBtn = document.getElementById('resetBtn');
+        
+        // Elementos de estadísticas
+        const totalPlayersEl = document.getElementById('totalPlayers');
+        const avgPREl = document.getElementById('avgPR');
+        const totalEarningsEl = document.getElementById('totalEarnings');
+        const recruitedPlayersEl = document.getElementById('recruitedPlayers');
 
         // FUNCIONES PARA JUGADORES
         function renderPlayers() {
@@ -627,7 +713,14 @@
             playersTableBody.innerHTML = '';
             
             if (filteredPlayers.length === 0) {
-                playersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No se encontraron jugadores</td></tr>';
+                playersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-search" style="font-size: 3rem; color: rgba(255,255,255,0.2); margin-bottom: 15px; display: block;"></i>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 1.1rem;">No se encontraron jugadores con los filtros actuales</p>
+                        </td>
+                    </tr>`;
+                updateStats([]);
                 return;
             }
             
@@ -636,110 +729,46 @@
                 if (player.status === 'En observación') badgeClass = 'badge-warning';
                 if (player.status === 'Descarte') badgeClass = 'badge-danger';
                 
+                // Formatear earnings con símbolo de dólar
+                const formattedEarnings = `$${player.earnings.toLocaleString()}`;
+                
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><a href="${player.link}" class="player-link" target="_blank">${player.name}</a></td>
                     <td>${player.rank}</td>
                     <td>${player.role}</td>
                     <td>${player.region}</td>
-                    <td>${player.kd}</td>
-                    <td>${player.winRate}%</td>
+                    <td class="pr-cell">${player.pr.toFixed(2)}</td>
+                    <td class="money-cell">${formattedEarnings}</td>
                     <td><span class="badge ${badgeClass}">${player.status}</span></td>
-                    <td>
-                        <button class="btn btn-primary btn-sm edit-btn" data-id="${player.id}"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="${player.id}"><i class="fas fa-trash"></i></button>
-                    </td>
                 `;
                 playersTableBody.appendChild(row);
             });
             
-            // Agregar event listeners a los botones
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', () => editPlayer(btn.dataset.id));
-            });
-            
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', () => deletePlayer(btn.dataset.id));
-            });
+            updateStats(filteredPlayers);
         }
 
-        function openModal(player = null) {
-            if (player) {
-                currentPlayerId = player.id;
-                modalTitle.textContent = 'Editar Jugador';
-                document.getElementById('playerId').value = player.id;
-                document.getElementById('playerName').value = player.name;
-                document.getElementById('playerRank').value = player.rank;
-                document.getElementById('playerRole').value = player.role;
-                document.getElementById('playerRegion').value = player.region;
-                document.getElementById('playerKD').value = player.kd;
-                document.getElementById('playerWinRate').value = player.winRate;
-                document.getElementById('playerLink').value = player.link;
-                document.getElementById('playerStatus').value = player.status;
-                document.getElementById('playerNotes').value = player.notes || '';
+        function updateStats(filteredPlayers) {
+            const total = filteredPlayers.length;
+            totalPlayersEl.textContent = total;
+            
+            if (total > 0) {
+                // Calcular PR promedio
+                const totalPR = filteredPlayers.reduce((sum, player) => sum + player.pr, 0);
+                const avgPR = totalPR / total;
+                avgPREl.textContent = avgPR.toFixed(2);
+                
+                // Calcular total de earnings
+                const totalEarnings = filteredPlayers.reduce((sum, player) => sum + player.earnings, 0);
+                totalEarningsEl.textContent = `$${totalEarnings.toLocaleString()}`;
+                
+                // Contar jugadores reclutados
+                const recruited = filteredPlayers.filter(player => player.status === 'Reclutado').length;
+                recruitedPlayersEl.textContent = recruited;
             } else {
-                currentPlayerId = null;
-                modalTitle.textContent = 'Agregar Nuevo Jugador';
-                playerForm.reset();
-                document.getElementById('playerStatus').value = 'Prospect';
-            }
-            playerModal.classList.add('active');
-        }
-
-        function closeModal() {
-            playerModal.classList.remove('active');
-        }
-
-        function savePlayer(e) {
-            e.preventDefault();
-            
-            const playerData = {
-                name: document.getElementById('playerName').value,
-                rank: document.getElementById('playerRank').value,
-                role: document.getElementById('playerRole').value,
-                region: document.getElementById('playerRegion').value,
-                kd: parseFloat(document.getElementById('playerKD').value),
-                winRate: parseFloat(document.getElementById('playerWinRate').value),
-                status: document.getElementById('playerStatus').value,
-                link: document.getElementById('playerLink').value,
-                notes: document.getElementById('playerNotes').value
-            };
-            
-            if (currentPlayerId) {
-                // Editar jugador existente
-                const index = players.findIndex(p => p.id === currentPlayerId);
-                if (index !== -1) {
-                    players[index] = { ...players[index], ...playerData };
-                    showAlert('Jugador actualizado correctamente', 'success');
-                }
-            } else {
-                // Agregar nuevo jugador
-                const newId = (players.length + 1).toString();
-                const newPlayer = {
-                    id: newId,
-                    ...playerData
-                };
-                players.push(newPlayer);
-                showAlert('Jugador agregado correctamente', 'success');
-            }
-            
-            closeModal();
-            renderPlayers();
-        }
-
-        function editPlayer(id) {
-            const player = players.find(p => p.id === id);
-            if (player) openModal(player);
-        }
-
-        function deletePlayer(id) {
-            if (!confirm('¿Está seguro que desea eliminar este jugador?')) return;
-            
-            const index = players.findIndex(p => p.id === id);
-            if (index !== -1) {
-                players.splice(index, 1);
-                showAlert('Jugador eliminado correctamente', 'success');
-                renderPlayers();
+                avgPREl.textContent = '0.00';
+                totalEarningsEl.textContent = '$0';
+                recruitedPlayersEl.textContent = '0';
             }
         }
 
@@ -750,6 +779,50 @@
             roleFilter.value = '';
             statusFilter.value = '';
             renderPlayers();
+            showNotification('Filtros reiniciados');
+        }
+
+        function showNotification(message) {
+            // Crear notificación temporal
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                background-color: var(--primary);
+                color: var(--dark);
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                animation: slideUp 0.3s ease-out;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideDown 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+            
+            // Agregar animaciones CSS si no existen
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideUp {
+                        from { transform: translateY(100%); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    @keyframes slideDown {
+                        from { transform: translateY(0); opacity: 1; }
+                        to { transform: translateY(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
         }
 
         // EVENT LISTENERS
@@ -759,25 +832,9 @@
         rankFilter.addEventListener('change', renderPlayers);
         roleFilter.addEventListener('change', renderPlayers);
         statusFilter.addEventListener('change', renderPlayers);
-        addPlayerBtn.addEventListener('click', () => openModal());
         resetBtn.addEventListener('click', resetFilters);
-        playerForm.addEventListener('submit', savePlayer);
-        cancelBtn.addEventListener('click', closeModal);
-        
-        modalClose.forEach(closeBtn => {
-            closeBtn.addEventListener('click', () => {
-                document.querySelector('.modal.active').classList.remove('active');
-            });
-        });
-        
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.classList.remove('active');
-            });
-        });
 
         // INICIALIZACIÓN
-        // Renderizar jugadores al cargar
         window.addEventListener('DOMContentLoaded', () => {
             renderPlayers();
         });
