@@ -483,33 +483,6 @@
             transform: translateX(2px);
         }
         
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-        
-        .badge-primary {
-            background-color: rgba(0, 200, 150, 0.15);
-            color: var(--primary);
-            border: 1px solid rgba(0, 200, 150, 0.3);
-        }
-        
-        .badge-warning {
-            background-color: rgba(255, 193, 7, 0.15);
-            color: #ffc107;
-            border: 1px solid rgba(255, 193, 7, 0.3);
-        }
-        
-        .badge-danger {
-            background-color: rgba(255, 70, 85, 0.15);
-            color: var(--danger);
-            border: 1px solid rgba(255, 70, 85, 0.3);
-        }
-        
         .money-cell {
             color: #32cd32;
             font-weight: 600;
@@ -656,6 +629,7 @@
                                     <input type="text" placeholder="Buscar región..." class="search-input">
                                 </div>
                                 <div class="select-options">
+                                    <div class="select-option" data-value="">Todas las regiones</div>
                                     <div class="select-option" data-value="EU">Europa (EU)</div>
                                     <div class="select-option" data-value="NA">Norte América (NA)</div>
                                     <div class="select-option" data-value="SA">Medio Oriente (ME)</div>
@@ -677,6 +651,7 @@
                                     <input type="text" placeholder="Buscar rango..." class="search-input">
                                 </div>
                                 <div class="select-options">
+                                    <div class="select-option" data-value="">Todos los rangos</div>
                                     <div class="select-option" data-value="ZYX Cantera">ZYX Cantera</div>
                                     <div class="select-option" data-value="ZYX Rango 1">ZYX Rango 1</div>
                                     <div class="select-option" data-value="ZYX Rango 2">ZYX Rango 2</div>
@@ -701,6 +676,7 @@
                                     <input type="text" placeholder="Buscar rol..." class="search-input">
                                 </div>
                                 <div class="select-options">
+                                    <div class="select-option" data-value="">Todos los roles</div>
                                     <div class="select-option" data-value="Fragger">Fragger</div>
                                     <div class="select-option" data-value="Support">Support</div>
                                     <div class="select-option" data-value="IGL">IGL</div>
@@ -721,13 +697,13 @@
                                     <input type="text" placeholder="Buscar PR..." class="search-input">
                                 </div>
                                 <div class="select-options">
-                                    <div class="select-option" data-value="0">Sin PR (0) </div>
                                     <div class="select-option" data-value="">Cualquier PR</div>
                                     <div class="select-option" data-value="100">+100 </div>
                                     <div class="select-option" data-value="500">+500 </div>
                                     <div class="select-option" data-value="1000">+1000 </div>
                                     <div class="select-option" data-value="5000">+5000 </div>
                                     <div class="select-option" data-value="10000">+10000 </div>
+                                    <div class="select-option" data-value="0">Sin PR (0) </div>
                                 </div>
                             </div>
                         </div>
@@ -752,27 +728,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <label for="statusFilter"><i class="fas fa-flag"></i> Estado</label>
-                        <div class="custom-select" id="statusSelect">
-                            <div class="select-header">
-                                <span class="selected-value select-placeholder">Todos los estados</span>
-                                <i class="fas fa-chevron-down select-arrow"></i>
-                            </div>
-                            <div class="select-dropdown">
-                                <div class="select-search">
-                                    <input type="text" placeholder="Buscar estado..." class="search-input">
-                                </div>
-                                <div class="select-options">
-                                    <div class="select-option" data-value="Prospect">Prospect </div>
-                                    <div class="select-option" data-value="En observación">En observación </div>
-                                    <div class="select-option" data-value="Reclutado">Reclutado </div>
-                                    <div class="select-option" data-value="Descarte">Descarte </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="action-buttons">
@@ -790,7 +745,6 @@
                             <th>Región</th>
                             <th>PR</th>
                             <th>Earnings</th>
-                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody id="playersTableBody">
@@ -812,10 +766,6 @@
                     <div class="stat-value" id="totalEarnings">$0</div>
                     <div class="stat-label">Total Earnings</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="recruitedPlayers">0</div>
-                    <div class="stat-label">Reclutados</div>
-                </div>
             </div>
         </div>
     </div>
@@ -831,7 +781,6 @@
                 region: 'EU',
                 pr: 6,
                 earnings: 0,
-                status: 'Reclutado',
                 link: '#',
                 notes: 'Excelente en duelos, trabajo en equipo mejorando'
             },
@@ -843,7 +792,6 @@
                 region: 'EU',
                 pr: 0,
                 earnings: 0,
-                status: 'Reclutado',
                 link: '#',
                 notes: 'Fundador y CEO, visión estratégica excepcional'
             },
@@ -855,7 +803,6 @@
                 region: 'NA',
                 pr: 0.95,
                 earnings: 3500,
-                status: 'En observación',
                 link: '#',
                 notes: 'Gran líder táctico, necesita mejorar mecánicas'
             },
@@ -867,7 +814,6 @@
                 region: 'SA',
                 pr: 1.28,
                 earnings: 2200,
-                status: 'Prospect',
                 link: '#',
                 notes: 'Potencial alto, consistencia en desarrollo'
             },
@@ -879,7 +825,6 @@
                 region: 'AS',
                 pr: 1.35,
                 earnings: 800,
-                status: 'Prospect',
                 link: '#',
                 notes: 'Nuevo talento, gran actitud para aprender'
             },
@@ -891,7 +836,6 @@
                 region: 'EU',
                 pr: 1.62,
                 earnings: 18000,
-                status: 'Reclutado',
                 link: '#',
                 notes: 'Jugador clave del equipo principal'
             },
@@ -903,7 +847,6 @@
                 region: 'NA',
                 pr: 0.88,
                 earnings: 1500,
-                status: 'En observación',
                 link: '#',
                 notes: 'Support dedicado, necesita más experiencia'
             },
@@ -915,7 +858,6 @@
                 region: 'SA',
                 pr: 1.41,
                 earnings: 950,
-                status: 'Prospect',
                 link: '#',
                 notes: 'Mecánicas prometedoras, mentalidad competitiva'
             },
@@ -927,7 +869,6 @@
                 region: 'EU',
                 pr: 1.05,
                 earnings: 14500,
-                status: 'Reclutado',
                 link: '#',
                 notes: 'Estratega principal, gran conocimiento del juego'
             },
@@ -939,7 +880,6 @@
                 region: 'AS',
                 pr: 1.33,
                 earnings: 4200,
-                status: 'Descarte',
                 link: '#',
                 notes: 'Buena mecánica pero problemas de actitud'
             },
@@ -951,7 +891,6 @@
                 region: 'NA',
                 pr: 1.18,
                 earnings: 2800,
-                status: 'Prospect',
                 link: '#',
                 notes: 'Consistente, buen desempeño en torneos locales'
             },
@@ -963,7 +902,6 @@
                 region: 'EU',
                 pr: 2.15,
                 earnings: 25000,
-                status: 'Reclutado',
                 link: '#',
                 notes: 'MVP regional, rating excelente'
             }
@@ -1145,7 +1083,7 @@
         }
 
         // INICIALIZACIÓN DE LOS SELECTS PERSONALIZADOS
-        let regionSelect, rankSelect, roleSelect, prSelect, earningsSelect, statusSelect;
+        let regionSelect, rankSelect, roleSelect, prSelect, earningsSelect;
 
         // ELEMENTOS DEL DOM
         const searchInput = document.getElementById('searchInput');
@@ -1157,7 +1095,6 @@
         const totalPlayersEl = document.getElementById('totalPlayers');
         const avgPREl = document.getElementById('avgPR');
         const totalEarningsEl = document.getElementById('totalEarnings');
-        const recruitedPlayersEl = document.getElementById('recruitedPlayers');
 
         // FUNCIONES PARA JUGADORES
         function renderPlayers() {
@@ -1167,7 +1104,6 @@
             const role = roleSelect.getValue();
             const prValue = prSelect.getValue();
             const earningsValue = earningsSelect.getValue();
-            const status = statusSelect.getValue();
             
             // Filtrar jugadores
             const filteredPlayers = players.filter(player => {
@@ -1182,7 +1118,6 @@
                 const matchesRegion = region === '' || player.region === region;
                 const matchesRank = rank === '' || player.rank === rank;
                 const matchesRole = role === '' || player.role === role;
-                const matchesStatus = status === '' || player.status === status;
                 
                 // Filtro por PR
                 let matchesPR = true;
@@ -1206,7 +1141,7 @@
                 }
                 
                 return matchesSearch && matchesRegion && matchesRank && matchesRole && 
-                       matchesStatus && matchesPR && matchesEarnings;
+                       matchesPR && matchesEarnings;
             });
             
             // Renderizar tabla
@@ -1215,7 +1150,7 @@
             if (filteredPlayers.length === 0) {
                 playersTableBody.innerHTML = `
                     <tr>
-                        <td colspan="7" style="text-align: center; padding: 40px;">
+                        <td colspan="6" style="text-align: center; padding: 40px;">
                             <i class="fas fa-search" style="font-size: 3rem; color: rgba(255,255,255,0.2); margin-bottom: 15px; display: block;"></i>
                             <p style="color: rgba(255,255,255,0.5); font-size: 1.1rem;">No se encontraron jugadores con los filtros actuales</p>
                         </td>
@@ -1225,10 +1160,6 @@
             }
             
             filteredPlayers.forEach(player => {
-                let badgeClass = 'badge-primary';
-                if (player.status === 'En observación') badgeClass = 'badge-warning';
-                if (player.status === 'Descarte') badgeClass = 'badge-danger';
-                
                 // Formatear earnings con símbolo de dólar
                 const formattedEarnings = player.earnings === 0 ? 'Sin earnings' : `$${player.earnings.toLocaleString()}`;
                 const earningsClass = player.earnings === 0 ? 'zero' : '';
@@ -1245,7 +1176,6 @@
                     <td>${player.region}</td>
                     <td class="pr-cell ${prClass}">${prDisplay}</td>
                     <td class="money-cell ${earningsClass}">${formattedEarnings}</td>
-                    <td><span class="badge ${badgeClass}">${player.status}</span></td>
                 `;
                 playersTableBody.appendChild(row);
             });
@@ -1267,14 +1197,9 @@
                 // Calcular total de earnings
                 const totalEarnings = filteredPlayers.reduce((sum, player) => sum + player.earnings, 0);
                 totalEarningsEl.textContent = `$${totalEarnings.toLocaleString()}`;
-                
-                // Contar jugadores reclutados
-                const recruited = filteredPlayers.filter(player => player.status === 'Reclutado').length;
-                recruitedPlayersEl.textContent = recruited;
             } else {
                 avgPREl.textContent = '0.00';
                 totalEarningsEl.textContent = '$0';
-                recruitedPlayersEl.textContent = '0';
             }
         }
 
@@ -1285,7 +1210,6 @@
             roleSelect.reset();
             prSelect.reset();
             earningsSelect.reset();
-            statusSelect.reset();
             renderPlayers();
             showNotification('Filtros reiniciados');
         }
@@ -1323,7 +1247,6 @@
             roleSelect = new CustomSelect('roleSelect');
             prSelect = new CustomSelect('prSelect');
             earningsSelect = new CustomSelect('earningsSelect');
-            statusSelect = new CustomSelect('statusSelect');
             
             // Event listeners para cambios en los selects
             document.querySelectorAll('.custom-select').forEach(select => {
